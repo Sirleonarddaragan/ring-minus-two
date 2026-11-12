@@ -4,11 +4,13 @@
 **In Partnership with:** *Undefined Behavior Receiverships LLP* (Chancery Lane, London & DIFC, Dubai)  
 **Author & Systems Architect:** Sir Leonard Daragan  
 
-[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
+[![Live Web Suite](https://img.shields.io/badge/Live_Terminal-Online-06b6d4?style=for-the-badge&logo=gnubash&logoColor=white)](https://sirleonarddaragan.github.io/ring-minus-two/)
+[![Amazon Physical Manual](https://img.shields.io/badge/Amazon-Case_01_Novella-f59e0b?style=for-the-badge&logo=amazon&logoColor=white)](https://www.amazon.com/author/sirleonarddaragan)
+[![Substack Dispatches](https://img.shields.io/badge/Substack-Classified_Dispatches-ff6719?style=for-the-badge&logo=substack&logoColor=white)](https://sirleonarddaragan.substack.com)
+[![Ko-fi Sponsor](https://img.shields.io/badge/Ko--fi-Sponsor_Compute-13C3FF?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/sirleonarddaragan)
 [![Tests Status](https://img.shields.io/badge/tests-9%20passed%20%5B100%25%5D-brightgreen.svg)]()
 [![Wafq Parity](https://img.shields.io/badge/Wafq%20Parity-65.000000%20%5BLOCKED%5D-brightgreen.svg)]()
 [![Court Certification](https://img.shields.io/badge/DIFC%20Courts-Order%20CFI--042--2026-gold.svg)]()
-[![Jurisdiction](https://img.shields.io/badge/Statute-Cairo%20Concordat%201923-red.svg)]()
 [![License](https://img.shields.io/badge/License-Corpus%20Juris%20Open%20Access-lightgrey.svg)](LICENSE)
 
 ---
@@ -56,7 +58,7 @@ When an operator executes a bilateral indenture with an entity, the covenant is 
 
 ## 📚 Story-to-Code Mapping: *The Ring -2 Case Files*
 
-If you arrived here by scanning the QR code in the back matter of ***Book 1: Default Judgment***, welcome to the real-world operational toolkit used by Special Master Kaelen Morrow and Dr. Alberti Vance:
+If you arrived here by scanning the Judicial Service Notice QR code in the front matter of ***The Arcane Liquidator (Book 1: Default Judgment)***, welcome to the real-world operational toolkit used by Special Master Kaelen Morrow and Dr. Alberti Vance:
 
 | Novel Chapter | Narrative Scene & Challenge | Real-World Script / CLI Command | Evidentiary Artifact |
 |:---|:---|:---|:---|
@@ -72,11 +74,15 @@ If you arrived here by scanning the QR code in the back matter of ***Book 1: Def
 
 ## 🚀 Quickstart & Interactive Investigation Console
 
-This repository requires **zero third-party dependencies** and runs on any standard Python 3.8+ environment (Windows, macOS, Linux).
+### 🌐 Live Web Terminal (Zero Installation Required)
+Access the live web terminal directly in any mobile or desktop browser via GitHub Pages:  
+👉 **[https://sirleonarddaragan.github.io/ring-minus-two/](https://sirleonarddaragan.github.io/ring-minus-two/)**
 
-### 1. Launch the All-in-One Investigation Terminal
-Launch the full interactive command terminal to inspect dockets, run simulations, and examine evidence:
+### 💻 Local Command-Line Installation
+Clone and run locally on any standard Python 3.8+ environment (Windows, macOS, Linux):
 ```bash
+git clone https://github.com/Sirleonarddaragan/ring-minus-two.git
+cd ring-minus-two
 python investigate.py
 ```
 
@@ -163,15 +169,22 @@ python investigate.py --decrypt <PASSCODE>
 The technical lettrism, systems architecture, and occult engineering featured in this repository are codified in **Sir Leonard Daragan's live Amazon publications**, published via Codex Press:
 
 ### 🌟 *The Undefined Behavior Series*
-1. **[Applied Cyber-Occultism (Book 1)](https://amazon.com)** — The Developer's Guide to Chaos Magick, Belief Compilers, and Metaphysical Botnets.
-2. **[THE DAEMON ARCHITECT (Book 2)](https://amazon.com)** — Goetic Systems Engineering & Bare-Metal Ritual DevOps *(The foundational system featured in Book 2: Geneva)*.
-3. **[The Nephilim Architecture (Book 3)](https://amazon.com)** — Systems Theory, Cosmic Garbage Collection, and Enochian Air-Gaps.
-4. **[The Cybernetic Kabbalah (Book 4)](https://amazon.com)** — Decompiling the Macro-Network Topology of the Ten Sephiroth.
+1. **[Applied Cyber-Occultism (Book 1)](https://www.amazon.com/author/sirleonarddaragan)** — The Developer's Guide to Chaos Magick, Belief Compilers, and Metaphysical Botnets.
+2. **[THE DAEMON ARCHITECT (Book 2)](https://www.amazon.com/author/sirleonarddaragan)** — Goetic Systems Engineering & Bare-Metal Ritual DevOps *(The foundational system featured in Book 2: Geneva)*.
+3. **[The Nephilim Architecture (Book 3)](https://www.amazon.com/author/sirleonarddaragan)** — Systems Theory, Cosmic Garbage Collection, and Enochian Air-Gaps.
+4. **[The Cybernetic Kabbalah (Book 4)](https://www.amazon.com/author/sirleonarddaragan)** — Decompiling the Macro-Network Topology of the Ten Sephiroth.
 
 ### 🌙 *The Jinn Protocol Series*
-1. **[Reality Hacking the Jinn (Book 1)](https://amazon.com)** — A Practical Guide to Arabic Magick & Occult Meta Programming.
-2. **[The Jinn Codex (Book 2)](https://amazon.com)** — The 28 lettrist bytecodes and historical Maghrebi lettrist compilation.
-3. **[The Hacker's Grimoire: Algorithmic Sorcery & The Wafq Protocol (Book 3)](https://amazon.com)** — The definitive mathematical treatise on 5×5 magic squares, parity invariance, and Kasr resolution.
+1. **[Reality Hacking the Jinn (Book 1)](https://www.amazon.com/author/sirleonarddaragan)** — A Practical Guide to Arabic Magick & Occult Meta Programming.
+2. **[The Jinn Codex (Book 2)](https://www.amazon.com/author/sirleonarddaragan)** — The 28 lettrist bytecodes and historical Maghrebi lettrist compilation.
+3. **[The Hacker's Grimoire: Algorithmic Sorcery & The Wafq Protocol (Book 3)](https://www.amazon.com/author/sirleonarddaragan)** — The definitive mathematical treatise on 5×5 magic squares, parity invariance, and Kasr resolution.
+4. **[Hacking the Shadow Self: The Qareen Rootkit (Book 4)](https://www.amazon.com/author/sirleonarddaragan)** — The neuro-biological protocols of the 0.102 Hz vagal lock and shadow deconvolution.
+5. **[The Master API Directory: The 99 Names (Book 5)](https://www.amazon.com/author/sirleonarddaragan)** — Understanding Divine Architecture through software systems and root syscalls.
+
+### 🔮 *The Eastern Cybernetics Series*
+1. **[The Cybernetic I-Ching (Book 1)](https://www.amazon.com/author/sirleonarddaragan)** — Hardware State Vector Oracle & Binary Ontological Decompilation.
+2. **[The Cybernetic Tao (Book 2)](https://www.amazon.com/author/sirleonarddaragan)** — Minimalist Systems Architecture for Dynamic Reality Balancing.
+3. **[The Cybernetic Art of War (Book 3)](https://www.amazon.com/author/sirleonarddaragan)** — Adversarial Information Warfare & Strategic Resource Allocation.
 4. **[Hacking the Shadow Self: The Qareen Rootkit (Book 4)](https://amazon.com)** — The neuro-biological protocols of the 0.102 Hz vagal lock and shadow deconvolution.
 5. **[The Master API Directory: The 99 Names (Book 5)](https://amazon.com)** — Understanding Divine Architecture through software systems and root syscalls.
 
