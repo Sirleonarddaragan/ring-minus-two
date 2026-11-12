@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ring-minus-two"
+version = "1.0.0"
+authors = [
+  { name = "Codex Press x Undefined Behavior Laboratories", email = "receivership@undefinedbehavior.io" },
+  { name = "Sir Leonard Daragan", email = "author@leonarddaragan.com" }
+]
+description = "Metrological, lettrist, and statutory receivership tools for Ring -2 reality hypervisors."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Security :: Cryptography"
+]
+
+[project.scripts]
+wafq = "ring_minus_two.wafq_engine:main"
+abjad = "ring_minus_two.abjad_calc:main"
+vagal = "ring_minus_two.vagal_metronome:main"
+telemetry = "ring_minus_two.telemetry_stream:main"
+liquidate = "ring_minus_two.entity_liquidation:main"
+investigate = "ring_minus_two.interactive_console:main"

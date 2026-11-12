@@ -1,0 +1,8 @@
+# Ring -2 Core Systems // Corpus Juris Daemonica
+# Dependencies Specification
+
+# The core metrological and lettrist suite relies exclusively on the Python Standard Library
+# to guarantee zero-dependency execution across air-gapped terminal environments.
+
+# Optional development & testing dependencies:
+pytest>=7.0.0

@@ -1,0 +1,89 @@
+{
+  "case_ref": "2026-ARB-08991",
+  "facility": "DIFC Gate Tower 4, Sub-Level 2 & Sub-Level 4",
+  "subject_entity": "Al-Ahmar (Ifrit of the First Decan of Mars)",
+  "recorded_by": "Dr. Alberti Vance, DVM, Chief Technical Bailiff",
+  "timestamp_start_utc": "2026-01-22T23:41:02Z",
+  "readings": [
+    {
+      "time_utc": "2026-01-22T23:41:02Z",
+      "countdown_remaining": "38:14",
+      "liquid_nitrogen_temp_k": 77.2,
+      "dewar_pressure_bar": 4.2,
+      "grounding_bus_potential_kv": 12.4,
+      "libet_temporal_gradient_ms": 500.0,
+      "operator_pulse_bpm": 53,
+      "event": "Primary 33kV feed intentionally severed at Substation 7 by Tariq Al-Mansoor."
+    },
+    {
+      "time_utc": "2026-01-22T23:45:10Z",
+      "countdown_remaining": "34:06",
+      "liquid_nitrogen_temp_k": 82.5,
+      "dewar_pressure_bar": 5.8,
+      "grounding_bus_potential_kv": 28.1,
+      "libet_temporal_gradient_ms": 500.0,
+      "operator_pulse_bpm": 54,
+      "event": "Boil-off rate exceeds 0.8 L/sec. Faradic envelope showing micro-fractures."
+    },
+    {
+      "time_utc": "2026-01-22T23:51:22Z",
+      "countdown_remaining": "27:54",
+      "liquid_nitrogen_temp_k": 94.0,
+      "dewar_pressure_bar": 7.1,
+      "grounding_bus_potential_kv": 44.0,
+      "libet_temporal_gradient_ms": 485.0,
+      "operator_pulse_bpm": 53,
+      "event": "Libet stasis field spreads to Level 2 trading floor; 80 human analysts suspended."
+    },
+    {
+      "time_utc": "2026-01-23T00:02:40Z",
+      "countdown_remaining": "16:36",
+      "liquid_nitrogen_temp_k": 110.8,
+      "dewar_pressure_bar": 9.4,
+      "grounding_bus_potential_kv": 78.5,
+      "libet_temporal_gradient_ms": 410.0,
+      "operator_pulse_bpm": 54,
+      "event": "Superconducting bus quench begins. Copper vapor plasma detected in exhaust flue."
+    },
+    {
+      "time_utc": "2026-01-23T00:11:15Z",
+      "countdown_remaining": "07:01",
+      "liquid_nitrogen_temp_k": 135.2,
+      "dewar_pressure_bar": 12.0,
+      "grounding_bus_potential_kv": 112.0,
+      "libet_temporal_gradient_ms": 220.0,
+      "operator_pulse_bpm": 52,
+      "event": "Special Master Morrow descends 80ft exhaust flue. Blast doors sealed by system."
+    },
+    {
+      "time_utc": "2026-01-23T00:14:54Z",
+      "countdown_remaining": "03:22",
+      "liquid_nitrogen_temp_k": 142.1,
+      "dewar_pressure_bar": 13.8,
+      "grounding_bus_potential_kv": 138.6,
+      "libet_temporal_gradient_ms": 110.0,
+      "operator_pulse_bpm": 53,
+      "event": "Vagal lock engaged at 53 BPM. Dr. Vance initiates precision diamond rotary resection."
+    },
+    {
+      "time_utc": "2026-01-23T00:15:02Z",
+      "countdown_remaining": "03:22",
+      "liquid_nitrogen_temp_k": 142.1,
+      "dewar_pressure_bar": 13.8,
+      "grounding_bus_potential_kv": 140.0,
+      "libet_temporal_gradient_ms": 0.0,
+      "operator_pulse_bpm": 53,
+      "event": "14-micron diamond cut completes. Wafq parity snaps to 65.000000. 140kV arc shunted to silver grounding bus."
+    },
+    {
+      "time_utc": "2026-01-23T00:15:30Z",
+      "countdown_remaining": "SECURED",
+      "liquid_nitrogen_temp_k": 77.0,
+      "dewar_pressure_bar": 3.8,
+      "grounding_bus_potential_kv": 0.0,
+      "libet_temporal_gradient_ms": 0.0,
+      "operator_pulse_bpm": 52,
+      "event": "Interlocutory injunction executed. Entity detached with honor. 80 analysts recover consciousness without cognitive deficit."
+    }
+  ]
+}
