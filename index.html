@@ -17,12 +17,12 @@
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
     :root {
-      --bg-void: #06080d;
-      --bg-panel: #0b0f17;
-      --bg-card: #101622;
-      --bg-elevated: #141c2b;
+      --bg-void: #03050a;
+      --bg-panel: #080c14;
+      --bg-card: #0d131f;
+      --bg-elevated: #121a2a;
       --border-dim: rgba(148, 163, 184, 0.14);
-      --border-strong: rgba(148, 163, 184, 0.25);
+      --border-strong: rgba(56, 189, 248, 0.28);
       --border-gold: #d4af37;
       --border-cyan: #06b6d4;
       --text-gold: #f5d061;
@@ -36,8 +36,8 @@
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
       --font-serif: 'Cinzel', serif;
-      --radius-sm: 6px;
-      --radius-md: 10px;
+      --radius-sm: 4px;
+      --radius-md: 6px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,8 +45,12 @@
     body {
       background-color: var(--bg-void);
       background-image:
-        radial-gradient(ellipse 80% 45% at 50% -10%, rgba(6, 182, 212, 0.08), transparent 70%),
-        radial-gradient(ellipse 60% 35% at 85% 0%, rgba(212, 175, 55, 0.06), transparent 65%);
+        radial-gradient(ellipse 80% 42% at 50% -8%, rgba(6, 182, 212, 0.11), transparent 68%),
+        radial-gradient(ellipse 55% 30% at 88% 4%, rgba(212, 175, 55, 0.08), transparent 62%),
+        linear-gradient(to right, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+      background-position: 0 0, 0 0, -1px -1px, -1px -1px;
       color: var(--text-main);
       font-family: var(--font-sans);
       min-height: 100vh;
@@ -55,6 +59,21 @@
       line-height: 1.55;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes pulseBeacon {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--green-ok); }
+      50% { opacity: 0.45; box-shadow: 0 0 2px var(--green-ok); }
+    }
+
+    @keyframes waveScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     /* Ultra-subtle CRT hairline texture without muting typography */
@@ -99,15 +118,24 @@
     }
 
     .brand-tag {
-      background: rgba(6, 182, 212, 0.1);
+      background: rgba(6, 182, 212, 0.12);
       color: var(--text-cyan);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      font-size: 0.66rem;
-      padding: 0.18rem 0.5rem;
-      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      font-size: 0.64rem;
+      padding: 0.16rem 0.5rem;
+      border-radius: 3px;
       text-transform: uppercase;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .live-beacon {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green-ok);
+      display: inline-block;
+      animation: pulseBeacon 2.2s ease-in-out infinite;
     }
 
     .top-links {
@@ -201,18 +229,30 @@
       gap: 1.25rem;
     }
 
-    /* Compact Asymmetric Judicial Header */
+    /* Compact Asymmetric Judicial Header with HUD Corner Reticles */
     .hero {
-      background: linear-gradient(145deg, rgba(14, 19, 30, 0.96), rgba(9, 13, 20, 0.98));
+      position: relative;
+      background: linear-gradient(150deg, rgba(12, 18, 30, 0.94), rgba(6, 9, 16, 0.98));
       border: 1px solid var(--border-dim);
+      border-top: 1px solid rgba(212, 175, 55, 0.35);
       border-left: 3px solid var(--border-gold);
-      padding: 1.35rem 1.5rem;
+      padding: 1.4rem 1.6rem;
       border-radius: var(--radius-md);
       display: grid;
-      grid-template-columns: 1.35fr 0.9fr;
+      grid-template-columns: 1.35fr 0.95fr;
       gap: 1.5rem;
       align-items: center;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 14px; height: 14px;
+      border-top: 2px solid rgba(56, 189, 248, 0.55);
+      border-right: 2px solid rgba(56, 189, 248, 0.55);
+      pointer-events: none;
     }
 
     @media (max-width: 860px) {
@@ -281,11 +321,18 @@
 
     /* Live Docket Strip (Hero Right Column) */
     .docket-telemetry-card {
-      background: rgba(6, 9, 15, 0.75);
-      border: 1px solid var(--border-dim);
+      background: rgba(4, 7, 13, 0.88);
+      border: 1px solid rgba(56, 189, 248, 0.22);
       border-radius: var(--radius-sm);
-      padding: 0.85rem 1rem;
+      padding: 0.9rem 1rem;
       font-family: var(--font-mono);
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      box-shadow: inset 0 0 24px rgba(6, 182, 212, 0.05);
+    }
+
+    .docket-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 0.65rem 0.9rem;
@@ -298,17 +345,41 @@
     }
 
     .docket-k {
-      font-size: 0.64rem;
-      letter-spacing: 0.1em;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
 
     .docket-v {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--text-main);
       font-variant-numeric: tabular-nums;
+    }
+
+    .telemetry-wave-bar {
+      border-top: 1px solid rgba(148, 163, 184, 0.12);
+      padding-top: 0.55rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .wave-viewport {
+      flex: 1;
+      height: 22px;
+      overflow: hidden;
+      position: relative;
+      mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    }
+
+    .wave-svg {
+      width: 200%;
+      height: 22px;
+      animation: waveScroll 4.5s linear infinite;
     }
 
     /* Segmented Rail Navigation Tabs */
@@ -470,18 +541,120 @@
       width: 100%;
     }
 
-    /* 5x5 Wafq Grid */
-    .wafq-grid {
-      display: grid;
-      grid-template-columns: repeat(5, clamp(52px, 13vw, 66px));
-      grid-template-rows: repeat(5, clamp(52px, 13vw, 66px));
-      gap: 6px;
-      background: #06090f;
-      padding: 12px;
+    /* Machined Wafq Metrology Housing & Parity Gutters */
+    .wafq-housing {
+      position: relative;
+      background: linear-gradient(180deg, #070b13 0%, #04070d 100%);
       border: 1px solid var(--border-strong);
       border-radius: var(--radius-md);
-      box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.75);
+      padding: 12px 14px 14px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(56, 189, 248, 0.12);
+    }
+
+    .wafq-housing-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .wafq-matrix-frame {
+      display: grid;
+      grid-template-columns: auto 34px;
+      grid-template-rows: 22px auto;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .wafq-col-sums {
+      grid-column: 1;
+      grid-row: 1;
+      display: grid;
+      grid-template-columns: repeat(5, clamp(50px, 12vw, 62px));
+      gap: 6px;
+      padding: 0 4px;
+    }
+
+    .wafq-row-sums {
+      grid-column: 2;
+      grid-row: 2;
+      display: grid;
+      grid-template-rows: repeat(5, clamp(50px, 12vw, 62px));
+      gap: 6px;
+      padding: 4px 0;
+    }
+
+    .gutter-sum {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: var(--green-ok);
+      font-variant-numeric: tabular-nums;
+      height: 100%;
+    }
+
+    .gutter-sum.fault {
+      background: rgba(244, 63, 94, 0.16);
+      border-color: rgba(244, 63, 94, 0.55);
+      color: #fda4af;
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.25);
+    }
+
+    /* 5x5 Wafq Grid */
+    .wafq-grid {
+      grid-column: 1;
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: repeat(5, clamp(50px, 12vw, 62px));
+      grid-template-rows: repeat(5, clamp(50px, 12vw, 62px));
+      gap: 6px;
+      background: #04060b;
+      padding: 4px;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      border-radius: var(--radius-sm);
       touch-action: manipulation;
+    }
+
+    .tolerance-gauge {
+      background: #060911;
+      border: 1px solid var(--border-dim);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      font-family: var(--font-mono);
+    }
+
+    .tolerance-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-bottom: 0.45rem;
+    }
+
+    .tolerance-track {
+      height: 8px;
+      background: #0d1320;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .tolerance-fill {
+      height: 100%;
+      transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
     }
 
     .wafq-cell {
@@ -709,14 +882,22 @@
 
     .pacer-circle-wrap {
       position: relative;
-      width: min(220px, 60vw);
-      height: min(220px, 60vw);
+      width: min(230px, 62vw);
+      height: min(230px, 62vw);
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      border: 1px dashed rgba(56, 189, 248, 0.18);
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.04) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.07) 0%, transparent 72%);
+    }
+
+    .pacer-reticle {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      animation: spinSlow 40s linear infinite;
     }
 
     .pacer-circle {
@@ -772,16 +953,20 @@
 
     .terminal-dots {
       display: flex;
-      gap: 5px;
+      gap: 7px;
       align-items: center;
+      font-size: 0.64rem;
+      letter-spacing: 0.08em;
+      color: var(--text-cyan);
     }
 
     .terminal-dots i {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 1px;
       display: inline-block;
-      background: #334155;
+      background: var(--text-cyan);
+      box-shadow: 0 0 6px var(--text-cyan);
     }
 
     .terminal-box {
@@ -1231,6 +1416,7 @@
   <!-- Top Navigation HUD -->
   <header>
     <div class="brand-title">
+      <span class="live-beacon" title="Ring -2 Kernel Runtime Online"></span>
       <span>THE ARCANE LIQUIDATOR</span>
       <span class="brand-tag">RING -2 // DIFC</span>
     </div>
@@ -1278,21 +1464,32 @@
       </div>
 
       <div class="docket-telemetry-card" aria-label="Live Docket Summary">
-        <div class="docket-kv">
-          <span class="docket-k">Seized Estate</span>
-          <span class="docket-v" style="color:var(--green-ok);">$421.84M USD</span>
+        <div class="docket-grid">
+          <div class="docket-kv">
+            <span class="docket-k">Seized Estate</span>
+            <span class="docket-v" style="color:var(--green-ok);">$421.84M USD</span>
+          </div>
+          <div class="docket-kv">
+            <span class="docket-k">Vagal Spec</span>
+            <span class="docket-v" style="color:var(--text-cyan);">0.100 Hz / 53 BPM</span>
+          </div>
+          <div class="docket-kv">
+            <span class="docket-k">Matrix State</span>
+            <span class="docket-v" id="hero-matrix-state" style="color:var(--red-alert);">+4 KASR BREACH</span>
+          </div>
+          <div class="docket-kv">
+            <span class="docket-k">Hotkeys</span>
+            <span class="docket-v" style="color:var(--text-dim);">[1–6] Tabs · [M] Audio</span>
+          </div>
         </div>
-        <div class="docket-kv">
-          <span class="docket-k">Vagal Spec</span>
-          <span class="docket-v" style="color:var(--text-cyan);">0.100 Hz / 53 BPM</span>
-        </div>
-        <div class="docket-kv">
-          <span class="docket-k">Matrix State</span>
-          <span class="docket-v" id="hero-matrix-state" style="color:var(--red-alert);">+4 KASR BREACH</span>
-        </div>
-        <div class="docket-kv">
-          <span class="docket-k">Keys</span>
-          <span class="docket-v" style="color:var(--text-dim);">[1–6] Tabs · [M] Audio</span>
+        <div class="telemetry-wave-bar">
+          <span style="font-size:0.62rem; color:var(--text-muted); letter-spacing:0.1em; white-space:nowrap;">SUB-L2 BUS</span>
+          <div class="wave-viewport" aria-hidden="true">
+            <svg class="wave-svg" viewBox="0 0 240 22" preserveAspectRatio="none">
+              <path d="M0,11 L15,11 L20,4 L25,18 L30,11 L55,11 L60,6 L65,16 L70,11 L95,11 L100,3 L105,19 L110,11 L135,11 L140,4 L145,18 L150,11 L175,11 L180,6 L185,16 L190,11 L215,11 L220,3 L225,19 L230,11 L240,11" fill="none" stroke="#38bdf8" stroke-width="1.3" stroke-opacity="0.75"/>
+            </svg>
+          </div>
+          <span style="font-size:0.62rem; color:var(--green-ok); letter-spacing:0.08em; white-space:nowrap;">LIVE 0.100Hz</span>
         </div>
       </div>
     </div>
@@ -1319,7 +1516,17 @@
 
       <div class="wafq-workspace">
         <div class="wafq-matrix-col">
-          <div class="wafq-grid" id="wafq-grid-display"></div>
+          <div class="wafq-housing">
+            <div class="wafq-housing-meta">
+              <span>WAFQ_CNC // CU-MARS PLATE</span>
+              <span style="color:var(--text-cyan);">TARGET ∑ = 65</span>
+            </div>
+            <div class="wafq-matrix-frame">
+              <div class="wafq-col-sums" id="wafq-col-sums"></div>
+              <div class="wafq-grid" id="wafq-grid-display"></div>
+              <div class="wafq-row-sums" id="wafq-row-sums"></div>
+            </div>
+          </div>
           <div class="wafq-actions-row">
             <button class="btn-action btn-danger" onclick="loadDefectiveMatrix()">
               <span>⚠️</span> Simulate +4 Kasr Breach
@@ -1336,6 +1543,15 @@
             <span style="color:var(--text-gold);">Nucleus (Sirr) · Pure Copper · Parity Constant 65.00</span>
           </div>
           <div class="wafq-stats" id="wafq-stats-panel"></div>
+          <div class="tolerance-gauge">
+            <div class="tolerance-head">
+              <span>CNC CELL (3,3) BORE CALIBRATION</span>
+              <b id="tolerance-readout" style="color:var(--red-alert);">17.000 mm (+4.0 Kasr)</b>
+            </div>
+            <div class="tolerance-track">
+              <div class="tolerance-fill" id="tolerance-fill" style="width:100%; background:var(--red-alert);"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1369,8 +1585,8 @@
 
       <div class="terminal-shell">
         <div class="terminal-chrome">
-          <div class="terminal-dots"><i></i><i></i><i></i></div>
-          <span>ILM_AL_HURUF // BYTECODE_STDOUT</span>
+          <div class="terminal-dots"><i></i><span>SYS.KERNEL // HURUF_COMPILER</span></div>
+          <span>28-BYTECODE STDOUT</span>
         </div>
         <div class="terminal-box" id="abjad-output"></div>
       </div>
@@ -1388,6 +1604,14 @@
 
       <div class="pacer-container">
         <div class="pacer-circle-wrap">
+          <svg class="pacer-reticle" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="94" fill="none" stroke="rgba(56,189,248,0.22)" stroke-width="1" stroke-dasharray="4 6"/>
+            <circle cx="100" cy="100" r="82" fill="none" stroke="rgba(212,175,55,0.25)" stroke-width="1" stroke-dasharray="22 14"/>
+            <line x1="100" y1="2" x2="100" y2="14" stroke="#38bdf8" stroke-width="1.5"/>
+            <line x1="100" y1="186" x2="100" y2="198" stroke="#38bdf8" stroke-width="1.5"/>
+            <line x1="2" y1="100" x2="14" y2="100" stroke="#38bdf8" stroke-width="1.5"/>
+            <line x1="186" y1="100" x2="198" y2="100" stroke="#38bdf8" stroke-width="1.5"/>
+          </svg>
           <div class="pacer-circle" id="pacer-circle">
             <div class="pacer-phase" id="pacer-phase">STANDBY</div>
             <div class="pacer-timer" id="pacer-timer">10.0s</div>
@@ -1444,8 +1668,8 @@
 
       <div class="terminal-shell">
         <div class="terminal-chrome">
-          <div class="terminal-dots"><i></i><i></i><i></i></div>
-          <span>DIFC_TOWER_4 :: TELEMETRY_STDOUT</span>
+          <div class="terminal-dots"><i></i><span>SYS.BUS // DIFC_TOWER_4</span></div>
+          <span>TELEMETRY_STDOUT</span>
         </div>
         <div class="terminal-box" id="telemetry-log">Click "Stream Live Telemetry Bus" to replay the recorded sensor log from Gate Tower 4.
 Or enter an interactive judicial command in the CLI prompt below.</div>
@@ -1572,8 +1796,8 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
 
       <div class="terminal-shell">
         <div class="terminal-chrome">
-          <div class="terminal-dots"><i></i><i></i><i></i></div>
-          <span>CASE_02_DOSSIER.ENC // XOR_HARMONIC</span>
+          <div class="terminal-dots"><i></i><span>SYS.VAULT // CASE_02.ENC</span></div>
+          <span>XOR_HARMONIC</span>
         </div>
         <div class="terminal-box" id="decrypt-output">Status: Encrypted file locked [XOR Lettrist Harmonic]. Compile root 'Adl in Tab 02 to derive the passcode.</div>
       </div>
@@ -2077,6 +2301,22 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
       const diag2 = currentMatrix.reduce((sum, r, i) => sum + r[4 - i], 0);
 
       const isLocked = !isDefective;
+      const colSumsEl = document.getElementById('wafq-col-sums');
+      if (colSumsEl) {
+        colSumsEl.innerHTML = colSums.map(s => `<div class="gutter-sum ${s !== 65 ? 'fault' : ''}">∑${s}</div>`).join('');
+      }
+      const rowSumsEl = document.getElementById('wafq-row-sums');
+      if (rowSumsEl) {
+        rowSumsEl.innerHTML = rowSums.map(s => `<div class="gutter-sum ${s !== 65 ? 'fault' : ''}">${s}</div>`).join('');
+      }
+      const tolFill = document.getElementById('tolerance-fill');
+      const tolReadout = document.getElementById('tolerance-readout');
+      if (tolFill && tolReadout) {
+        tolFill.style.width = isLocked ? '76%' : '100%';
+        tolFill.style.background = isLocked ? 'var(--green-ok)' : 'var(--red-alert)';
+        tolReadout.textContent = isLocked ? '13.000 mm (LOCKED · S=65)' : '17.000 mm (+4.0 Kasr BREACH)';
+        tolReadout.style.color = isLocked ? 'var(--green-ok)' : 'var(--red-alert)';
+      }
       const heroStateEl = document.getElementById('hero-matrix-state');
       if (heroStateEl) {
         heroStateEl.textContent = isLocked ? '65.0 PARITY LOCKED' : '+4 KASR BREACH';
