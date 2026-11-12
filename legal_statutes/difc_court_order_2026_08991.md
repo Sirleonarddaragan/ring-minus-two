@@ -36,7 +36,7 @@
 
 **UPON READING** the Emergency Ex Parte Application of Special Master Kaelen Morrow, Esq. dated 22 January 2026;  
 **AND UPON READING** the Technical Telemetry Affidavit and Metrology Report of Dr. Alberti Vance, DVM (Chief Technical Bailiff);  
-**AND UPON HEARING** Counsel Sebastian "Sebas" Vance appearing via remote audiovisual link from the Dubai Maritime Court;  
+**AND UPON HEARING** Counsel Sebastián "Sebas" Castillo appearing via remote audiovisual link from the Dubai Maritime Court;  
 **AND UPON NOTING** the formal appearance and jurisdictional joinder of Agent Valeria Rodriguez (Interpol Financial Crimes & Occult Artifacts Directorate, Lyon);  
 **AND UPON CONSIDERING** the provisions of the Cairo Concordat of 1923, the DIFC Court Law (DIFC Law No. 10 of 2004), and the UNCITRAL Model Law on Cross-Border Insolvency;
 

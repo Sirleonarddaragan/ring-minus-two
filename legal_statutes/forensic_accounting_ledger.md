@@ -1,7 +1,7 @@
 # FORENSIC ACCOUNTING & ASSET RECOVERY LEDGER
 ### IN RE: Q-ENTROPY ARBITRAGE LTD. (IN RECEIVERSHIP)
 **DIFC Court Case No.: CFI-042-2026 // Arbitration Enforcement Ref: 2026-ARB-08991**  
-**Senior Forensic Metrologist & Registry Auditor:** Sebastian "Sebas" Vance  
+**Senior Forensic Metrologist & Registry Auditor:** Sebastián "Sebas" Castillo, Esq.  
 **Supervising Receiver:** Kaelen Morrow, Esq.  
 **Jurisdiction:** Dubai (DIFC) / London (Chancery Division) / Lyon (Interpol)  
 **Date of Filing:** 23 January 2026  
@@ -46,7 +46,7 @@ Under Paragraph 5 of DIFC Court Order CFI-042-2026, the recovered \$421,840,000.
 ### C. Priority 3: Special Master Receivership & Metrological Costs
 * **Statutory Receivership Fee (Undefined Behavior Receiverships LLP):** \$21,000,000.00.
 * **Bailiff & Technical Engineering Fee (Dr. Alberti Vance, DVM):** \$2,000,000.00 *(Note: Immediately cleared Dr. Vance's \$220,000.00 Cornell student loan balance; remainder retained in operational reserve)*.
-* **Maritime Registry & Senior Forensic Accounting Fee (Sebas Vance):** \$1,500,000.00.
+* **Maritime Registry & Senior Forensic Accounting Fee (Sebas Castillo):** \$1,500,000.00.
 * **Senior Lettrist Analysis Retainer (Farah Al-Khatib):** \$1,500,000.00.
 * **Total Administrative Costs:** **\$26,000,000.00 USD**.
 
@@ -60,6 +60,6 @@ Under Paragraph 5 of DIFC Court Order CFI-042-2026, the recovered \$421,840,000.
 I hereby certify that all accounts have been reconciled to the penny. The arithmetic parity of the financial ledger matches the zero-entropy state of the rectified 5×5 Martial Wafq. 
 
 *Certified by,*  
-**Sebastian "Sebas" Vance**  
-Chief Forensic Metrologist, Undefined Behavior Receiverships LLP  
+**Sebastián "Sebas" Castillo, Esq.**  
+Senior Associate & Forensic Auditor, Undefined Behavior Receiverships LLP  
 Member, Dubai Maritime Arbitration Tribunal

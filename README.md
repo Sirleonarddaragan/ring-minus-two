@@ -182,7 +182,7 @@ The technical lettrism, systems architecture, and occult engineering featured in
 All case filings and indentures in this repository operate under public international law:
 * [`legal_statutes/cairo_concordat_1923.md`](legal_statutes/cairo_concordat_1923.md): The full diplomatic treaty text establishing the Five Canons of Reality Contracts and Section 9 (Prohibition of Human Neural Collateral).
 * [`legal_statutes/difc_court_order_2026_08991.md`](legal_statutes/difc_court_order_2026_08991.md): Justice Sir Jeremy Cavendish's certified order appointing Kaelen Morrow as Special Master and seizing \$421.84M USD.
-* [`legal_statutes/forensic_accounting_ledger.md`](legal_statutes/forensic_accounting_ledger.md): Sebastian Vance's asset tracking matrix reconciling the full restitution of \$160M to 80 affected analysts.
+* [`legal_statutes/forensic_accounting_ledger.md`](legal_statutes/forensic_accounting_ledger.md): Sebastián Castillo's asset tracking matrix reconciling the full restitution of \$160M to 80 affected analysts.
 * [`legal_statutes/clause_4_3_default_notice.txt`](legal_statutes/clause_4_3_default_notice.txt): The predatory indenture executed by Q-Entropy Arbitrage Ltd.
 
 ---

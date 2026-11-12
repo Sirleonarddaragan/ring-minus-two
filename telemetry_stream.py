@@ -40,7 +40,7 @@ class TelemetryMonitor:
         print(f"{BOLD}{CYAN}================================================================================{RESET}")
         print(f"Facility: Q-Entropy Arbitrage Ltd. | Enclosure: Cryo-Core 01 (Al-Ahmar)")
         print(f"Monitoring Officer: Dr. Alberti Vance, DVM, Chief Technical Bailiff")
-        print(f"Legal Counsel on Wire: Sebastian 'Sebas' Vance (Maritime Court, Dubai)")
+        print(f"Legal Counsel on Wire: Sebastián 'Sebas' Castillo, Esq. (Maritime Court, Dubai)")
         print("-" * 80)
         
         telemetry_frames = [
