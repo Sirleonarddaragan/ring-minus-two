@@ -137,9 +137,9 @@ def interactive_loop():
                 aud.print_report(rep, "DEFECTIVE Q-ENTROPY MATRIX")
         elif choice == "6":
             from .abjad_calc import print_audit
-            phrase = input("\nEnter Arabic text or press Enter for 'Al-'Adl': ").strip()
+            phrase = input("\nEnter Arabic text or press Enter for Root 'Adl (عدل): ").strip()
             if not phrase:
-                print_audit("العَدْل", "mashriqi")
+                print_audit("عَدْل", "mashriqi")
             else:
                 print_audit(phrase, "mashriqi")
         elif choice == "7":

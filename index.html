@@ -761,6 +761,9 @@
     @media (max-width: 768px) {
       .eco-grid { grid-template-columns: 1fr; }
     }
+    @media (min-width: 769px) {
+      .eco-card.eco-span-full { grid-column: span 2; }
+    }
     .eco-card {
       background: #0d121f;
       border: 1px solid #1e293b;
@@ -966,7 +969,7 @@
           <span>☕</span> Sponsor Compute on Ko-fi
         </a>
         <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener" class="hero-pill-btn btn-gold">
-          <span>📖</span> Case 01 on Amazon ($3.99 / KU)
+          <span>📖</span> Book 1 on Amazon Author Catalog
         </a>
         <button onclick="openEcosystemModal()" class="hero-pill-btn btn-constellation">
           <span>◈</span> Daragan Codex Constellation (5 Books)
@@ -979,12 +982,12 @@
 
     <!-- Navigation Tabs -->
     <div class="nav-tabs" id="tab-nav-bar">
-      <button class="tab-btn active" onclick="openTab('wafq')">1. 5×5 Wafq Parity Auditor</button>
-      <button class="tab-btn" onclick="openTab('abjad')">2. ‘Ilm al-Ḥurūf Compiler</button>
-      <button class="tab-btn" onclick="openTab('vagal')">3. 0.102 Hz Vagal Lock</button>
-      <button class="tab-btn" onclick="openTab('telemetry')">4. Sub-Level 2 Telemetry & CLI</button>
-      <button class="tab-btn" onclick="openTab('ledger')">5. Restitution & Compute Escrow</button>
-      <button class="tab-btn" onclick="openTab('decrypt')">6. Decrypt Case 02</button>
+      <button class="tab-btn active" data-tab="wafq" onclick="openTab('wafq')">1. 5×5 Wafq Parity Auditor</button>
+      <button class="tab-btn" data-tab="abjad" onclick="openTab('abjad')">2. ‘Ilm al-Ḥurūf Compiler</button>
+      <button class="tab-btn" data-tab="vagal" onclick="openTab('vagal')">3. 0.100 Hz Vagal Lock</button>
+      <button class="tab-btn" data-tab="telemetry" onclick="openTab('telemetry')">4. Sub-Level 2 Telemetry & CLI</button>
+      <button class="tab-btn" data-tab="ledger" onclick="openTab('ledger')">5. Restitution & Compute Escrow</button>
+      <button class="tab-btn" data-tab="decrypt" onclick="openTab('decrypt')">6. Decrypt Case 02</button>
     </div>
 
     <!-- TAB 1: WAFQ AUDITOR -->
@@ -1025,6 +1028,10 @@
 
       <div class="input-group">
         <input type="text" id="abjad-input" class="input-dark" placeholder="Enter Arabic text (e.g. عدل or الحق)..." value="عدل" oninput="audioEngine.playKeystroke()">
+        <select id="abjad-mode" class="input-dark" style="flex:0 0 180px;" onchange="runAbjad(); audioEngine.playRelay();">
+          <option value="mashriqi" selected>Eastern (Mashriqī)</option>
+          <option value="maghribi">Western (Maghribī / Al-Buni)</option>
+        </select>
         <button class="btn-action" onclick="runAbjad(); audioEngine.playRelay();">Compile Bytecodes</button>
       </div>
 
@@ -1060,8 +1067,9 @@
         </div>
 
         <div class="wafq-stats" style="text-align:center;">
-          <div>Current Autonomic Frequency: <b style="color:var(--text-cyan);">0.102 Hz</b> | Target Cardiac Rate: <b style="color:var(--green-ok);" id="pacer-bpm">53 BPM</b></div>
-          <div style="color:var(--text-dim); font-size:0.75rem; margin-top:0.3rem;">Safety Interlock: Pulse MUST stay below 60 BPM. Faradic envelope active. Synthetic 432 Hz sine tone synchronizes inhalation and cardiac diastole.</div>
+          <div>Nominal Autonomic Resonance: <b style="color:var(--text-cyan);">0.100 Hz (10.0s Cycle // 0.102 Hz Case Lock Threshold)</b> | Target Cardiac Rate: <b style="color:var(--green-ok);" id="pacer-bpm">53 BPM</b></div>
+          <div style="color:var(--text-dim); font-size:0.75rem; margin-top:0.3rem;">Safety Interlock (In-Fiction Spec): Pulse held below 60 BPM. Faradic envelope active. Synthetic 432 Hz sine tone synchronizes inhalation and cardiac diastole.</div>
+          <div style="color:#64748b; font-size:0.7rem; margin-top:0.35rem;"><i>Note: Educational &amp; immersive sci-fi/occult coherence simulation only. Not medical advice or diagnostic instrumentation.</i></div>
         </div>
       </div>
     </div>
@@ -1147,10 +1155,11 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
       </div>
 
       <div style="margin-top:1.5rem; background:var(--bg-card); padding:1rem; border:1px solid var(--border-dim); border-radius:4px; font-size:0.8rem;">
-        <div style="color:var(--text-gold); font-weight:700; margin-bottom:0.5rem;">Mandatory Statutory Disbursements (DIFC Order CFI-042-2026):</div>
+        <div style="color:var(--text-gold); font-weight:700; margin-bottom:0.5rem;">Mandatory Statutory Disbursements (DIFC Order CFI-042-2026 — Reconciled Total: $421,840,000.00 USD):</div>
         <div>• <b>$160,000,000.00 USD</b> disbursed to 80 affected junior analysts ($2,000,000.00 each) within 4 hours.</div>
-        <div>• <b>$18,840,000.00 USD</b> allocated to DEWA and building structural steel de-ionization.</div>
-        <div>• <b>$26,000,000.00 USD</b> receivership costs (cleared Dr. Alberti Vance's $220,000.00 Cornell student loans).</div>
+        <div>• <b>$18,840,000.00 USD</b> allocated to DEWA utility grid repair and building structural steel de-ionization.</div>
+        <div>• <b>$26,000,000.00 USD</b> statutory receivership fees &amp; operations (cleared Dr. Alberti Vance's $220,000.00 Cornell student loans).</div>
+        <div>• <b>$42,000,000.00 USD</b> disbursed to DIFC commercial trade creditors &amp; hardware lessors.</div>
         <div>• <b>$175,000,000.00 USD</b> held in DIFC Court Registry judicial surplus escrow.</div>
       </div>
 
@@ -1254,7 +1263,7 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
         <!-- Card 2: The Cybernetic Red Book -->
         <div class="eco-card">
           <div class="eco-card-header">
-            <div class="eco-tag">WESTERN CYBERNETICS // VOL 1</div>
+            <div class="eco-tag">STANDALONE CODEX // HARDCOVER &amp; KINDLE</div>
             <div class="eco-badge-current" style="border-color:#334155; color:#94a3b8; background:transparent;">EXTERNAL RUNTIME</div>
           </div>
           <div class="eco-card-title">The Cybernetic Red Book</div>
@@ -1330,7 +1339,7 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
         </div>
 
         <!-- Card 5: The Arcane Liquidator (ACTIVE TERMINAL) -->
-        <div class="eco-card current-system" style="grid-column: span 2;">
+        <div class="eco-card current-system eco-span-full">
           <div class="eco-card-header">
             <div class="eco-tag">RING -2 CASE FILES // SPECIAL MASTER RECEIVERSHIP</div>
             <div class="eco-badge-current">ACTIVE RUNTIME // DIFC TERMINAL</div>
@@ -1338,20 +1347,20 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
           <div class="eco-card-title">The Arcane Liquidator // Default Judgment</div>
           <div class="eco-card-sub">Statutory Receivership & Metrological Parity Suite for Corporate Entity Insolvent Estates</div>
           <p class="eco-card-desc">
-            Official operational runtime accompanying Volume 1 of The Ring -2 Case Files. Features the 5×5 Martial Wafq parity lock, 0.102 Hz autonomic Faraday cage, Sub-Level 2 telemetry, and the $421.84M USD forensic restitution ledger.
+            Official operational runtime accompanying Volume 1 of The Ring -2 Case Files. Features the 5×5 Martial Wafq parity lock, 0.100 Hz autonomic Faraday cage, Sub-Level 2 telemetry, and the $421.84M USD forensic restitution ledger.
           </p>
           <div class="eco-card-pills">
             <span>5×5 Wafq Resection</span>
-            <span>0.102 Hz Vagal Lock</span>
+            <span>0.100 Hz Vagal Lock</span>
             <span>‘Ilm al-Ḥurūf Compiler</span>
-            <span>$421.8M Restitution Escrow</span>
+            <span>$421.84M Restitution Escrow</span>
           </div>
           <div class="eco-card-actions">
-            <a href="https://github.com/Sirleonarddaragan/ring-minus-two" target="_blank" rel="noopener" class="eco-btn-run" style="background:var(--border-gold); color:#000;">
-              <span>⚡</span> GitHub Repository
+            <a href="https://sirleonarddaragan.github.io/ring-minus-two/" target="_blank" rel="noopener" class="eco-btn-run" style="background:var(--border-gold); color:#000;">
+              <span>⚡</span> DIFC Terminal
             </a>
             <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener" class="eco-btn-book">
-              <span>📖</span> Amazon Novella ($3.99)
+              <span>📖</span> Amazon Catalog
             </a>
           </div>
         </div>
@@ -1636,11 +1645,10 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
     // --- NAVIGATION TABS ---
     function openTab(tabId) {
       audioEngine.playRelay();
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-btn[data-tab]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabId);
+      });
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      
-      const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
-      if (targetBtn) targetBtn.classList.add('active');
       
       const targetContent = document.getElementById('tab-' + tabId);
       if (targetContent) targetContent.classList.add('active');
@@ -1720,9 +1728,11 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
       `;
     }
 
-    function inspectCell(r, c, val) {
-      audioEngine.playCellTone(val);
-      if (navigator.vibrate) navigator.vibrate(15);
+    function inspectCell(r, c, val, silent = false) {
+      if (!silent) {
+        audioEngine.playCellTone(val);
+        if (navigator.vibrate) navigator.vibrate(15);
+      }
       
       const inspector = document.getElementById('wafq-cell-inspector');
       const isCenter = (r === 2 && c === 2);
@@ -1741,12 +1751,14 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
       }
     }
 
-    function loadDefectiveMatrix() {
-      audioEngine.playKasrBreach();
-      if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+    function loadDefectiveMatrix(silent = false) {
+      if (!silent) {
+        audioEngine.playKasrBreach();
+        if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+      }
       currentMatrix = JSON.parse(JSON.stringify(DEFECTIVE_Q_ENTROPY));
       renderWafqGrid(true);
-      inspectCell(2, 2, 17);
+      inspectCell(2, 2, 17, silent);
     }
 
     function apply14MicronResection() {
@@ -1754,11 +1766,11 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
       if (navigator.vibrate) navigator.vibrate([15, 30, 60]);
       currentMatrix = JSON.parse(JSON.stringify(CANON_MARS));
       renderWafqGrid(false);
-      inspectCell(2, 2, 13);
+      inspectCell(2, 2, 13, false);
     }
 
     // --- 2. ABJAD COMPILER LOGIC ---
-    const ABJAD = {
+    const ABJAD_MASHRIQI = {
       'ا': 1, 'أ': 1, 'إ': 1, 'آ': 1, 'ء': 1, 'ى': 10, 'ئ': 10, 'ؤ': 6,
       'ب': 2, 'ج': 3, 'د': 4, 'ه': 5, 'ة': 5, 'و': 6, 'ز': 7, 'ح': 8,
       'ط': 9, 'ي': 10, 'ك': 20, 'ل': 30, 'م': 40, 'ن': 50, 'س': 60,
@@ -1766,21 +1778,34 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
       'ث': 500, 'خ': 600, 'ذ': 700, 'ض': 800, 'ظ': 900, 'غ': 1000
     };
 
+    const ABJAD_MAGHRIBI = Object.assign({}, ABJAD_MASHRIQI, {
+      'ص': 60,
+      'س': 300,
+      'ش': 1000,
+      'ض': 90,
+      'ظ': 800,
+      'غ': 900
+    });
+
     function runAbjad() {
       const text = document.getElementById('abjad-input').value.trim();
-      const clean = text.replace(/[\u064B-\u065F\u0670]/g, ''); // strip tashkeel
+      const modeEl = document.getElementById('abjad-mode');
+      const mode = modeEl ? modeEl.value : 'mashriqi';
+      const table = (mode === 'maghribi') ? ABJAD_MAGHRIBI : ABJAD_MASHRIQI;
+      const clean = text.replace(/\p{Mn}/gu, ''); // strip all Arabic diacritics / combining marks
       let total = 0;
-      let log = `['ILM AL-HURUF // COMPILER REPORT]\nInput Phrase: ${text}\nSanitized:    ${clean}\n` + "-".repeat(60) + "\n";
+      let log = `['ILM AL-HURUF // COMPILER REPORT (${mode.toUpperCase()})]\nInput Phrase: ${text}\nSanitized:    ${clean}\n` + "-".repeat(60) + "\n";
       log += `GLYPH   BYTECODE   RUNNING SUM\n` + "-".repeat(60) + "\n";
 
       for (let ch of clean) {
-        if (ABJAD[ch] !== undefined) {
-          total += ABJAD[ch];
-          log += `  ${ch}      ${String(ABJAD[ch]).padEnd(10)} ${total}\n`;
+        if (table[ch] !== undefined) {
+          total += table[ch];
+          log += `  ${ch}      ${String(table[ch]).padEnd(10)} ${total}\n`;
         }
       }
       log += "=".repeat(60) + `\nTOTAL GEMATRIC SUM (JUMMAL): ${total}\n`;
       if (total === 104) log += `>> RECOGNIZED ROOT API: 'ADL (EQUILIBRIUM & ABSOLUTE JUSTICE) [PASSCODE FOR TAB 6]\n`;
+      if (total === 135) log += `>> RECOGNIZED PHRASE: AL-'ADL (WITH ARTICLE AL-) // NOTE: CASE 02 USES ROOT 'ADL = 104\n`;
       if (total === 337) log += `>> RECOGNIZED ROOT API: AL-QAHHAR (THE IRRESISTIBLE SUBDUER)\n`;
       if (total === 280) log += `>> RECOGNIZED ROOT API: AL-AHMAR (THE RED SOVEREIGN // MARS IFRIT)\n`;
       if (total === 66)  log += `>> RECOGNIZED ROOT API: ALLAH (THE SUPREME MONAD // RING -2 HYPERVISOR)\n`;
@@ -1796,10 +1821,10 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
 
     // --- 3. VAGAL LOCK PACER LOGIC ---
     let pacerActive = false;
-    let pacerTime = 0;
+    let pacerStartTime = 0;
     let pacerInterval = null;
     let lastPhase = '';
-    let heartbeatCounter = 0;
+    let lastBeatIndex = 0;
 
     function togglePacer() {
       audioEngine.playRelay();
@@ -1811,10 +1836,10 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
       if (pacerActive) {
         btn.innerHTML = "<span>🛑</span> Disengage Vagal Lock (Stop)";
         btn.style.background = "#f43f5e";
-        pacerTime = 0;
+        pacerStartTime = performance.now();
         lastPhase = '';
-        heartbeatCounter = 0;
-        pacerInterval = setInterval(updatePacer, 100);
+        lastBeatIndex = -1;
+        pacerInterval = setInterval(updatePacer, 50);
       } else {
         btn.innerHTML = "<span>🫀</span> Engage Vagal Lock (Start)";
         btn.style.background = "var(--border-cyan)";
@@ -1826,18 +1851,19 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
     }
 
     function updatePacer() {
-      pacerTime = (pacerTime + 0.1) % 10.0;
+      const elapsedSec = (performance.now() - pacerStartTime) / 1000.0;
+      const pacerTime = elapsedSec % 10.0;
       const circle = document.getElementById('pacer-circle');
       const phase = document.getElementById('pacer-phase');
       const timer = document.getElementById('pacer-timer');
 
       timer.innerText = (10.0 - pacerTime).toFixed(1) + "s";
 
-      // Heartbeat pulse at 53 BPM (~every 1.13 seconds)
-      heartbeatCounter += 0.1;
-      if (heartbeatCounter >= 1.13) {
+      // Heartbeat pulse at 53 BPM (~every 1.132 seconds)
+      const beatIndex = Math.floor(elapsedSec / 1.132);
+      if (beatIndex > lastBeatIndex) {
         audioEngine.playHeartbeat();
-        heartbeatCounter = 0;
+        lastBeatIndex = beatIndex;
       }
 
       let currentPhase = '';
@@ -1867,33 +1893,44 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
     }
 
     // --- 4. TELEMETRY LOG & INTERACTIVE CLI ---
+    let telemetryTimers = [];
+
+    function cancelTelemetryTimers() {
+      telemetryTimers.forEach(t => clearTimeout(t));
+      telemetryTimers = [];
+    }
+
     function replayTelemetry() {
       audioEngine.playRelay();
+      cancelTelemetryTimers();
       const box = document.getElementById('telemetry-log');
       box.innerText = "[CONNECTING TO DIFC GATE TOWER 4 CRYOGENIC SENSORS...]\n";
       
       const frames = [
-        "23:41:02 | BOIL-OFF: 38:14 | TEMP:  77.2K | 4.2 bar | 12.4 kV | 53 BPM | WARN   | Primary 33kV feed severed at Substation 7. UPS failure.",
-        "23:45:10 | BOIL-OFF: 34:06 | TEMP:  82.5K | 5.8 bar | 28.1 kV | 54 BPM | CRIT   | Liquid nitrogen boil-off accelerating (0.8L/sec).",
-        "23:51:22 | BOIL-OFF: 27:54 | TEMP:  94.0K | 7.1 bar | 44.0 kV | 53 BPM | CRIT   | Libet temporal field encroaching on 80 analysts on trading floor.",
-        "00:02:40 | BOIL-OFF: 16:36 | TEMP: 110.8K | 9.4 bar | 78.5 kV | 54 BPM | EMERG  | Superconducting bus quench initiated. Copper vapor in flue.",
-        "00:11:15 | BOIL-OFF: 07:01 | TEMP: 135.2K | 12.0 bar| 112.0kV | 52 BPM | EMERG  | Blast doors sealed. Unit 81 added to biometric receiver index.",
-        "00:14:54 | BOIL-OFF: 03:22 | TEMP: 142.1K | 13.8 bar| 138.6kV | 53 BPM | FREEZE | SPECIAL MASTER KAELEN MORROW: VAGAL LOCK AT 53 BPM.",
-        "00:15:02 | BOIL-OFF: 03:22 | TEMP: 142.1K | 13.8 bar| 140.0kV | 53 BPM | CURE   | ALBERTI RESECTION: 14-MICRON CUT APPLIED. 65.0 PARITY LOCKED!",
-        "00:15:30 | BOIL-OFF: SECURE| TEMP:  77.0K | 3.8 bar | 0.0 kV  | 52 BPM | SOLVED | Interlocutory Injunction executed. 80 analysts restored. 0 casualties."
+        "23:41:02 | BOIL-OFF: 38:14 | TEMP:  77.2K |  4.2 bar |  12.4 kV | 53 BPM | WARN   | Primary 33kV feed severed at Substation 7. UPS failure.",
+        "23:45:10 | BOIL-OFF: 34:06 | TEMP:  82.5K |  5.8 bar |  28.1 kV | 54 BPM | CRIT   | Liquid nitrogen boil-off accelerating (0.8L/sec).",
+        "23:48:04 | BOIL-OFF: 31:12 | TEMP:  88.1K |  6.4 bar |  35.6 kV | 53 BPM | CRIT   | Blast doors sealed. Unit 81 added to biometric receiver index.",
+        "23:51:22 | BOIL-OFF: 27:54 | TEMP:  94.0K |  7.1 bar |  44.0 kV | 53 BPM | CRIT   | Libet temporal field encroaching on 80 analysts on trading floor.",
+        "00:02:40 | BOIL-OFF: 16:36 | TEMP: 110.8K |  9.4 bar |  78.5 kV | 54 BPM | EMERG  | Superconducting bus quench initiated. Copper vapor in flue.",
+        "00:12:15 | BOIL-OFF: 07:01 | TEMP: 135.2K | 12.0 bar | 112.0 kV | 52 BPM | EMERG  | Exhaust flue descent initiated. Thermal runaway critical.",
+        "00:15:54 | BOIL-OFF: 03:22 | TEMP: 142.1K | 13.8 bar | 138.6 kV | 53 BPM | FREEZE | SPECIAL MASTER KAELEN MORROW: VAGAL LOCK ENGAGED AT 53 BPM.",
+        "00:16:02 | BOIL-OFF: 03:22 [HALTED] | 142.1K | 13.8 bar | 140.0 kV | 53 BPM | CURE   | ALBERTI RESECTION: 14-MICRON CUT APPLIED. BOIL-OFF FROZEN & 65.0 LOCKED!",
+        "00:16:30 | BOIL-OFF: SECURE| TEMP:  77.0K |  3.8 bar |   0.0 kV | 52 BPM | SOLVED | Interlocutory Injunction executed. 80 analysts restored. 0 casualties."
       ];
 
       frames.forEach((f, idx) => {
-        setTimeout(() => {
+        const tid = setTimeout(() => {
           box.innerText += f + "\n";
           box.scrollTop = box.scrollHeight;
           audioEngine.playKeystroke();
         }, idx * 360);
+        telemetryTimers.push(tid);
       });
     }
 
     function clearTelemetry() {
       audioEngine.playRelay();
+      cancelTelemetryTimers();
       document.getElementById('telemetry-log').innerText = "[TELEMETRY BUFFER CLEARED]\nType 'help' in CLI below or click 'Stream Live Telemetry Bus'.";
     }
 
@@ -1982,7 +2019,7 @@ STATUS: At large in Zurich / Paradeplatz corridor.\n`;
         out.innerText = `[PASSCODE 104 ACCEPTED // LETTRIST HARMONIC VERIFIED]
 ================================================================================
 CLASSIFIED DOSSIER: CASE FILE 02 // PRIVATBANK VON HABSBURG-ZWINGLI
-PARADEPLATZ, ZURICH & LAKE GENEVA, SWITZERLAND
+PARADEPLATZ & LAKE ZURICH, ZURICH, SWITZERLAND
 RECEIVER: KAELEN MORROW, ESQ. // CHIEF TECHNICAL BAILIFF: DR. ALBERTI VANCE
 ================================================================================
 TARGET ASSET: 3.45 Billion CHF Sovereign Gold & Synthetic CDO Portfolio.
@@ -1990,7 +2027,7 @@ THE ENCUMBRANCE: A 16th-century Goetic cross-collateralized lien executed in 158
 by Prince-Bishop Johann Otto von Habsburg under the auspices of Lord Alistair
 Sterling's ancestral banking syndicate.
 
-NATURE OF ENTITY: Belial-0x01 (Goetic Terrestrial Lord / 1582 Sovereign Charter).
+NATURE OF ENTITY: Bael (The First King of Goetia / Planetary Sphere of the Sun).
 SUBSTRATE: Cryo-hardened cobalt-chrome safe deposit vault suspended 60 meters
 beneath Lake Zurich, insulated by a subterranean freshwater geothermal siphon.
 
@@ -1998,15 +2035,15 @@ INTERPOL NOTICE: Agent Valeria 'Val' Rodriguez has flagged anomalous offshore wi
 transfers originating from Sterling Private Capital (Mayfair, London) routing into
 Zwingli numbered accounts.
 
-COMING IN BOOK 2: 'LIEN ON THE SOUL' (THE ARCANE LIQUIDATOR CASE 02)
+STATUS: CASE FILE 02 ('LIEN ON THE SOUL') IS CURRENTLY UNDER DEVELOPMENT // COMING SOON
 BASED ON: THE DAEMON ARCHITECT (Goetic Systems Engineering & Bare-Metal Ritual DevOps)
-PRE-ORDER / AUTHOR CATALOG: https://www.amazon.com/author/sirleonarddaragan
+SUBSCRIBE FOR RELEASE DISPATCHES: https://sirleonarddaragan.substack.com
 ================================================================================`;
       } else {
         audioEngine.playError();
         if (navigator.vibrate) navigator.vibrate([50, 50]);
         out.style.color = "var(--red-alert)";
-        out.innerText = `[ACCESS DENIED: INVALID LETTRIST HARMONIC (Code ${code})]\nHint: What is the Abjad gematria value of Divine Justice ('Adl)? Visit Tab 2 for the compiler.`;
+        out.innerText = `[ACCESS DENIED: INVALID LETTRIST HARMONIC (Code ${code})]\nHint: What is the Abjad gematria value of Divine Justice ('Adl / عدل)? Visit Tab 2 for the compiler.`;
       }
     }
 
@@ -2029,24 +2066,29 @@ PRE-ORDER / AUTHOR CATALOG: https://www.amazon.com/author/sirleonarddaragan
       }
     }
 
-    // Keyboard Hotkeys
+    // Keyboard Hotkeys (Guarded so typing in inputs/CLI/Decryptor never hijacks tabs)
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeEcosystemModal();
-      } else if (e.key === '1') { openTab('wafq'); }
+        return;
+      }
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) {
+        return;
+      }
+      if (e.key === '1') { openTab('wafq'); }
       else if (e.key === '2') { openTab('abjad'); }
       else if (e.key === '3') { openTab('vagal'); }
       else if (e.key === '4') { openTab('telemetry'); }
       else if (e.key === '5') { openTab('ledger'); }
       else if (e.key === '6') { openTab('decrypt'); }
       else if (e.key === 'm' || e.key === 'M') {
-        if (document.activeElement.tagName !== 'INPUT') audioEngine.toggleAudio();
+        audioEngine.toggleAudio();
       }
     });
 
-    // Init on load
+    // Init cleanly on load without violating browser autoplay audio policy
     window.onload = function() {
-      loadDefectiveMatrix();
+      loadDefectiveMatrix(true);
       runAbjad();
     };
   </script>

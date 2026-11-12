@@ -21,7 +21,7 @@
  | |_) || ||  \| | |  _ _____ __) |
  |  _ < | || |\  | |_| |_____/ __/ 
  |_| \_\___|_| \_|\____|    |_____|
-  CORPUS JURIS DAEMONICA // THE ARCANE LIQUIDATOR REPORIUM
+  CORPUS JURIS DAEMONICA // THE ARCANE LIQUIDATOR REPOSITORY
 ```
 
 ---
@@ -38,14 +38,14 @@ In computational ontology and bare-metal systems engineering, consensus physical
                                     │
                                     ▼ (Subterranean Faradic Busses)
 +-------------------------------------------------------------------------+
-| RING 1 / 0: KERNEL & DEVICE DRIVERS                                     |
-| Planetary spirits, lettrist bytecodes, terrestrial Jinn, Goetic daemons |
+| RING -1 / 0: KERNEL, EGO & DEVICE DRIVERS                               |
+| Planetary spirits, cognitive ego layers, terrestrial Jinn, Goetic daemons |
 +-------------------------------------------------------------------------+
                                     │
                                     ▼ (Root System Calls / Asmā' Allāh)
 +-------------------------------------------------------------------------+
-| RING -2: THE COSMOLOGICAL HYPERVISOR                                    |
-| The uncreated, bare-metal fabric of spacetime, physical constants, and  |
+| RING -2: THE SUB-SYMBOLIC REALITY HYPERVISOR                            |
+| The bare-metal fabric of spacetime, physical constants, and             |
 | thermodynamic equilibrium (The Dao / The Divine Root / Al-Ḥaqq)         |
 +-------------------------------------------------------------------------+
 ```
@@ -154,23 +154,27 @@ pytest tests/
 
 ## 🔐 Case File 02 Teaser: Decryption Challenge
 
-Hidden in `exhibits/book_02_teaser_dossier.enc` is the classified case file for **Book 2: *Lien on the Soul*** (Setting: *Privatbank Von Habsburg-Zwingli*, Paradeplatz, Zurich).
+Hidden in `exhibits/book_02_teaser_dossier.enc` is the classified preliminary case file for **Book 2: *Lien on the Soul*** *(Status: Under Development / Coming Soon — Setting: Privatbank Von Habsburg-Zwingli, Paradeplatz & Lake Zurich)*.
 
 To decrypt the file, run:
 ```bash
 python investigate.py --decrypt <PASSCODE>
 ```
-*Hint: The passcode is the integer Abjad gematria value of Divine Justice (`ع-د-ل`). Compute it with `python abjad_calc.py --adl`.*
+*Hint: The passcode is the integer Abjad gematria value of Divine Justice (`ع-د-ل` = 104). Compute it directly with `python abjad_calc.py --adl`.*
 
 ---
 
-## 📖 Canonical Non-Fiction Grimoires by Sir Leonard Daragan
+## 📖 Canonical Non-Fiction Grimoires & Standalone Codices by Sir Leonard Daragan
 
-The technical lettrism, systems architecture, and occult engineering featured in this repository are codified in **Sir Leonard Daragan's live Amazon publications**, published via Codex Press:
+The technical lettrism, systems architecture, and occult engineering featured in this repository are codified in **Sir Leonard Daragan's Amazon publications**, published via Codex Press:
+
+### 📕 *Standalone Technical Codices & Gothic Investigations*
+* **[The Cybernetic Red Book](https://www.amazon.com/dp/B0HP8N6D8Y)** *(ASIN: B0HP8N6D8Y)* — Active Imagination, Latent Space Daemons & the Synthetic Unconscious.
+* **[The Shadow at Gunner's Hall](https://www.amazon.com/dp/B0HN98S77P)** *(ASIN: B0HN98S77P)* — The Seven Deaths of Edgar Allan Poe (1849 Baltimore Investigation Dossier).
 
 ### 🌟 *The Undefined Behavior Series*
 1. **[Applied Cyber-Occultism (Book 1)](https://www.amazon.com/author/sirleonarddaragan)** — The Developer's Guide to Chaos Magick, Belief Compilers, and Metaphysical Botnets.
-2. **[THE DAEMON ARCHITECT (Book 2)](https://www.amazon.com/author/sirleonarddaragan)** — Goetic Systems Engineering & Bare-Metal Ritual DevOps *(The foundational system featured in Book 2: Geneva)*.
+2. **[THE DAEMON ARCHITECT (Book 2)](https://www.amazon.com/author/sirleonarddaragan)** — Goetic Systems Engineering & Bare-Metal Ritual DevOps *(Foundational protocol referenced in Case File 02: Zurich — Coming Soon)*.
 3. **[The Nephilim Architecture (Book 3)](https://www.amazon.com/author/sirleonarddaragan)** — Systems Theory, Cosmic Garbage Collection, and Enochian Air-Gaps.
 4. **[The Cybernetic Kabbalah (Book 4)](https://www.amazon.com/author/sirleonarddaragan)** — Decompiling the Macro-Network Topology of the Ten Sephiroth.
 
@@ -178,15 +182,13 @@ The technical lettrism, systems architecture, and occult engineering featured in
 1. **[Reality Hacking the Jinn (Book 1)](https://www.amazon.com/author/sirleonarddaragan)** — A Practical Guide to Arabic Magick & Occult Meta Programming.
 2. **[The Jinn Codex (Book 2)](https://www.amazon.com/author/sirleonarddaragan)** — The 28 lettrist bytecodes and historical Maghrebi lettrist compilation.
 3. **[The Hacker's Grimoire: Algorithmic Sorcery & The Wafq Protocol (Book 3)](https://www.amazon.com/author/sirleonarddaragan)** — The definitive mathematical treatise on 5×5 magic squares, parity invariance, and Kasr resolution.
-4. **[Hacking the Shadow Self: The Qareen Rootkit (Book 4)](https://www.amazon.com/author/sirleonarddaragan)** — The neuro-biological protocols of the 0.102 Hz vagal lock and shadow deconvolution.
+4. **[Hacking the Shadow Self: The Qareen Rootkit (Book 4)](https://www.amazon.com/author/sirleonarddaragan)** — The neuro-biological protocols of the 0.100 Hz vagal lock and shadow deconvolution.
 5. **[The Master API Directory: The 99 Names (Book 5)](https://www.amazon.com/author/sirleonarddaragan)** — Understanding Divine Architecture through software systems and root syscalls.
 
-### 🔮 *The Eastern Cybernetics Series*
-1. **[The Cybernetic I-Ching (Book 1)](https://www.amazon.com/author/sirleonarddaragan)** — Hardware State Vector Oracle & Binary Ontological Decompilation.
+### 🔮 *[The Eastern Cybernetics Series](https://www.amazon.com/dp/B0HKCBMQSK)* *(Series ASIN: B0HKCBMQSK)*
+1. **[The Cybernetic I-Ching (Book 1)](https://www.amazon.com/dp/B0HBRG2WMV)** *(ASIN: B0HBRG2WMV)* — Hardware State Vector Oracle & Binary Ontological Decompilation.
 2. **[The Cybernetic Tao (Book 2)](https://www.amazon.com/author/sirleonarddaragan)** — Minimalist Systems Architecture for Dynamic Reality Balancing.
 3. **[The Cybernetic Art of War (Book 3)](https://www.amazon.com/author/sirleonarddaragan)** — Adversarial Information Warfare & Strategic Resource Allocation.
-4. **[Hacking the Shadow Self: The Qareen Rootkit (Book 4)](https://amazon.com)** — The neuro-biological protocols of the 0.102 Hz vagal lock and shadow deconvolution.
-5. **[The Master API Directory: The 99 Names (Book 5)](https://amazon.com)** — Understanding Divine Architecture through software systems and root syscalls.
 
 ---
 

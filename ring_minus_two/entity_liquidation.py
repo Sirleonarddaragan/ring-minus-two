@@ -40,7 +40,8 @@ class EntityLiquidator:
         self.case_id = case_id
         self.special_master = "Kaelen Morrow, Esq. (Undefined Behavior Receiverships LLP)"
 
-    def audit_covenants(self) -> bool:
+    def audit_covenants(self, fast: bool = False) -> bool:
+        step_delay = 0.02 if fast else 0.15
         print(f"\n{BOLD}{CYAN}================================================================================{RESET}")
         print(f"{BOLD}{CYAN}      [CORPUS JURIS DAEMONICA // CAIRO CONCORDAT STATUTORY AUDIT]      {RESET}")
         print(f"{BOLD}{CYAN}================================================================================{RESET}")
@@ -48,12 +49,13 @@ class EntityLiquidator:
         print(f"Contract: Exhibit B Indenture (Q-Entropy Arbitrage Ltd. / Tariq Al-Mansoor)")
         print("-" * 80)
         
-        time.sleep(0.3)
+        if not fast:
+            time.sleep(0.3)
         print(f"{BOLD}Verifying the Five Constitutional Canons of 1923:{RESET}\n")
         
         violations = []
         for name, desc in CANONS_OF_CAIRO:
-            time.sleep(0.15)
+            time.sleep(step_delay)
             if "CANON 2" in name:
                 print(f"  {RED}✗ {name}{RESET}")
                 print(f"    {desc}")
@@ -115,12 +117,12 @@ def main():
     liquidator = EntityLiquidator()
 
     if args.audit:
-        liquidator.audit_covenants()
+        liquidator.audit_covenants(fast=args.fast)
     elif args.evict:
-        liquidator.audit_covenants()
+        liquidator.audit_covenants(fast=args.fast)
         liquidator.execute_eviction(fast=args.fast)
     else:
-        liquidator.audit_covenants()
+        liquidator.audit_covenants(fast=args.fast)
         liquidator.execute_eviction(fast=args.fast)
 
 if __name__ == "__main__":

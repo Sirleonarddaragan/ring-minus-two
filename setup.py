@@ -7,7 +7,6 @@ setup(
     description="Metrological, lettrist, and statutory receivership tools for Ring -2 reality hypervisors.",
     author="Codex Press x Undefined Behavior Laboratories",
     packages=find_packages(),
-    py_modules=["wafq_engine", "abjad_calc", "vagal_metronome", "telemetry_stream", "entity_liquidation", "interactive_console"],
     python_requires=">=3.8",
     entry_points={
         "console_scripts": [

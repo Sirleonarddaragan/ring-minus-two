@@ -33,7 +33,7 @@ class TelemetryMonitor:
         self.speed = simulation_speed
 
     def stream_breach_sequence(self, fast: bool = False):
-        delay = 0.05 if fast else 0.8
+        delay = (0.05 if fast else 0.8) / max(self.speed, 0.1)
         
         print(f"\n{BOLD}{CYAN}================================================================================{RESET}")
         print(f"{BOLD}{CYAN}      [DIFC GATE TOWER 4 // SUB-LEVEL 2 TELEMETRY STREAM // LIVE BUS]      {RESET}")
@@ -44,17 +44,18 @@ class TelemetryMonitor:
         print("-" * 80)
         
         telemetry_frames = [
-            {"time": "23:41:02", "clock": "38:14", "temp_k": 77.2, "psi": 4.2, "kv": 12.4, "bpm": 53, "libet_ms": 500, "status": "WARN", "msg": "Primary 33kV feed severed at Substation 7. UPS failure."},
-            {"time": "23:45:10", "clock": "34:06", "temp_k": 82.5, "psi": 5.8, "kv": 28.1, "bpm": 54, "libet_ms": 500, "status": "CRIT", "msg": "Liquid nitrogen boil-off accelerating (0.8L/sec)."},
-            {"time": "23:51:22", "clock": "27:54", "temp_k": 94.0, "psi": 7.1, "kv": 44.0, "bpm": 53, "libet_ms": 485, "status": "CRIT", "msg": "Libet temporal field encroaching on 80 analysts on trading floor."},
-            {"time": "00:02:40", "clock": "16:36", "temp_k": 110.8, "psi": 9.4, "kv": 78.5, "bpm": 54, "libet_ms": 410, "status": "EMERG", "msg": "Superconducting bus quench initiated. Copper vapor detected in flue."},
-            {"time": "00:11:15", "clock": "07:01", "temp_k": 135.2, "psi": 12.0, "kv": 112.0, "bpm": 52, "libet_ms": 220, "status": "EMERG", "msg": "Blast doors sealed. Unit 81 added to biometric receiver index."},
-            {"time": "00:14:54", "clock": "03:22", "temp_k": 142.1, "psi": 13.8, "kv": 138.6, "bpm": 53, "libet_ms": 110, "status": "FREEZE", "msg": "SPECIAL MASTER KAELEN MORROW: VAGAL LOCK ENGAGED AT 53 BPM."},
-            {"time": "00:15:02", "clock": "03:22", "temp_k": 142.1, "psi": 13.8, "kv": 140.0, "bpm": 53, "libet_ms": 0, "status": "CURE", "msg": "ALBERTI RESECTION: 14-MICRON CUT APPLIED. 65.0 PARITY LOCKED!"},
-            {"time": "00:15:30", "clock": "SECURE", "temp_k": 77.0, "psi": 3.8, "kv": 0.0, "bpm": 52, "libet_ms": 0, "status": "SOLVED", "msg": "Interlocutory Injunction executed. 80 analysts restored. 0 casualties."}
+            {"time": "23:41:02", "clock": "38:14", "temp_k": 77.2, "bar": 4.2, "kv": 12.4, "bpm": 53, "libet_ms": 500, "status": "WARN", "msg": "Primary 33kV feed severed at Substation 7. UPS failure."},
+            {"time": "23:45:10", "clock": "34:06", "temp_k": 82.5, "bar": 5.8, "kv": 28.1, "bpm": 54, "libet_ms": 500, "status": "CRIT", "msg": "Liquid nitrogen boil-off accelerating (0.8L/sec)."},
+            {"time": "23:48:04", "clock": "31:12", "temp_k": 88.1, "bar": 6.4, "kv": 35.6, "bpm": 53, "libet_ms": 495, "status": "CRIT", "msg": "Blast doors sealed. Unit 81 added to biometric receiver index."},
+            {"time": "23:51:22", "clock": "27:54", "temp_k": 94.0, "bar": 7.1, "kv": 44.0, "bpm": 53, "libet_ms": 485, "status": "CRIT", "msg": "Libet temporal field encroaching on 80 analysts on trading floor."},
+            {"time": "00:02:40", "clock": "16:36", "temp_k": 110.8, "bar": 9.4, "kv": 78.5, "bpm": 54, "libet_ms": 410, "status": "EMERG", "msg": "Superconducting bus quench initiated. Copper vapor detected in flue."},
+            {"time": "00:12:15", "clock": "07:01", "temp_k": 135.2, "bar": 12.0, "kv": 112.0, "bpm": 52, "libet_ms": 220, "status": "EMERG", "msg": "Special Master descends 80ft exhaust flue. Thermal runaway critical."},
+            {"time": "00:15:54", "clock": "03:22", "temp_k": 142.1, "bar": 13.8, "kv": 138.6, "bpm": 53, "libet_ms": 110, "status": "FREEZE", "msg": "SPECIAL MASTER KAELEN MORROW: VAGAL LOCK ENGAGED AT 53 BPM."},
+            {"time": "00:16:02", "clock": "03:22 [HALT]", "temp_k": 142.1, "bar": 13.8, "kv": 140.0, "bpm": 53, "libet_ms": 0, "status": "CURE", "msg": "ALBERTI RESECTION: 14-MICRON CUT APPLIED. BOIL-OFF FROZEN & 65.0 LOCKED!"},
+            {"time": "00:16:30", "clock": "SECURED", "temp_k": 77.0, "bar": 3.8, "kv": 0.0, "bpm": 52, "libet_ms": 0, "status": "SOLVED", "msg": "Interlocutory Injunction executed. 80 analysts restored. 0 casualties."}
         ]
 
-        print(f"{'TIMESTAMP':<10} {'BOIL-OFF':<10} {'TEMP':<8} {'PRESSURE':<10} {'ARC (kV)':<10} {'PULSE':<8} {'STATUS':<10} {'DIAGNOSTIC LOG'}")
+        print(f"{'TIMESTAMP':<10} {'BOIL-OFF':<14} {'TEMP':<8} {'PRESSURE':<10} {'ARC (kV)':<10} {'PULSE':<8} {'STATUS':<10} {'DIAGNOSTIC LOG'}")
         print("-" * 80)
 
         for f in telemetry_frames:
@@ -65,7 +66,7 @@ class TelemetryMonitor:
             elif f["status"] == "FREEZE": color = BOLD + CYAN
             elif f["status"] == "CURE" or f["status"] == "SOLVED": color = BOLD + GREEN
 
-            print(f"{f['time']:<10} {BOLD}{f['clock']:<10}{RESET} {f['temp_k']:5.1f}K   {f['psi']:4.1f} bar    {f['kv']:5.1f} kV     {f['bpm']:2d} BPM   {color}{f['status']:<10}{RESET} {f['msg']}")
+            print(f"{f['time']:<10} {BOLD}{f['clock']:<14}{RESET} {f['temp_k']:5.1f}K   {f['bar']:4.1f} bar    {f['kv']:5.1f} kV     {f['bpm']:2d} BPM   {color}{f['status']:<10}{RESET} {f['msg']}")
             time.sleep(delay)
 
         print("=" * 80)

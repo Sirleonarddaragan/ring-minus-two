@@ -149,7 +149,8 @@ def main():
     mode = "maghribi" if args.maghribi else "mashriqi"
 
     if args.adl:
-        print_audit("العَدْل", mode)
+        print_audit("عَدْل", mode)
+        print(f"{YELLOW}>>> Root Key 'Adl (عدل) = 104 [Case 02 Decryption Key] | With definite article Al-'Adl (العدل) = 135{RESET}\n")
     elif args.qahhar:
         print_audit("القَهَّار", mode)
     elif args.ahmar:
@@ -157,9 +158,9 @@ def main():
     elif args.text:
         print_audit(args.text, mode)
     else:
-        # Default showcase run: Al-'Adl
-        print(f"{YELLOW}>>> No input specified. Running default lettrist verification for 'AL-'ADL'...{RESET}")
-        print_audit("العَدْل", mode)
+        # Default showcase run: Root 'Adl
+        print(f"{YELLOW}>>> No input specified. Running default lettrist verification for Root 'ADL (عَدْل)...{RESET}")
+        print_audit("عَدْل", mode)
         print("Usage:")
         print("  python abjad_calc.py 'الله'")
         print("  python abjad_calc.py --adl")
