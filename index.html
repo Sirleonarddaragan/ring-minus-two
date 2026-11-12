@@ -14,59 +14,66 @@
   <meta name="theme-color" content="#05070a">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700;800&family=Cinzel:wght@600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
     :root {
-      --bg-void: #05070a;
-      --bg-panel: #0b0f14;
-      --bg-card: #111720;
-      --border-dim: #1d2633;
+      --bg-void: #06080d;
+      --bg-panel: #0b0f17;
+      --bg-card: #101622;
+      --bg-elevated: #141c2b;
+      --border-dim: rgba(148, 163, 184, 0.14);
+      --border-strong: rgba(148, 163, 184, 0.25);
       --border-gold: #d4af37;
       --border-cyan: #06b6d4;
-      --text-gold: #f6d860;
+      --text-gold: #f5d061;
       --text-cyan: #38bdf8;
-      --text-dim: #798799;
+      --text-dim: #94a3b8;
+      --text-muted: #64748b;
       --text-main: #e2e8f0;
       --red-alert: #f43f5e;
       --green-ok: #10b981;
       --kofi-color: #13c3ff;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
       --font-serif: 'Cinzel', serif;
+      --radius-sm: 6px;
+      --radius-md: 10px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: var(--bg-void);
+      background-image:
+        radial-gradient(ellipse 80% 45% at 50% -10%, rgba(6, 182, 212, 0.08), transparent 70%),
+        radial-gradient(ellipse 60% 35% at 85% 0%, rgba(212, 175, 55, 0.06), transparent 65%);
       color: var(--text-main);
-      font-family: var(--font-mono);
+      font-family: var(--font-sans);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      line-height: 1.5;
+      line-height: 1.55;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* CRT Scanline Overlay - GPU accelerated & zero pointer-events */
+    /* Ultra-subtle CRT hairline texture without muting typography */
     body::before {
       content: " ";
       position: fixed;
-      top: 0; left: 0; bottom: 0; right: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%);
       background-size: 100% 3px;
       pointer-events: none;
       z-index: 999;
-      opacity: 0.25;
-      will-change: opacity;
-      transform: translateZ(0);
+      opacity: 0.06;
     }
 
-    /* Top HUD */
+    /* Slim Sticky Navigation HUD */
     header {
-      background: var(--bg-panel);
+      background: rgba(8, 11, 18, 0.86);
       border-bottom: 1px solid var(--border-dim);
-      padding: 0.75rem 1.25rem;
+      padding: 0.65rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -75,36 +82,37 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
     .brand-title {
-      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       color: var(--text-gold);
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
       flex-wrap: wrap;
     }
 
     .brand-tag {
-      background: rgba(6, 182, 212, 0.15);
+      background: rgba(6, 182, 212, 0.1);
       color: var(--text-cyan);
-      border: 1px solid var(--border-cyan);
-      font-size: 0.7rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 3px;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-size: 0.66rem;
+      padding: 0.18rem 0.5rem;
+      border-radius: 999px;
       text-transform: uppercase;
       font-weight: 600;
+      letter-spacing: 0.08em;
     }
 
     .top-links {
       display: flex;
-      gap: 0.5rem;
-      font-size: 0.75rem;
+      gap: 0.4rem;
       align-items: center;
       flex-wrap: wrap;
     }
@@ -112,178 +120,255 @@
     .top-links a, .top-links button {
       color: var(--text-dim);
       text-decoration: none;
-      padding: 0.35rem 0.65rem;
+      padding: 0.35rem 0.7rem;
       border: 1px solid var(--border-dim);
-      border-radius: 4px;
-      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      background: rgba(16, 22, 34, 0.75);
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 500;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      min-height: 36px;
+      min-height: 34px;
       touch-action: manipulation;
-      transition: all 0.2s ease;
+      transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
     }
 
     .top-links a:hover, .top-links button:hover {
-      color: var(--text-gold);
-      border-color: var(--border-gold);
-      background: rgba(212, 175, 55, 0.08);
-      transform: translateY(-1px);
+      color: var(--text-main);
+      border-color: var(--border-strong);
+      background: var(--bg-elevated);
     }
 
-    /* Commercial High-Priority Buttons */
     .btn-kofi {
-      background: rgba(19, 195, 255, 0.16) !important;
-      color: #38bdf8 !important;
-      border: 1px solid #0284c7 !important;
-      font-weight: 700 !important;
-      box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+      background: rgba(19, 195, 255, 0.12) !important;
+      color: #7dd3fc !important;
+      border-color: rgba(56, 189, 248, 0.4) !important;
+      font-weight: 600 !important;
     }
 
     .btn-kofi:hover {
-      background: rgba(19, 195, 255, 0.3) !important;
+      background: rgba(19, 195, 255, 0.22) !important;
       border-color: #38bdf8 !important;
-      box-shadow: 0 0 18px rgba(56, 189, 248, 0.5);
+      color: #ffffff !important;
     }
 
     .btn-gold {
-      background: rgba(212, 175, 55, 0.15) !important;
+      background: rgba(212, 175, 55, 0.12) !important;
       color: var(--text-gold) !important;
+      border-color: rgba(212, 175, 55, 0.45) !important;
+      font-weight: 600 !important;
+    }
+
+    .btn-gold:hover {
+      background: rgba(212, 175, 55, 0.22) !important;
       border-color: var(--border-gold) !important;
-      font-weight: 700 !important;
     }
 
     .btn-constellation {
-      background: rgba(245, 158, 11, 0.14) !important;
-      border: 1px solid #f59e0b !important;
       color: #fbbf24 !important;
-      font-weight: 700 !important;
+      border-color: rgba(245, 158, 11, 0.35) !important;
+      background: rgba(245, 158, 11, 0.08) !important;
+      font-weight: 600 !important;
+    }
+
+    .btn-constellation:hover {
+      background: rgba(245, 158, 11, 0.16) !important;
+      border-color: #f59e0b !important;
     }
 
     .btn-audio {
-      border-color: var(--border-cyan) !important;
+      border-color: rgba(6, 182, 212, 0.35) !important;
       color: var(--text-cyan) !important;
-      font-weight: 700 !important;
     }
 
     .btn-audio.muted {
       border-color: var(--border-dim) !important;
-      color: var(--text-dim) !important;
-      opacity: 0.7;
+      color: var(--text-muted) !important;
     }
 
-    /* Main Container */
+    /* Main Workspace Container */
     main {
       flex: 1;
-      max-width: 1200px;
+      max-width: 1180px;
       width: 100%;
       margin: 0 auto;
-      padding: 1.5rem 1rem;
+      padding: 1.5rem 1.25rem 2.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
 
-    /* Hero Banner */
+    /* Compact Asymmetric Judicial Header */
     .hero {
-      background: var(--bg-panel);
+      background: linear-gradient(145deg, rgba(14, 19, 30, 0.96), rgba(9, 13, 20, 0.98));
       border: 1px solid var(--border-dim);
-      border-top: 3px solid var(--border-gold);
-      padding: 1.5rem;
-      border-radius: 4px;
-      position: relative;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      border-left: 3px solid var(--border-gold);
+      padding: 1.35rem 1.5rem;
+      border-radius: var(--radius-md);
+      display: grid;
+      grid-template-columns: 1.35fr 0.9fr;
+      gap: 1.5rem;
+      align-items: center;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
     }
 
     .hero-pre {
+      font-family: var(--font-mono);
       color: var(--text-cyan);
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      margin-bottom: 0.4rem;
-      font-weight: 700;
+      margin-bottom: 0.35rem;
+      font-weight: 600;
     }
 
     .hero h1 {
       font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      font-size: clamp(1.55rem, 3.2vw, 2.15rem);
       color: var(--text-gold);
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+      letter-spacing: 0.06em;
+      line-height: 1.15;
+      margin-bottom: 0.45rem;
     }
 
     .hero-sub {
       color: var(--text-dim);
-      font-size: 0.85rem;
-      max-width: 860px;
-      line-height: 1.6;
+      font-size: 0.86rem;
+      max-width: 660px;
+      line-height: 1.55;
     }
 
+    .hero-sub b { color: var(--text-main); font-weight: 600; }
+
     .hero-action-bar {
-      margin-top: 1.25rem;
+      margin-top: 0.95rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.55rem;
       align-items: center;
     }
 
     .hero-pill-btn {
       text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 700;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.74rem;
+      font-weight: 600;
       font-family: var(--font-mono);
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      min-height: 38px;
+      min-height: 36px;
+      border: 1px solid var(--border-dim);
+      background: var(--bg-card);
+      color: var(--text-main);
+      cursor: pointer;
       touch-action: manipulation;
-      transition: all 0.2s ease;
+      transition: all 0.18s ease;
     }
 
-    /* Navigation Tabs */
+    .hero-pill-btn:hover { transform: translateY(-1px); }
+
+    /* Live Docket Strip (Hero Right Column) */
+    .docket-telemetry-card {
+      background: rgba(6, 9, 15, 0.75);
+      border: 1px solid var(--border-dim);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      font-family: var(--font-mono);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.65rem 0.9rem;
+    }
+
+    .docket-kv {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .docket-k {
+      font-size: 0.64rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .docket-v {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Segmented Rail Navigation Tabs */
     .nav-tabs {
       display: flex;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border-dim);
-      padding-bottom: 0.5rem;
+      gap: 0.4rem;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-dim);
+      padding: 0.35rem;
+      border-radius: var(--radius-md);
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
+      scrollbar-width: none;
     }
 
+    .nav-tabs::-webkit-scrollbar { display: none; }
+
     .tab-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border-dim);
+      background: transparent;
+      border: 1px solid transparent;
       color: var(--text-dim);
-      padding: 0.6rem 1rem;
+      padding: 0.5rem 0.85rem;
       font-family: var(--font-mono);
-      font-size: 0.78rem;
+      font-size: 0.74rem;
+      font-weight: 500;
       cursor: pointer;
-      border-radius: 4px 4px 0 0;
-      transition: all 0.2s ease;
+      border-radius: var(--radius-sm);
+      transition: all 0.18s ease;
       white-space: nowrap;
-      min-height: 42px;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
       touch-action: manipulation;
+    }
+
+    .tab-num {
+      font-size: 0.64rem;
+      color: var(--text-muted);
+      background: rgba(148, 163, 184, 0.1);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
     }
 
     .tab-btn:hover {
       color: var(--text-main);
-      border-color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .tab-btn.active {
-      background: var(--bg-panel);
+      background: var(--bg-elevated);
       color: var(--text-cyan);
-      border-color: var(--border-cyan);
-      border-bottom: 1px solid var(--bg-panel);
-      font-weight: 700;
-      box-shadow: 0 -2px 10px rgba(6, 182, 212, 0.15);
+      border-color: rgba(56, 189, 248, 0.35);
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .tab-btn.active .tab-num {
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--text-cyan);
     }
 
     /* Tab Content Panels */
@@ -292,13 +377,13 @@
       background: var(--bg-panel);
       border: 1px solid var(--border-dim);
       padding: 1.5rem;
-      border-radius: 4px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
     }
 
     .tab-content.active {
       display: block;
-      animation: fadeIn 0.25s ease-out;
+      animation: fadeIn 0.22s ease-out;
     }
 
     @keyframes fadeIn {
@@ -307,35 +392,95 @@
     }
 
     /* Section Headers */
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border-dim);
+    }
+
     .section-title {
-      font-size: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.96rem;
       font-weight: 700;
       color: var(--text-gold);
-      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      letter-spacing: 0.02em;
     }
 
-    /* 5x5 Wafq Grid (Responsive clamp math for mobile screens) */
-    .wafq-container {
+    .section-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+      max-width: 820px;
+      line-height: 1.6;
+    }
+
+    .section-desc b { color: var(--text-main); }
+
+    /* Tab 1 Cockpit 2-Column Layout */
+    .wafq-workspace {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 880px) {
+      .wafq-workspace {
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
+      .wafq-telemetry-col { width: 100%; }
+    }
+
+    .wafq-matrix-col {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.25rem;
-      padding: 0.5rem 0;
+      gap: 0.9rem;
     }
 
+    .wafq-telemetry-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      min-width: 0;
+    }
+
+    .wafq-actions-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* 5x5 Wafq Grid */
     .wafq-grid {
       display: grid;
-      grid-template-columns: repeat(5, min(56px, 15vw));
-      grid-template-rows: repeat(5, min(56px, 15vw));
-      gap: clamp(4px, 1.2vw, 7px);
-      background: #070a0e;
-      padding: clamp(8px, 2vw, 14px);
-      border: 2px solid var(--border-dim);
-      border-radius: 6px;
-      box-shadow: 0 0 35px rgba(0, 0, 0, 0.9), 0 0 15px rgba(6, 182, 212, 0.05);
+      grid-template-columns: repeat(5, clamp(52px, 13vw, 66px));
+      grid-template-rows: repeat(5, clamp(52px, 13vw, 66px));
+      gap: 6px;
+      background: #06090f;
+      padding: 12px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.75);
       touch-action: manipulation;
     }
 
@@ -346,103 +491,112 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: clamp(0.85rem, 3.6vw, 1.2rem);
+      font-family: var(--font-mono);
+      font-size: clamp(0.95rem, 3.2vw, 1.18rem);
       font-weight: 700;
       color: var(--text-main);
-      border-radius: 4px;
-      transition: all 0.2s ease;
+      border-radius: var(--radius-sm);
+      transition: all 0.16s ease;
       position: relative;
       cursor: pointer;
       user-select: none;
       -webkit-tap-highlight-color: transparent;
+      font-variant-numeric: tabular-nums;
     }
 
     .wafq-cell:hover {
       border-color: var(--border-cyan);
-      transform: scale(1.04);
+      background: var(--bg-elevated);
+      transform: translateY(-1px);
       z-index: 2;
     }
 
     .wafq-cell .cell-coord {
-      font-size: clamp(0.45rem, 1.8vw, 0.55rem);
-      color: var(--text-dim);
+      font-size: 0.54rem;
+      font-weight: 500;
+      color: var(--text-muted);
       position: absolute;
-      top: 2px; left: 4px;
+      top: 3px; left: 5px;
     }
 
     .wafq-cell.center-cell {
-      border-color: var(--border-gold);
+      border-color: rgba(212, 175, 55, 0.6);
       color: var(--text-gold);
     }
 
     .wafq-cell.defective {
       border-color: var(--red-alert) !important;
-      color: var(--red-alert) !important;
-      background: rgba(244, 63, 94, 0.18) !important;
-      box-shadow: 0 0 20px rgba(244, 63, 94, 0.45);
-      animation: pulseAlert 1.5s infinite;
+      color: #fda4af !important;
+      background: rgba(244, 63, 94, 0.16) !important;
+      box-shadow: 0 0 18px rgba(244, 63, 94, 0.35);
+      animation: pulseAlert 1.8s infinite;
     }
 
     @keyframes pulseAlert {
-      0%, 100% { box-shadow: 0 0 10px rgba(244, 63, 94, 0.3); }
-      50% { box-shadow: 0 0 25px rgba(244, 63, 94, 0.7); }
+      0%, 100% { box-shadow: 0 0 8px rgba(244, 63, 94, 0.25); }
+      50% { box-shadow: 0 0 20px rgba(244, 63, 94, 0.55); }
     }
 
     .wafq-cell.resected {
       border-color: var(--green-ok) !important;
-      color: var(--green-ok) !important;
-      background: rgba(16, 185, 129, 0.18) !important;
-      box-shadow: 0 0 20px rgba(16, 185, 129, 0.45);
+      color: #6ee7b7 !important;
+      background: rgba(16, 185, 129, 0.16) !important;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
     }
 
     .wafq-cell-inspector {
       width: 100%;
-      max-width: 600px;
-      background: #080c12;
-      border: 1px dashed var(--border-cyan);
-      border-radius: 4px;
-      padding: 0.6rem 0.9rem;
-      font-size: 0.75rem;
+      background: #070b12;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-left: 3px solid var(--border-cyan);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
       color: var(--text-dim);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 8px;
     }
 
     .wafq-stats {
       width: 100%;
-      max-width: 600px;
       background: var(--bg-card);
       border: 1px solid var(--border-dim);
-      padding: 1rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
+      padding: 1rem 1.15rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
     }
 
     .stat-row {
       display: flex;
       justify-content: space-between;
-      padding: 0.35rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 0.52rem 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.08);
       align-items: center;
+      gap: 12px;
+      font-variant-numeric: tabular-nums;
     }
 
-    .stat-row:last-child { border-bottom: none; }
+    .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .stat-row:first-child { padding-top: 0; }
+    .stat-row span:first-child { color: var(--text-dim); }
 
     .btn-action {
-      background: var(--border-cyan);
-      color: #000;
+      background: #0284c7;
+      color: #ffffff;
       font-family: var(--font-mono);
-      font-weight: 700;
-      font-size: 0.8rem;
-      padding: 0.65rem 1.2rem;
-      border: none;
-      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.76rem;
+      padding: 0.55rem 1rem;
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      border-radius: var(--radius-sm);
       cursor: pointer;
-      transition: all 0.2s;
-      min-height: 42px;
+      transition: all 0.18s ease;
+      min-height: 38px;
       touch-action: manipulation;
       display: inline-flex;
       align-items: center;
@@ -451,13 +605,97 @@
     }
 
     .btn-action:hover {
-      background: #7dd3fc;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+      background: #0369a1;
+      border-color: var(--text-cyan);
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.3);
       transform: translateY(-1px);
     }
 
-    .btn-action:active {
-      transform: translateY(1px);
+    .btn-action:active { transform: translateY(0); }
+
+    .btn-danger {
+      background: rgba(244, 63, 94, 0.16);
+      color: #fda4af;
+      border-color: rgba(244, 63, 94, 0.55);
+    }
+
+    .btn-danger:hover {
+      background: rgba(244, 63, 94, 0.28);
+      color: #ffffff;
+      border-color: var(--red-alert);
+      box-shadow: 0 0 14px rgba(244, 63, 94, 0.35);
+    }
+
+    .btn-success {
+      background: rgba(16, 185, 129, 0.16);
+      color: #6ee7b7;
+      border-color: rgba(16, 185, 129, 0.55);
+    }
+
+    .btn-success:hover {
+      background: rgba(16, 185, 129, 0.28);
+      color: #ffffff;
+      border-color: var(--green-ok);
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-ghost {
+      background: var(--bg-card);
+      color: var(--text-dim);
+      border: 1px solid var(--border-dim);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 500;
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.16s ease;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text-main);
+      border-color: var(--border-strong);
+      background: var(--bg-elevated);
+    }
+
+    /* Preset Chips */
+    .chip-bar {
+      display: flex;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .chip-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-right: 0.2rem;
+    }
+
+    .chip-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      color: var(--text-dim);
+      padding: 0.32rem 0.65rem;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .chip-btn:hover {
+      color: var(--text-cyan);
+      border-color: rgba(56, 189, 248, 0.45);
+      background: rgba(56, 189, 248, 0.08);
     }
 
     /* Metronome Breathing Circle */
@@ -466,7 +704,7 @@
       flex-direction: column;
       align-items: center;
       gap: 1.5rem;
-      padding: 1.5rem 0;
+      padding: 1rem 0 0.25rem;
     }
 
     .pacer-circle-wrap {
@@ -476,15 +714,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 50%;
+      border: 1px dashed rgba(56, 189, 248, 0.18);
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.04) 0%, transparent 70%);
     }
 
     .pacer-circle {
-      width: min(120px, 35vw);
-      height: min(120px, 35vw);
+      width: min(124px, 34vw);
+      height: min(124px, 34vw);
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(6, 182, 212, 0.05) 70%);
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(6, 182, 212, 0.04) 72%);
       border: 2px solid var(--border-cyan);
-      box-shadow: 0 0 30px rgba(6, 182, 212, 0.35);
+      box-shadow: 0 0 28px rgba(6, 182, 212, 0.28);
       transition: transform 0.1s linear, border-color 0.3s;
       display: flex;
       flex-direction: column;
@@ -494,27 +735,62 @@
     }
 
     .pacer-phase {
-      font-size: clamp(0.75rem, 2.5vw, 0.9rem);
-      font-weight: 800;
+      font-family: var(--font-mono);
+      font-size: clamp(0.75rem, 2.5vw, 0.88rem);
+      font-weight: 700;
       color: var(--text-cyan);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
     }
 
     .pacer-timer {
+      font-family: var(--font-mono);
       font-size: clamp(1rem, 3.5vw, 1.25rem);
       color: var(--text-main);
       font-weight: 700;
+      font-variant-numeric: tabular-nums;
     }
 
     /* Terminal Console */
-    .terminal-box {
-      background: #030508;
+    .terminal-shell {
       border: 1px solid var(--border-dim);
-      border-radius: 4px;
-      padding: 1rem;
-      font-size: 0.8rem;
-      color: #94a3b8;
-      max-height: 400px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: #04060b;
+    }
+
+    .terminal-chrome {
+      background: #0b101b;
+      border-bottom: 1px solid var(--border-dim);
+      padding: 0.45rem 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .terminal-dots i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      background: #334155;
+    }
+
+    .terminal-box {
+      background: transparent;
+      border: none;
+      padding: 1rem 1.1rem;
+      font-size: 0.79rem;
+      color: #cbd5e1;
+      max-height: 410px;
       overflow-y: auto;
       white-space: pre-wrap;
       font-family: var(--font-mono);
@@ -525,18 +801,17 @@
     .cli-bar {
       display: flex;
       gap: 0.5rem;
-      background: #070a0e;
-      border: 1px solid var(--border-cyan);
-      border-radius: 4px;
-      padding: 0.4rem 0.6rem;
+      background: #080c14;
+      border-top: 1px solid var(--border-dim);
+      padding: 0.5rem 0.75rem;
       align-items: center;
-      margin-top: 0.75rem;
     }
 
     .cli-prompt {
+      font-family: var(--font-mono);
       color: var(--text-cyan);
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       user-select: none;
     }
 
@@ -553,121 +828,176 @@
     /* Input controls */
     .input-group {
       display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
+      gap: 0.6rem;
+      margin-bottom: 0.85rem;
       flex-wrap: wrap;
     }
 
     .input-dark {
       flex: 1;
-      min-width: 240px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-dim);
+      min-width: 220px;
+      background: #070a10;
+      border: 1px solid var(--border-strong);
       color: var(--text-main);
-      padding: 0.6rem 0.8rem;
+      padding: 0.55rem 0.85rem;
       font-family: var(--font-mono);
-      font-size: 0.85rem;
-      border-radius: 4px;
-      min-height: 42px;
+      font-size: 0.84rem;
+      border-radius: var(--radius-sm);
+      min-height: 40px;
     }
 
     .input-dark:focus {
       outline: none;
       border-color: var(--border-cyan);
-      box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.14);
     }
 
-    /* Table styles */
+    /* Ledger Table */
     .table-responsive {
       width: 100%;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
-      margin-top: 1rem;
+      border: 1px solid var(--border-dim);
+      border-radius: var(--radius-sm);
+      background: #070a11;
     }
 
     .doc-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.8rem;
-      min-width: 580px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      min-width: 600px;
+      font-variant-numeric: tabular-nums;
     }
 
     .doc-table th, .doc-table td {
-      border: 1px solid var(--border-dim);
-      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--border-dim);
+      padding: 0.72rem 0.9rem;
       text-align: left;
     }
 
     .doc-table th {
       background: var(--bg-card);
       color: var(--text-gold);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       font-weight: 700;
+    }
+
+    .doc-table tbody tr:hover {
+      background: rgba(56, 189, 248, 0.04);
+    }
+
+    .doc-table tr:last-child td { border-bottom: none; }
+    .num-cell { text-align: right !important; font-weight: 600; color: var(--text-main); }
+
+    .disbursement-card {
+      margin-top: 1.25rem;
+      background: var(--bg-card);
+      padding: 1rem 1.15rem;
+      border: 1px solid var(--border-dim);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+    }
+
+    .disbursement-title {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-gold);
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+      letter-spacing: 0.03em;
+    }
+
+    .disbursement-list {
+      display: grid;
+      gap: 0.4rem;
+      color: var(--text-dim);
+    }
+
+    .disbursement-list div {
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+    }
+
+    .disbursement-list b {
+      font-family: var(--font-mono);
+      color: var(--text-main);
+      min-width: 138px;
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
     }
 
     /* Ko-fi Compute Escrow Banner */
     .kofi-escrow-box {
-      margin-top: 1.5rem;
-      background: linear-gradient(135deg, rgba(19, 195, 255, 0.08) 0%, rgba(11, 15, 20, 0.95) 100%);
-      border: 1px solid #0284c7;
-      border-radius: 6px;
+      margin-top: 1.25rem;
+      background: linear-gradient(135deg, rgba(19, 195, 255, 0.07) 0%, rgba(11, 15, 23, 0.96) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: var(--radius-md);
       padding: 1.25rem;
-      box-shadow: 0 0 25px rgba(6, 182, 212, 0.15);
     }
 
     .kofi-escrow-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.65rem;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
 
     .kofi-escrow-badge {
-      background: rgba(19, 195, 255, 0.2);
-      border: 1px solid #38bdf8;
-      color: #38bdf8;
-      font-size: 0.7rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 3px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-family: var(--font-mono);
+      background: rgba(19, 195, 255, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #7dd3fc;
+      font-size: 0.68rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
     }
 
     .kofi-tier-buttons {
       display: flex;
-      gap: 0.6rem;
+      gap: 0.55rem;
       margin-top: 1rem;
       flex-wrap: wrap;
     }
 
     .kofi-tier-btn {
-      background: #0284c7;
-      color: #ffffff;
+      font-family: var(--font-mono);
+      background: rgba(19, 195, 255, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: #e0f2fe;
       text-decoration: none;
-      padding: 0.55rem 1rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      border-radius: 4px;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.74rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s;
+      transition: all 0.18s ease;
     }
 
     .kofi-tier-btn:hover {
-      background: #0369a1;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
       transform: translateY(-1px);
     }
 
     /* Footer */
     footer {
-      background: var(--bg-panel);
+      background: rgba(8, 11, 18, 0.9);
       border-top: 1px solid var(--border-dim);
-      padding: 1.5rem 1rem;
+      padding: 1.35rem 1.25rem;
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       color: var(--text-dim);
     }
 
@@ -678,8 +1008,8 @@
     .eco-modal-overlay {
       display: none;
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(3, 4, 7, 0.92);
+      inset: 0;
+      background: rgba(3, 4, 8, 0.9);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       z-index: 10050;
@@ -688,18 +1018,16 @@
       padding: 16px;
       overflow-y: auto;
     }
-    .eco-modal-overlay.active {
-      display: flex;
-    }
+    .eco-modal-overlay.active { display: flex; }
     .eco-modal-card {
       background: #090d16;
       border: 1px solid #1e293b;
-      border-radius: 8px;
-      max-width: 1060px;
+      border-radius: var(--radius-md);
+      max-width: 1040px;
       width: 100%;
       max-height: 92vh;
       overflow-y: auto;
-      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 24px rgba(212, 175, 55, 0.15);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85);
       padding: 24px;
       position: relative;
       font-family: var(--font-mono);
@@ -715,21 +1043,21 @@
       gap: 12px;
     }
     .eco-header-eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
       color: #38bdf8;
       text-transform: uppercase;
       margin-bottom: 4px;
       font-weight: 700;
     }
     .eco-header-title {
-      font-size: clamp(1.1rem, 3vw, 1.35rem);
+      font-size: clamp(1.1rem, 3vw, 1.32rem);
       font-weight: 800;
       color: #f1f5f9;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
     }
     .eco-header-desc {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: #94a3b8;
       margin-top: 4px;
     }
@@ -737,10 +1065,10 @@
       background: transparent;
       border: 1px solid #334155;
       color: #94a3b8;
-      font-size: 1.4rem;
-      width: 36px;
-      height: 36px;
-      border-radius: 4px;
+      font-size: 1.35rem;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -755,8 +1083,8 @@
     .eco-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 20px;
+      gap: 14px;
+      margin-bottom: 18px;
     }
     @media (max-width: 768px) {
       .eco-grid { grid-template-columns: 1fr; }
@@ -767,22 +1095,20 @@
     .eco-card {
       background: #0d121f;
       border: 1px solid #1e293b;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       padding: 16px 18px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
       transition: transform 0.15s ease, border-color 0.15s ease;
     }
     .eco-card:hover {
       transform: translateY(-2px);
-      border-color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.55);
     }
     .eco-card.current-system {
-      border-color: var(--border-gold);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.18);
-      background: #121927;
+      border-color: rgba(212, 175, 55, 0.7);
+      background: #111827;
     }
     .eco-card-header {
       display: flex;
@@ -792,16 +1118,16 @@
       gap: 6px;
     }
     .eco-tag {
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
       color: #38bdf8;
       font-weight: 700;
       text-transform: uppercase;
     }
     .eco-badge-current {
-      font-size: 0.64rem;
+      font-size: 0.62rem;
       padding: 2px 7px;
-      background: rgba(245, 158, 11, 0.18);
+      background: rgba(245, 158, 11, 0.15);
       border: 1px solid #f59e0b;
       color: #f59e0b;
       border-radius: 3px;
@@ -809,21 +1135,21 @@
       letter-spacing: 0.05em;
     }
     .eco-card-title {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 700;
       color: #f8fafc;
       margin: 0 0 4px 0;
-      letter-spacing: 0.02em;
     }
     .eco-card-sub {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: #f59e0b;
       font-style: italic;
       margin-bottom: 8px;
-      line-height: 1.38;
+      line-height: 1.4;
     }
     .eco-card-desc {
-      font-size: 0.8rem;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
       color: #cbd5e1;
       line-height: 1.5;
       margin-bottom: 12px;
@@ -835,8 +1161,8 @@
       margin-bottom: 14px;
     }
     .eco-card-pills span {
-      font-size: 0.66rem;
-      padding: 3px 6px;
+      font-size: 0.65rem;
+      padding: 2px 7px;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid #334155;
       border-radius: 3px;
@@ -861,26 +1187,19 @@
       transition: all 0.15s ease;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      text-align: center;
     }
     .eco-btn-run {
       background: #0284c7;
       color: #ffffff;
       border: 1px solid #38bdf8;
     }
-    .eco-btn-run:hover {
-      background: #0369a1;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
-    }
+    .eco-btn-run:hover { background: #0369a1; }
     .eco-btn-book {
       background: rgba(245, 158, 11, 0.12);
       color: #fbbf24;
       border: 1px solid #f59e0b;
     }
-    .eco-btn-book:hover {
-      background: rgba(245, 158, 11, 0.22);
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
-    }
+    .eco-btn-book:hover { background: rgba(245, 158, 11, 0.22); }
     .eco-modal-footer {
       border-top: 1px solid #1e293b;
       padding-top: 14px;
@@ -889,25 +1208,21 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       color: #64748b;
     }
-    .eco-modal-footer a {
-      color: #38bdf8;
-      text-decoration: none;
-    }
-    .eco-modal-footer a:hover {
-      text-decoration: underline;
-    }
+    .eco-modal-footer a { color: #38bdf8; text-decoration: none; }
+    .eco-modal-footer a:hover { text-decoration: underline; }
     /* === END CONSTELLATION CSS === */
 
     @media (max-width: 640px) {
-      header { padding: 0.6rem 0.8rem; }
-      .brand-title { font-size: 0.78rem; }
-      .top-links { width: 100%; overflow-x: auto; padding-bottom: 4px; }
-      .hero { padding: 1.1rem; }
-      .tab-content { padding: 1rem 0.8rem; }
-      .wafq-cell { font-size: 0.85rem; }
+      header { padding: 0.6rem 0.9rem; }
+      .brand-title { font-size: 0.76rem; }
+      .top-links { width: 100%; overflow-x: auto; padding-bottom: 2px; }
+      main { padding: 1rem 0.85rem 2rem; }
+      .hero { padding: 1.05rem; }
+      .tab-content { padding: 1.05rem 0.95rem; }
+      .disbursement-list div { flex-direction: column; gap: 1px; }
     }
   </style>
 </head>
@@ -917,139 +1232,158 @@
   <header>
     <div class="brand-title">
       <span>THE ARCANE LIQUIDATOR</span>
-      <span class="brand-tag">Ring -2 Core Systems</span>
+      <span class="brand-tag">RING -2 // DIFC</span>
     </div>
 
     <div class="top-links">
-      <!-- Audio Master Controller -->
-      <button id="audio-toggle-btn" class="btn-audio" onclick="audioEngine.toggleAudio()" title="Toggle Web Audio Synthesizer (Relays, Pacer & Alarm)">
+      <button id="audio-toggle-btn" class="btn-audio" onclick="audioEngine.toggleAudio()" title="Toggle Web Audio Synthesizer (Shortcut: M)">
         <span>🔊</span> AUDIO: ON
       </button>
-
-      <!-- Prominent Ko-fi Link (Fuel the Receiver) -->
-      <a href="https://ko-fi.com/sirleonarddaragan" class="btn-kofi" target="_blank" rel="noopener" title="Sponsor Compute for Special Master Kaelen Morrow">
-        <span>☕</span> Fuel the Receiver
-      </a>
-
-      <!-- Ecosystem Modal Button -->
-      <button class="btn-constellation" onclick="openEcosystemModal()" title="View all 5 runtimes in the Daragan Universe">
+      <button class="btn-constellation" onclick="openEcosystemModal()" title="View all 5 runtimes in the Daragan Codex">
         <span>◈</span> All 5 Suites
       </button>
-
-      <!-- Amazon Book 1 Link -->
-      <a href="https://www.amazon.com/author/sirleonarddaragan" class="btn-gold" target="_blank" rel="noopener" title="Buy Default Judgment & Manuals on Amazon">
-        <span>📖</span> Amazon Books
-      </a>
-
-      <!-- Substack Dispatches -->
       <a href="https://sirleonarddaragan.substack.com" target="_blank" rel="noopener" title="Classified Receivership Dispatches">
         <span>📡</span> Substack
       </a>
-
-      <!-- GitHub Source -->
       <a href="https://github.com/Sirleonarddaragan/ring-minus-two" target="_blank" rel="noopener">
         <span>⚙️</span> GitHub
+      </a>
+      <a href="https://www.amazon.com/author/sirleonarddaragan" class="btn-gold" target="_blank" rel="noopener" title="Buy Default Judgment &amp; Manuals on Amazon">
+        <span>📖</span> Amazon
+      </a>
+      <a href="https://ko-fi.com/sirleonarddaragan" class="btn-kofi" target="_blank" rel="noopener" title="Sponsor Compute for Special Master Kaelen Morrow">
+        <span>☕</span> Ko-fi
       </a>
     </div>
   </header>
 
   <main>
-    <!-- Hero Banner -->
+    <!-- Hero Dossier Banner -->
     <div class="hero">
-      <div class="hero-pre">DIFC Case No. CFI-042-2026 // Arb Ref: 2026-ARB-08991 // Cairo Concordat 1923</div>
-      <h1>DEFAULT JUDGMENT</h1>
-      <div class="hero-sub">
-        Official Open-Source Metrological Suite & Judicial Investigation Terminal. 
-        Accompanies <i>Default Judgment (The Ring -2 Case Files // Volume 01)</i> by Sir Leonard Daragan.
-        Magic is not divine will. <b>Magic is contract law executed directly on the bare-metal hypervisor of reality.</b>
+      <div>
+        <div class="hero-pre">DIFC Case No. CFI-042-2026 · Arb Ref: 2026-ARB-08991 · Cairo Concordat 1923</div>
+        <h1>DEFAULT JUDGMENT</h1>
+        <div class="hero-sub">
+          Official Metrological Suite &amp; Judicial Receivership Terminal for <i>The Ring -2 Case Files: Book 1</i> by Sir Leonard Daragan.
+          <b>Magic is contract law executed directly on the bare-metal hypervisor of reality.</b>
+        </div>
+        <div class="hero-action-bar">
+          <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener" class="hero-pill-btn btn-gold">
+            <span>📖</span> Book 1 on Amazon
+          </a>
+          <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="hero-pill-btn btn-kofi">
+            <span>☕</span> Fuel the Receiver (Ko-fi)
+          </a>
+        </div>
       </div>
 
-      <div class="hero-action-bar">
-        <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="hero-pill-btn btn-kofi">
-          <span>☕</span> Sponsor Compute on Ko-fi
-        </a>
-        <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener" class="hero-pill-btn btn-gold">
-          <span>📖</span> Book 1 on Amazon Author Catalog
-        </a>
-        <button onclick="openEcosystemModal()" class="hero-pill-btn btn-constellation">
-          <span>◈</span> Daragan Codex Constellation (5 Books)
-        </button>
-        <a href="https://sirleonarddaragan.substack.com" target="_blank" rel="noopener" class="hero-pill-btn" style="border:1px solid #ff6719; color:#ff6719; background:rgba(255,103,25,0.1);">
-          <span>📡</span> Field Dispatches
-        </a>
+      <div class="docket-telemetry-card" aria-label="Live Docket Summary">
+        <div class="docket-kv">
+          <span class="docket-k">Seized Estate</span>
+          <span class="docket-v" style="color:var(--green-ok);">$421.84M USD</span>
+        </div>
+        <div class="docket-kv">
+          <span class="docket-k">Vagal Spec</span>
+          <span class="docket-v" style="color:var(--text-cyan);">0.100 Hz / 53 BPM</span>
+        </div>
+        <div class="docket-kv">
+          <span class="docket-k">Matrix State</span>
+          <span class="docket-v" id="hero-matrix-state" style="color:var(--red-alert);">+4 KASR BREACH</span>
+        </div>
+        <div class="docket-kv">
+          <span class="docket-k">Keys</span>
+          <span class="docket-v" style="color:var(--text-dim);">[1–6] Tabs · [M] Audio</span>
+        </div>
       </div>
     </div>
 
-    <!-- Navigation Tabs -->
+    <!-- Segmented Navigation Tabs -->
     <div class="nav-tabs" id="tab-nav-bar">
-      <button class="tab-btn active" data-tab="wafq" onclick="openTab('wafq')">1. 5×5 Wafq Parity Auditor</button>
-      <button class="tab-btn" data-tab="abjad" onclick="openTab('abjad')">2. ‘Ilm al-Ḥurūf Compiler</button>
-      <button class="tab-btn" data-tab="vagal" onclick="openTab('vagal')">3. 0.100 Hz Vagal Lock</button>
-      <button class="tab-btn" data-tab="telemetry" onclick="openTab('telemetry')">4. Sub-Level 2 Telemetry & CLI</button>
-      <button class="tab-btn" data-tab="ledger" onclick="openTab('ledger')">5. Restitution & Compute Escrow</button>
-      <button class="tab-btn" data-tab="decrypt" onclick="openTab('decrypt')">6. Decrypt Case 02</button>
+      <button class="tab-btn active" data-tab="wafq" onclick="openTab('wafq')"><span class="tab-num">01</span>Wafq Parity Auditor</button>
+      <button class="tab-btn" data-tab="abjad" onclick="openTab('abjad')"><span class="tab-num">02</span>‘Ilm al-Ḥurūf Compiler</button>
+      <button class="tab-btn" data-tab="vagal" onclick="openTab('vagal')"><span class="tab-num">03</span>0.100 Hz Vagal Lock</button>
+      <button class="tab-btn" data-tab="telemetry" onclick="openTab('telemetry')"><span class="tab-num">04</span>Sub-Level 2 CLI</button>
+      <button class="tab-btn" data-tab="ledger" onclick="openTab('ledger')"><span class="tab-num">05</span>Restitution Ledger</button>
+      <button class="tab-btn" data-tab="decrypt" onclick="openTab('decrypt')"><span class="tab-num">06</span>Decrypt Case 02</button>
     </div>
 
     <!-- TAB 1: WAFQ AUDITOR -->
     <div id="tab-wafq" class="tab-content active">
-      <div class="section-title">⚡ 5×5 Martial Wafq (Mars / Al-Ahmar Plate) Parity Verification</div>
-      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
-        In Case 01, Q-Entropy Arbitrage Ltd. suffered a fatal +4.0 <i>Kasr</i> (arithmetic fracture) when Cell (3,3) was milled at 17.0mm instead of 13.0mm, inducing 140kV of ungrounded back-EMF and an expanding Libet stasis field across 80 junior trading analysts.
-        <b>Click any cell below to audit its harmonic lettrist pitch.</b>
+      <div class="section-head">
+        <div class="section-title">⚡ 5×5 Martial Wafq Parity Verification</div>
+        <span class="section-kicker">MARS / AL-AHMAR COPPER PLATE · SIRR NUCLEUS</span>
+      </div>
+      <p class="section-desc">
+        In Case 01, Q-Entropy Arbitrage Ltd. induced a fatal +4.0 <i>Kasr</i> (arithmetic fracture) by milling Cell (3,3) at 17.0mm instead of 13.0mm — radiating 140 kV back-EMF across 80 trading analysts. <b>Select any matrix cell to audit its lettrist pitch.</b>
       </p>
 
-      <div class="wafq-container">
-        <div class="wafq-grid" id="wafq-grid-display"></div>
-
-        <div class="wafq-cell-inspector" id="wafq-cell-inspector">
-          <span>INSPECTING CELL (3,3): <b>Value 13</b></span>
-          <span style="color:var(--text-gold);">Nucleus (Sirr) // Pure Copper // Parity Constant 65.00</span>
-        </div>
-        
-        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center;">
-          <button class="btn-action" style="background:#f43f5e; color:#fff;" onclick="loadDefectiveMatrix()">
-            <span>⚠️</span> Simulate Q-Entropy Breach (+4 Kasr)
-          </button>
-          <button class="btn-action" style="background:#10b981; color:#fff;" onclick="apply14MicronResection()">
-            <span>⚡</span> Execute 14-Micron Diamond Resection (65.0 Parity Lock)
-          </button>
+      <div class="wafq-workspace">
+        <div class="wafq-matrix-col">
+          <div class="wafq-grid" id="wafq-grid-display"></div>
+          <div class="wafq-actions-row">
+            <button class="btn-action btn-danger" onclick="loadDefectiveMatrix()">
+              <span>⚠️</span> Simulate +4 Kasr Breach
+            </button>
+            <button class="btn-action btn-success" onclick="apply14MicronResection()">
+              <span>⚡</span> 14-Micron Resection (65.0 Lock)
+            </button>
+          </div>
         </div>
 
-        <div class="wafq-stats" id="wafq-stats-panel"></div>
+        <div class="wafq-telemetry-col">
+          <div class="wafq-cell-inspector" id="wafq-cell-inspector">
+            <span>INSPECTING CELL (3,3): <b>Value 13</b></span>
+            <span style="color:var(--text-gold);">Nucleus (Sirr) · Pure Copper · Parity Constant 65.00</span>
+          </div>
+          <div class="wafq-stats" id="wafq-stats-panel"></div>
+        </div>
       </div>
     </div>
 
     <!-- TAB 2: ABJAD COMPILER -->
     <div id="tab-abjad" class="tab-content">
-      <div class="section-title">📜 ‘Ilm al-Ḥurūf // Arabic Lettrist Bytecode Compiler</div>
-      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
-        Compile 28 lettrist bytecodes and gematric values (<i>Jummal</i>) under Eastern (Mashriqī) and Western (Maghribī / Al-Buni) traditions. Invokes root systemic calls directly on the cosmological hypervisor.
+      <div class="section-head">
+        <div class="section-title">📜 ‘Ilm al-Ḥurūf // Lettrist Bytecode Compiler</div>
+        <span class="section-kicker">28-GLYPH JUMMAL ENGINE</span>
+      </div>
+      <p class="section-desc">
+        Compile 28 lettrist bytecodes and gematric values (<i>Jummal</i>) under Eastern (Mashriqī) or Western (Maghribī / Al-Buni) traditions to inspect root API sums.
       </p>
 
       <div class="input-group">
         <input type="text" id="abjad-input" class="input-dark" placeholder="Enter Arabic text (e.g. عدل or الحق)..." value="عدل" oninput="audioEngine.playKeystroke()">
-        <select id="abjad-mode" class="input-dark" style="flex:0 0 180px;" onchange="runAbjad(); audioEngine.playRelay();">
+        <select id="abjad-mode" class="input-dark" style="flex:0 0 210px;" onchange="runAbjad(); audioEngine.playRelay();">
           <option value="mashriqi" selected>Eastern (Mashriqī)</option>
           <option value="maghribi">Western (Maghribī / Al-Buni)</option>
         </select>
         <button class="btn-action" onclick="runAbjad(); audioEngine.playRelay();">Compile Bytecodes</button>
       </div>
 
-      <div style="display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap;">
-        <button class="tab-btn" onclick="setAbjadPreset('عدل')">Al-‘Adl (104 // Absolute Justice)</button>
-        <button class="tab-btn" onclick="setAbjadPreset('القَهَّار')">Al-Qahhār (337 // The Subduer)</button>
-        <button class="tab-btn" onclick="setAbjadPreset('الأَحْمَر')">Al-Ahmar (280 // The Red Sovereign)</button>
-        <button class="tab-btn" onclick="setAbjadPreset('الله')">Allāh (66 // The Supreme)</button>
+      <div class="chip-bar">
+        <span class="chip-label">Presets:</span>
+        <button class="chip-btn" onclick="setAbjadPreset('عدل')">‘Adl (104 · Justice)</button>
+        <button class="chip-btn" onclick="setAbjadPreset('القَهَّار')">Al-Qahhār (337)</button>
+        <button class="chip-btn" onclick="setAbjadPreset('الأَحْمَر')">Al-Ahmar (280)</button>
+        <button class="chip-btn" onclick="setAbjadPreset('الله')">Allāh (66)</button>
       </div>
 
-      <div class="terminal-box" id="abjad-output"></div>
+      <div class="terminal-shell">
+        <div class="terminal-chrome">
+          <div class="terminal-dots"><i></i><i></i><i></i></div>
+          <span>ILM_AL_HURUF // BYTECODE_STDOUT</span>
+        </div>
+        <div class="terminal-box" id="abjad-output"></div>
+      </div>
     </div>
 
     <!-- TAB 3: VAGAL PACER -->
     <div id="tab-vagal" class="tab-content">
-      <div class="section-title">🫀 0.102 Hz Vagal Lock Controller (Autonomic Coherence Pacer)</div>
-      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
-        Target: 6.0 breaths per minute (10.0s cycle: 4s Inhale, 2s Hold, 4s Exhale). Locks heart rate at 52–54 BPM, establishing the biological Faraday cage to prevent sandboxed shadow daemons from breaching synaptic buffers during cryogenic quenches.
+      <div class="section-head">
+        <div class="section-title">🫀 0.100 Hz Vagal Lock Controller</div>
+        <span class="section-kicker">AUTONOMIC FARADAY PACER · 6.0 BPM</span>
+      </div>
+      <p class="section-desc">
+        4s Inhale · 2s Hold · 4s Exhale (10.0s resonant cycle). Stabilizes autonomic coherence and synthetic 432 Hz tone pacing during cryogenic quench simulations.
       </p>
 
       <div class="pacer-container">
@@ -1060,50 +1394,77 @@
           </div>
         </div>
 
-        <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center;">
           <button class="btn-action" id="pacer-toggle-btn" onclick="togglePacer()">
             <span>🫀</span> Engage Vagal Lock (Start)
           </button>
         </div>
 
-        <div class="wafq-stats" style="text-align:center;">
-          <div>Nominal Autonomic Resonance: <b style="color:var(--text-cyan);">0.100 Hz (10.0s Cycle // 0.102 Hz Case Lock Threshold)</b> | Target Cardiac Rate: <b style="color:var(--green-ok);" id="pacer-bpm">53 BPM</b></div>
-          <div style="color:var(--text-dim); font-size:0.75rem; margin-top:0.3rem;">Safety Interlock (In-Fiction Spec): Pulse held below 60 BPM. Faradic envelope active. Synthetic 432 Hz sine tone synchronizes inhalation and cardiac diastole.</div>
-          <div style="color:#64748b; font-size:0.7rem; margin-top:0.35rem;"><i>Note: Educational &amp; immersive sci-fi/occult coherence simulation only. Not medical advice or diagnostic instrumentation.</i></div>
+        <div class="wafq-stats" style="max-width:680px;">
+          <div class="stat-row">
+            <span>Nominal Resonance Frequency</span>
+            <b style="color:var(--text-cyan);">0.100 Hz (10.0s Cycle · 0.102 Hz Case Threshold)</b>
+          </div>
+          <div class="stat-row">
+            <span>Target Cardiac Rate</span>
+            <b style="color:var(--green-ok);" id="pacer-bpm">53 BPM</b>
+          </div>
+          <div class="stat-row">
+            <span>Audio Synchronization</span>
+            <span style="color:var(--text-dim);">432 Hz → 528 Hz Synthetic Sine Sweep</span>
+          </div>
+        </div>
+        <div style="color:var(--text-muted); font-size:0.74rem; text-align:center;">
+          <i>Educational &amp; immersive fiction coherence simulation only. Not medical advice or diagnostic instrumentation.</i>
         </div>
       </div>
     </div>
 
     <!-- TAB 4: TELEMETRY -->
     <div id="tab-telemetry" class="tab-content">
-      <div class="section-title">📡 DIFC Gate Tower 4 // Sub-Level 2 & 4 Sensor Array Stream</div>
-      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
-        Black box telemetry recording during the catastrophic boil-off event at Cryo-Core 01 (Al-Ahmar) in Sub-Level 4.
+      <div class="section-head">
+        <div class="section-title">📡 DIFC Gate Tower 4 // Sensor Array &amp; Judicial CLI</div>
+        <span class="section-kicker">SUB-LEVEL 2 &amp; 4 BLACK BOX</span>
+      </div>
+      <p class="section-desc">
+        Replay the black box telemetry stream from Cryo-Core 01 (Al-Ahmar) or query judicial records directly via the CLI below.
       </p>
 
-      <div style="margin-bottom:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+      <div class="chip-bar">
         <button class="btn-action" onclick="replayTelemetry()">
           <span>▶️</span> Stream Live Telemetry Bus
         </button>
-        <button class="tab-btn" onclick="clearTelemetry()">Clear Buffer</button>
+        <button class="btn-ghost" onclick="clearTelemetry()">Clear Buffer</button>
+        <span class="chip-label" style="margin-left:0.5rem;">Quick Run:</span>
+        <button class="chip-btn" onclick="runQuickCli('help')">help</button>
+        <button class="chip-btn" onclick="runQuickCli('vance')">vance</button>
+        <button class="chip-btn" onclick="runQuickCli('sebas')">sebas</button>
+        <button class="chip-btn" onclick="runQuickCli('sterling')">sterling</button>
       </div>
 
-      <div class="terminal-box" id="telemetry-log">Click "Stream Live Telemetry Bus" to replay the recorded sensor log from Gate Tower 4.
+      <div class="terminal-shell">
+        <div class="terminal-chrome">
+          <div class="terminal-dots"><i></i><i></i><i></i></div>
+          <span>DIFC_TOWER_4 :: TELEMETRY_STDOUT</span>
+        </div>
+        <div class="terminal-box" id="telemetry-log">Click "Stream Live Telemetry Bus" to replay the recorded sensor log from Gate Tower 4.
 Or enter an interactive judicial command in the CLI prompt below.</div>
-
-      <!-- Interactive CLI Prompt -->
-      <div class="cli-bar">
-        <span class="cli-prompt">DIFC_CLI&gt;</span>
-        <input type="text" id="cli-command-input" class="cli-input" placeholder="Type command: help, kasr, resect, vance, sebas, sterling, kofi, clear..." onkeydown="handleCliKeyDown(event)">
-        <button class="tab-btn" style="min-height:30px; padding:2px 8px; font-size:0.7rem;" onclick="executeCliCommand()">RUN</button>
+        <div class="cli-bar">
+          <span class="cli-prompt">DIFC_CLI&gt;</span>
+          <input type="text" id="cli-command-input" class="cli-input" placeholder="help, kasr, resect, telemetry, vance, sebas, seven, sterling, decrypt 104, clear..." onkeydown="handleCliKeyDown(event)">
+          <button class="btn-ghost" style="min-height:28px; padding:2px 10px; font-size:0.7rem;" onclick="executeCliCommand()">RUN</button>
+        </div>
       </div>
     </div>
 
     <!-- TAB 5: RESTITUTION LEDGER & KO-FI COMPUTE -->
     <div id="tab-ledger" class="tab-content">
-      <div class="section-title">💰 Asset Recovery & Restitution Schedule ($421,840,000.00 USD)</div>
-      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
-        Forensic accounting breakdown prepared by Sebastián "Sebas" Castillo, Esq. Reconciling the seized offshore assets of Tariq Al-Mansoor into the DIFC Court Receivership Escrow under Court Order CFI-042-2026.
+      <div class="section-head">
+        <div class="section-title">💰 Asset Recovery &amp; Restitution Schedule</div>
+        <span class="section-kicker">COURT ORDER CFI-042-2026 · $421.84M USD</span>
+      </div>
+      <p class="section-desc">
+        Forensic accounting breakdown prepared by Sebastián "Sebas" Castillo, Esq., reconciling the seized offshore assets of Tariq Al-Mansoor into DIFC Court Receivership Escrow.
       </p>
 
       <div class="table-responsive">
@@ -1113,7 +1474,7 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
               <th>Transaction Ref</th>
               <th>Interception Target</th>
               <th>Domicile / Bank</th>
-              <th>Recovered Sum (USD)</th>
+              <th style="text-align:right;">Recovered Sum (USD)</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -1122,70 +1483,73 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
               <td>TX-0891-A</td>
               <td>Falcon Apex SPV Ltd.</td>
               <td>Bank of Cyprus (Nicosia)</td>
-              <td>$112,400,000.00</td>
+              <td class="num-cell">$112,400,000.00</td>
               <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
             </tr>
             <tr>
               <td>TX-0891-B</td>
               <td>Silver Crescent Foundation</td>
               <td>Butterfield Bank (Cayman Islands)</td>
-              <td>$145,000,000.00</td>
+              <td class="num-cell">$145,000,000.00</td>
               <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
             </tr>
             <tr>
               <td>TX-0891-C</td>
               <td>Q-Alpha Vault Token Escrow</td>
               <td>Cold Multisig (Helipad Seizure)</td>
-              <td>$84,440,000.00</td>
+              <td class="num-cell">$84,440,000.00</td>
               <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
             </tr>
             <tr>
               <td>TX-0891-D</td>
               <td>Mayfair Nominee Trust No. 4</td>
-              <td>Coutts & Co. (London / Strand)</td>
-              <td>$80,000,000.00</td>
+              <td>Coutts &amp; Co. (London / Strand)</td>
+              <td class="num-cell">$80,000,000.00</td>
               <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
             </tr>
-            <tr style="background:rgba(16, 185, 129, 0.1); font-weight:700;">
-              <td colspan="3">TOTAL RECOVERED CAPITAL SEIZED INTO ESCROW:</td>
-              <td colspan="2" style="color:var(--green-ok);">$421,840,000.00 USD</td>
+            <tr style="background:rgba(16, 185, 129, 0.08); font-weight:700;">
+              <td colspan="3">TOTAL RECOVERED CAPITAL SEIZED INTO ESCROW</td>
+              <td class="num-cell" style="color:var(--green-ok);">$421,840,000.00</td>
+              <td style="color:var(--green-ok);">RECONCILED</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div style="margin-top:1.5rem; background:var(--bg-card); padding:1rem; border:1px solid var(--border-dim); border-radius:4px; font-size:0.8rem;">
-        <div style="color:var(--text-gold); font-weight:700; margin-bottom:0.5rem;">Mandatory Statutory Disbursements (DIFC Order CFI-042-2026 — Reconciled Total: $421,840,000.00 USD):</div>
-        <div>• <b>$160,000,000.00 USD</b> disbursed to 80 affected junior analysts ($2,000,000.00 each) within 4 hours.</div>
-        <div>• <b>$18,840,000.00 USD</b> allocated to DEWA utility grid repair and building structural steel de-ionization.</div>
-        <div>• <b>$26,000,000.00 USD</b> statutory receivership fees &amp; operations (cleared Dr. Alberti Vance's $220,000.00 Cornell student loans).</div>
-        <div>• <b>$42,000,000.00 USD</b> disbursed to DIFC commercial trade creditors &amp; hardware lessors.</div>
-        <div>• <b>$175,000,000.00 USD</b> held in DIFC Court Registry judicial surplus escrow.</div>
+      <div class="disbursement-card">
+        <div class="disbursement-title">Mandatory Statutory Disbursements (Reconciled Total: $421,840,000.00 USD)</div>
+        <div class="disbursement-list">
+          <div><b>$160,000,000.00</b><span>Disbursed to 80 affected junior analysts ($2,000,000.00 each) within 4 hours.</span></div>
+          <div><b>$18,840,000.00</b><span>Allocated to DEWA utility grid repair and building structural steel de-ionization.</span></div>
+          <div><b>$26,000,000.00</b><span>Statutory receivership fees &amp; operations (cleared Dr. Alberti Vance's $220,000.00 Cornell student loans).</span></div>
+          <div><b>$42,000,000.00</b><span>Disbursed to DIFC commercial trade creditors &amp; hardware lessors.</span></div>
+          <div><b>$175,000,000.00</b><span>Held in DIFC Court Registry judicial surplus escrow.</span></div>
+        </div>
       </div>
 
-      <!-- Real-World Commercial Sponsorship Box (Ko-fi Compute Escrow) -->
+      <!-- Ko-fi Compute Escrow -->
       <div class="kofi-escrow-box">
         <div class="kofi-escrow-header">
-          <span class="kofi-escrow-badge">☕ SPECIAL MASTER COMPUTE ESCROW // KO-FI INTEGRATION</span>
-          <span style="font-size:0.75rem; color:#94a3b8;">100% Client-Side Sovereign Systems · Zero Telemetry</span>
+          <span class="kofi-escrow-badge">☕ SPECIAL MASTER COMPUTE ESCROW // KO-FI</span>
+          <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim);">100% Client-Side Execution · Zero Telemetry</span>
         </div>
-        <h3 style="color:#ffffff; font-size:1.05rem; margin-bottom:0.5rem;">Fuel the Arcane Liquidator Infrastructure</h3>
-        <p style="font-size:0.82rem; color:#cbd5e1; line-height:1.6;">
-          Consensus reality runs on thermodynamic balance. While $421.84M was recovered in-fiction, real-world development of these zero-dependency open-source suites, CLI forensics, and future case archives is sustained directly by reader compute sponsorships.
+        <h3 style="color:#ffffff; font-size:1rem; margin-bottom:0.35rem;">Fuel the Arcane Liquidator Infrastructure</h3>
+        <p style="font-size:0.84rem; color:var(--text-dim); line-height:1.55;">
+          Real-world maintenance of these open-source forensic suites, CLI tools, and upcoming case archives is sustained directly by reader compute sponsorships.
         </p>
 
         <div class="kofi-tier-buttons">
-          <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn" style="background:#0284c7;">
+          <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn">
             <span>☕</span> $5 · Fuel a Cryo-Cycle
           </a>
-          <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn" style="background:#0369a1;">
+          <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn">
             <span>⚡</span> $15 · Sponsor Lettrist Compute
           </a>
-          <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn" style="background:#0f766e;">
+          <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn">
             <span>📜</span> $50 · Retain Special Master
           </a>
-          <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn btn-gold" style="color:#000 !important; background:var(--text-gold);">
-            <span>📖</span> Amazon Manuals & Books
+          <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn btn-gold">
+            <span>📖</span> Amazon Manuals &amp; Books
           </a>
         </div>
       </div>
@@ -1193,17 +1557,26 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
 
     <!-- TAB 6: DECRYPT CASE 02 -->
     <div id="tab-decrypt" class="tab-content">
-      <div class="section-title">🔐 Decrypt Classified Case File 02 (Zurich / Paradeplatz)</div>
-      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
-        Enter the Abjad bytecode value of Divine Justice (<i>‘Adl</i>) to decrypt the classified intelligence dossier on <b>Privatbank Von Habsburg-Zwingli</b> and Lord Alistair Sterling's 16th-century Goetic lien.
+      <div class="section-head">
+        <div class="section-title">🔐 Decrypt Classified Case File 02</div>
+        <span class="section-kicker">ZURICH / PARADEPLATZ · PRIVATBANK VON HABSBURG-ZWINGLI</span>
+      </div>
+      <p class="section-desc">
+        Enter the Abjad bytecode value of Divine Justice (<i>‘Adl</i>) to decrypt the classified intelligence dossier on <b>Privatbank Von Habsburg-Zwingli</b> and Lord Alistair Sterling's 1582 Goetic lien.
       </p>
 
       <div class="input-group">
-        <input type="number" id="decrypt-passcode" class="input-dark" placeholder="Enter integer gematric passcode (e.g. 104)..." oninput="audioEngine.playKeystroke()">
+        <input type="number" id="decrypt-passcode" class="input-dark" placeholder="Enter integer gematric passcode (compute root 'Adl in Tab 02)..." oninput="audioEngine.playKeystroke()">
         <button class="btn-action" onclick="decryptTeaser()">Decrypt Dossier</button>
       </div>
 
-      <div class="terminal-box" id="decrypt-output">Status: Encrypted file locked [AES/XOR Lettrist Harmonic]. Run Tab 2 (Abjad Compiler) for 'Adl to find the passcode.</div>
+      <div class="terminal-shell">
+        <div class="terminal-chrome">
+          <div class="terminal-dots"><i></i><i></i><i></i></div>
+          <span>CASE_02_DOSSIER.ENC // XOR_HARMONIC</span>
+        </div>
+        <div class="terminal-box" id="decrypt-output">Status: Encrypted file locked [XOR Lettrist Harmonic]. Compile root 'Adl in Tab 02 to derive the passcode.</div>
+      </div>
     </div>
   </main>
 
@@ -1704,6 +2077,11 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
       const diag2 = currentMatrix.reduce((sum, r, i) => sum + r[4 - i], 0);
 
       const isLocked = !isDefective;
+      const heroStateEl = document.getElementById('hero-matrix-state');
+      if (heroStateEl) {
+        heroStateEl.textContent = isLocked ? '65.0 PARITY LOCKED' : '+4 KASR BREACH';
+        heroStateEl.style.color = isLocked ? 'var(--green-ok)' : 'var(--red-alert)';
+      }
       stats.innerHTML = `
         <div class="stat-row">
           <span>Target Parity Constant (S):</span>
@@ -1939,6 +2317,14 @@ Or enter an interactive judicial command in the CLI prompt below.</div>
         executeCliCommand();
       } else {
         audioEngine.playKeystroke();
+      }
+    }
+
+    function runQuickCli(cmd) {
+      const input = document.getElementById('cli-command-input');
+      if (input) {
+        input.value = cmd;
+        executeCliCommand();
       }
     }
 
