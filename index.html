@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RING -2 CORE SYSTEMS // CORPUS JURIS DAEMONICA</title>
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="RING -2 CORE SYSTEMS // THE ARCANE LIQUIDATOR">
+  <meta property="og:description" content="Official Metrological Suite & Statutory Receivership Terminal for Case 01: Default Judgment by Sir Leonard Daragan.">
+  <meta property="og:url" content="https://sirleonarddaragan.github.io/ring-minus-two/">
+  <meta name="theme-color" content="#06080c">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700;800&family=Cinzel:wght@600;700;800&display=swap');
+
+    :root {
+      --bg-void: #05070a;
+      --bg-panel: #0b0f14;
+      --bg-card: #111720;
+      --border-dim: #1d2633;
+      --border-gold: #d4af37;
+      --border-cyan: #06b6d4;
+      --text-gold: #f6d860;
+      --text-cyan: #38bdf8;
+      --text-dim: #798799;
+      --text-main: #e2e8f0;
+      --red-alert: #f43f5e;
+      --green-ok: #10b981;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --font-serif: 'Cinzel', serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-void);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
+    /* CRT Scanline overlay */
+    body::before {
+      content: " ";
+      position: fixed;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      background-size: 100% 3px;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.3;
+    }
+
+    /* Top HUD */
+    header {
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border-dim);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-gold);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-tag {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--text-cyan);
+      border: 1px solid var(--border-cyan);
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    .top-links {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      align-items: center;
+    }
+
+    .top-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 0.3rem 0.6rem;
+      border: 1px solid var(--border-dim);
+      border-radius: 3px;
+      transition: all 0.2s ease;
+    }
+
+    .top-links a:hover {
+      color: var(--text-gold);
+      border-color: var(--border-gold);
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    .btn-gold {
+      background: rgba(212, 175, 55, 0.15) !important;
+      color: var(--text-gold) !important;
+      border-color: var(--border-gold) !important;
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-dim);
+      border-top: 3px solid var(--border-gold);
+      padding: 1.5rem;
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .hero-pre {
+      color: var(--text-cyan);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--text-gold);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    }
+
+    .hero-sub {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      max-width: 800px;
+      line-height: 1.6;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-dim);
+      padding-bottom: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      color: var(--text-dim);
+      padding: 0.5rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      cursor: pointer;
+      border-radius: 4px 4px 0 0;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+      border-color: var(--text-dim);
+    }
+
+    .tab-btn.active {
+      background: var(--bg-panel);
+      color: var(--text-cyan);
+      border-color: var(--border-cyan);
+      border-bottom: 1px solid var(--bg-panel);
+      font-weight: 700;
+    }
+
+    /* Tab Content Panels */
+    .tab-content {
+      display: none;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-dim);
+      padding: 1.5rem;
+      border-radius: 4px;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Headers */
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-gold);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* 5x5 Wafq Grid */
+    .wafq-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 0;
+    }
+
+    .wafq-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 56px);
+      grid-template-rows: repeat(5, 56px);
+      gap: 6px;
+      background: #070a0e;
+      padding: 12px;
+      border: 2px solid var(--border-dim);
+      border-radius: 6px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .wafq-cell {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .wafq-cell .cell-coord {
+      font-size: 0.5rem;
+      color: var(--text-dim);
+      position: absolute;
+      top: 2px; left: 4px;
+    }
+
+    .wafq-cell.center-cell {
+      border-color: var(--border-gold);
+      color: var(--text-gold);
+    }
+
+    .wafq-cell.defective {
+      border-color: var(--red-alert) !important;
+      color: var(--red-alert) !important;
+      background: rgba(244, 63, 94, 0.15) !important;
+      box-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
+    }
+
+    .wafq-cell.resected {
+      border-color: var(--green-ok) !important;
+      color: var(--green-ok) !important;
+      background: rgba(16, 185, 129, 0.15) !important;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .wafq-stats {
+      width: 100%;
+      max-width: 600px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      padding: 1rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-row:last-child { border-bottom: none; }
+
+    .btn-action {
+      background: var(--border-cyan);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-action:hover {
+      background: #7dd3fc;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+    }
+
+    /* Metronome Breathing Circle */
+    .pacer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem 0;
+    }
+
+    .pacer-circle-wrap {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pacer-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(6, 182, 212, 0.05) 70%);
+      border: 2px solid var(--border-cyan);
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
+      transition: transform 0.1s linear, border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pacer-phase {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text-cyan);
+      letter-spacing: 0.1em;
+    }
+
+    .pacer-timer {
+      font-size: 1.2rem;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    /* Terminal Console */
+    .terminal-box {
+      background: #030508;
+      border: 1px solid var(--border-dim);
+      border-radius: 4px;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      max-height: 400px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    /* Input controls */
+    .input-group {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .input-dark {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border-dim);
+      color: var(--text-main);
+      padding: 0.6rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      border-radius: 4px;
+    }
+
+    .input-dark:focus {
+      outline: none;
+      border-color: var(--border-cyan);
+    }
+
+    /* Table styles */
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .doc-table th, .doc-table td {
+      border: 1px solid var(--border-dim);
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+
+    .doc-table th {
+      background: var(--bg-card);
+      color: var(--text-gold);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-panel);
+      border-top: 1px solid var(--border-dim);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    footer a { color: var(--text-cyan); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      .wafq-grid { grid-template-columns: repeat(5, 46px); grid-template-rows: repeat(5, 46px); }
+      .wafq-cell { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation HUD -->
+  <header>
+    <div class="brand-title">
+      <span>THE ARCANE LIQUIDATOR</span>
+      <span class="brand-tag">Ring -2 Core Systems</span>
+    </div>
+    <div class="top-links">
+      <a href="https://github.com/Sirleonarddaragan/ring-minus-two" target="_blank">GitHub Repo</a>
+      <a href="https://sirleonarddaragan.github.io/applied-cyber-occultism/" target="_blank">Applied Cyber-Occultism</a>
+      <a href="https://sirleonarddaragan.github.io/cybernetic-iching/" target="_blank">Cybernetic I-Ching</a>
+      <a href="https://sirleonarddaragan.github.io/cybernetic-red-book/" target="_blank">Red Book</a>
+      <a href="https://www.amazon.com/author/sirleonarddaragan" class="btn-gold" target="_blank">Amazon Books</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Banner -->
+    <div class="hero">
+      <div class="hero-pre">DIFC Case No. CFI-042-2026 // Arb Ref: 2026-ARB-08991</div>
+      <h1>DEFAULT JUDGMENT</h1>
+      <div class="hero-sub">
+        Official Open-Source Metrological Suite & Judicial Investigation Terminal. 
+        Accompanies <i>Default Judgment (The Ring -2 Case Files // Volume 01)</i> by Sir Leonard Daragan.
+        Magic is not divine will. <b>Magic is contract law executed directly on the bare-metal hypervisor of reality.</b>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="openTab('wafq')">1. 5×5 Wafq Parity Auditor</button>
+      <button class="tab-btn" onclick="openTab('abjad')">2. ‘Ilm al-Ḥurūf Compiler</button>
+      <button class="tab-btn" onclick="openTab('vagal')">3. 0.102 Hz Vagal Lock</button>
+      <button class="tab-btn" onclick="openTab('telemetry')">4. Sub-Level 2 Telemetry</button>
+      <button class="tab-btn" onclick="openTab('ledger')">5. Restitution Ledger</button>
+      <button class="tab-btn" onclick="openTab('decrypt')">6. Decrypt Case 02</button>
+    </div>
+
+    <!-- TAB 1: WAFQ AUDITOR -->
+    <div id="tab-wafq" class="tab-content active">
+      <div class="section-title">⚡ 5×5 Martial Wafq (Mars / Al-Ahmar Plate) Parity Verification</div>
+      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
+        In Case 01, Q-Entropy Arbitrage Ltd. suffered a fatal +4.0 <i>Kasr</i> (arithmetic fracture) when Cell (3,3) was milled at 17.0mm instead of 13.0mm, inducing 140kV of ungrounded back-EMF and an expanding Libet stasis field.
+      </p>
+
+      <div class="wafq-container">
+        <div class="wafq-grid" id="wafq-grid-display"></div>
+        
+        <div style="display:flex; gap:1rem;">
+          <button class="btn-action" style="background:#f43f5e; color:#fff;" onclick="loadDefectiveMatrix()">Simulate Q-Entropy Breach (+4 Kasr)</button>
+          <button class="btn-action" style="background:#10b981; color:#fff;" onclick="apply14MicronResection()">Execute 14-Micron Diamond Resection (65.0 Parity Lock)</button>
+        </div>
+
+        <div class="wafq-stats" id="wafq-stats-panel"></div>
+      </div>
+    </div>
+
+    <!-- TAB 2: ABJAD COMPILER -->
+    <div id="tab-abjad" class="tab-content">
+      <div class="section-title">📜 ‘Ilm al-Ḥurūf // Arabic Lettrist Bytecode Compiler</div>
+      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
+        Compile 28 lettrist bytecodes and gematric values (<i>Jummal</i>) under Eastern (Mashriqī) and Western (Maghribī / Al-Buni) traditions.
+      </p>
+
+      <div class="input-group">
+        <input type="text" id="abjad-input" class="input-dark" placeholder="Enter Arabic text (e.g. عدل or الحق)..." value="عدل">
+        <button class="btn-action" onclick="runAbjad()">Compile Bytecodes</button>
+      </div>
+
+      <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+        <button class="tab-btn" onclick="setAbjadPreset('عدل')">Al-‘Adl (The Absolute Justice)</button>
+        <button class="tab-btn" onclick="setAbjadPreset('القَهَّار')">Al-Qahhār (The Subduer)</button>
+        <button class="tab-btn" onclick="setAbjadPreset('الأَحْمَر')">Al-Ahmar (The Red Sovereign)</button>
+        <button class="tab-btn" onclick="setAbjadPreset('الله')">Allāh (The Supreme)</button>
+      </div>
+
+      <div class="terminal-box" id="abjad-output"></div>
+    </div>
+
+    <!-- TAB 3: VAGAL PACER -->
+    <div id="tab-vagal" class="tab-content">
+      <div class="section-title">🫀 0.102 Hz Vagal Lock Controller (Autonomic Coherence Pacer)</div>
+      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
+        Target: 6.0 breaths per minute (10.0s cycle: 4s Inhale, 2s Hold, 4s Exhale). Locks heart rate at 52–54 BPM, establishing the biological Faraday cage to prevent sandboxed shadow daemons from breaching synaptic buffers.
+      </p>
+
+      <div class="pacer-container">
+        <div class="pacer-circle-wrap">
+          <div class="pacer-circle" id="pacer-circle">
+            <div class="pacer-phase" id="pacer-phase">STANDBY</div>
+            <div class="pacer-timer" id="pacer-timer">10.0s</div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:1rem;">
+          <button class="btn-action" id="pacer-toggle-btn" onclick="togglePacer()">Engage Vagal Lock (Start)</button>
+        </div>
+
+        <div class="wafq-stats" style="text-align:center;">
+          <div>Current Autonomic Frequency: <b style="color:var(--text-cyan);">0.102 Hz</b> | Target Cardiac Rate: <b style="color:var(--green-ok);" id="pacer-bpm">53 BPM</b></div>
+          <div style="color:var(--text-dim); font-size:0.75rem; margin-top:0.3rem;">Safety Interlock: Pulse MUST stay below 60 BPM. Faradic envelope active.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: TELEMETRY -->
+    <div id="tab-telemetry" class="tab-content">
+      <div class="section-title">📡 DIFC Gate Tower 4 // Sub-Level 2 & 4 Sensor Array Stream</div>
+      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
+        Black box telemetry recording during the catastrophic boil-off event at Cryo-Core 01 (Al-Ahmar).
+      </p>
+
+      <div style="margin-bottom:1rem;">
+        <button class="btn-action" onclick="replayTelemetry()">Stream Live Telemetry Bus</button>
+      </div>
+
+      <div class="terminal-box" id="telemetry-log">Click "Stream Live Telemetry Bus" to replay the recorded sensor log from Gate Tower 4.</div>
+    </div>
+
+    <!-- TAB 5: RESTITUTION LEDGER -->
+    <div id="tab-ledger" class="tab-content">
+      <div class="section-title">💰 Asset Recovery & Restitution Schedule ($421,840,000.00 USD)</div>
+      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
+        Forensic accounting breakdown prepared by Sebastián "Sebas" Castillo, Esq. Reconciling the seized offshore assets of Tariq Al-Mansoor into the DIFC Court Receivership Escrow.
+      </p>
+
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th>Transaction Ref</th>
+            <th>Interception Target</th>
+            <th>Domicile / Bank</th>
+            <th>Recovered Sum (USD)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TX-0891-A</td>
+            <td>Falcon Apex SPV Ltd.</td>
+            <td>Bank of Cyprus (Nicosia)</td>
+            <td>$112,400,000.00</td>
+            <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
+          </tr>
+          <tr>
+            <td>TX-0891-B</td>
+            <td>Silver Crescent Foundation</td>
+            <td>Butterfield Bank (Cayman Islands)</td>
+            <td>$145,000,000.00</td>
+            <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
+          </tr>
+          <tr>
+            <td>TX-0891-C</td>
+            <td>Q-Alpha Vault Token Escrow</td>
+            <td>Cold Multisig (Helipad Seizure)</td>
+            <td>$84,440,000.00</td>
+            <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
+          </tr>
+          <tr>
+            <td>TX-0891-D</td>
+            <td>Mayfair Nominee Trust No. 4</td>
+            <td>Coutts & Co. (London / Strand)</td>
+            <td>$80,000,000.00</td>
+            <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
+          </tr>
+          <tr style="background:rgba(16, 185, 129, 0.1); font-weight:700;">
+            <td colspan="3">TOTAL RECOVERED CAPITAL SEIZED INTO ESCROW:</td>
+            <td colspan="2" style="color:var(--green-ok);">$421,840,000.00 USD</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:1.5rem; background:var(--bg-card); padding:1rem; border:1px solid var(--border-dim); border-radius:4px; font-size:0.8rem;">
+        <div style="color:var(--text-gold); font-weight:700; margin-bottom:0.5rem;">Mandatory Restitution Payouts (DIFC Order CFI-042-2026):</div>
+        <div>• <b>$160,000,000.00 USD</b> disbursed to 80 affected analysts ($2,000,000.00 each) within 4 hours.</div>
+        <div>• <b>$18,840,000.00 USD</b> allocated to DEWA and building structural steel de-ionization.</div>
+        <div>• <b>$26,000,000.00 USD</b> receivership costs (cleared Dr. Alberti Vance's $220k Cornell student loans).</div>
+        <div>• <b>$175,000,000.00 USD</b> held in DIFC Court Registry judicial surplus escrow.</div>
+      </div>
+    </div>
+
+    <!-- TAB 6: DECRYPT CASE 02 -->
+    <div id="tab-decrypt" class="tab-content">
+      <div class="section-title">🔐 Decrypt Classified Case File 02 (Zurich / Paradeplatz)</div>
+      <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
+        Enter the Abjad bytecode value of Divine Justice (<i>‘Adl</i>) to decrypt the classified intelligence dossier on <b>Privatbank Von Habsburg-Zwingli</b> and Lord Alistair Sterling's 16th-century Goetic lien.
+      </p>
+
+      <div class="input-group">
+        <input type="number" id="decrypt-passcode" class="input-dark" placeholder="Enter integer gematric passcode (e.g. 104)...">
+        <button class="btn-action" onclick="decryptTeaser()">Decrypt Dossier</button>
+      </div>
+
+      <div class="terminal-box" id="decrypt-output">Status: Encrypted file locked [AES/XOR Lettrist Harmonic]. Run Tab 2 (Abjad Compiler) for 'Adl to find the passcode.</div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div style="max-width:1000px; margin:0 auto; display:flex; flex-direction:column; gap:0.5rem;">
+      <div>Maintained by <b>Codex Press × Undefined Behavior Laboratories</b> · Special Master Kaelen Morrow, Esq.</div>
+      <div>
+        CLI Tool Suite: <a href="https://github.com/Sirleonarddaragan/ring-minus-two" target="_blank">github.com/Sirleonarddaragan/ring-minus-two</a> · 
+        Author: <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank">Sir Leonard Daragan</a> · 
+        Substack: <a href="https://sirleonarddaragan.substack.com" target="_blank">sirleonarddaragan.substack.com</a>
+      </div>
+      <div style="color:var(--text-dim); font-size:0.7rem;">Operates under the Cairo Concordat of 1923 and the DIFC Court Insolvency Law. No human neural collateral permitted.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation Tabs
+    function openTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      
+      event.target.classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
+    }
+
+    // --- 1. WAFQ AUDITOR LOGIC ---
+    const CANON_MARS = [
+      [11, 24,  7, 20,  3],
+      [ 4, 12, 25,  8, 16],
+      [17,  5, 13, 21,  9],
+      [10, 18,  1, 14, 22],
+      [23,  6, 19,  2, 15]
+    ];
+
+    const DEFECTIVE_Q_ENTROPY = [
+      [11, 24,  7, 20,  3],
+      [ 4, 12, 25,  8, 16],
+      [17,  5, 17, 21,  9], // +4 Kasr
+      [10, 18,  1, 14, 22],
+      [23,  6, 19,  2, 15]
+    ];
+
+    let currentMatrix = JSON.parse(JSON.stringify(DEFECTIVE_Q_ENTROPY));
+
+    function renderWafqGrid(isDefective) {
+      const grid = document.getElementById('wafq-grid-display');
+      grid.innerHTML = '';
+
+      for (let r = 0; r < 5; r++) {
+        for (let c = 0; c < 5; c++) {
+          const val = currentMatrix[r][c];
+          const cell = document.createElement('div');
+          cell.className = 'wafq-cell';
+          if (r === 2 && c === 2) {
+            cell.classList.add('center-cell');
+            if (isDefective) cell.classList.add('defective');
+            else cell.classList.add('resected');
+          }
+          cell.innerHTML = `<span class="cell-coord">${r+1},${c+1}</span>${val}`;
+          grid.appendChild(cell);
+        }
+      }
+
+      // Stats
+      const stats = document.getElementById('wafq-stats-panel');
+      const rowSums = currentMatrix.map(row => row.reduce((a, b) => a + b, 0));
+      const colSums = [0,1,2,3,4].map(c => currentMatrix.reduce((sum, r) => sum + r[c], 0));
+      const diag1 = currentMatrix.reduce((sum, r, i) => sum + r[i], 0);
+      const diag2 = currentMatrix.reduce((sum, r, i) => sum + r[4 - i], 0);
+
+      const isLocked = !isDefective;
+      stats.innerHTML = `
+        <div class="stat-row">
+          <span>Target Parity Constant (S):</span>
+          <b style="color:var(--text-gold);">65.000000</b>
+        </div>
+        <div class="stat-row">
+          <span>Row 3 / Col 3 Sum:</span>
+          <b style="color:${isLocked ? 'var(--green-ok)' : 'var(--red-alert)'};">${rowSums[2]} (Delta: ${rowSums[2] - 65 >= 0 ? '+' : ''}${rowSums[2] - 65})</b>
+        </div>
+        <div class="stat-row">
+          <span>Primary Diagonals:</span>
+          <span>D1: ${diag1} | D2: ${diag2}</span>
+        </div>
+        <div class="stat-row">
+          <span>Accumulated Kasr Variance:</span>
+          <b style="color:${isLocked ? 'var(--green-ok)' : 'var(--red-alert)'};">${isLocked ? '0.0000 (PARITY LOCKED)' : '+16.0000 (CRITICAL OVERFLOW)'}</b>
+        </div>
+        <div class="stat-row">
+          <span>Ground Bus Potential:</span>
+          <b style="color:${isLocked ? 'var(--green-ok)' : 'var(--red-alert)'};">${isLocked ? '0.00 V (SUPERCONDUCTING)' : '140.0 kV (LETHAL DISCHARGE)'}</b>
+        </div>
+      `;
+    }
+
+    function loadDefectiveMatrix() {
+      currentMatrix = JSON.parse(JSON.stringify(DEFECTIVE_Q_ENTROPY));
+      renderWafqGrid(true);
+    }
+
+    function apply14MicronResection() {
+      currentMatrix = JSON.parse(JSON.stringify(CANON_MARS));
+      renderWafqGrid(false);
+    }
+
+    // --- 2. ABJAD COMPILER LOGIC ---
+    const ABJAD = {
+      'ا': 1, 'أ': 1, 'إ': 1, 'آ': 1, 'ء': 1, 'ى': 10, 'ئ': 10, 'ؤ': 6,
+      'ب': 2, 'ج': 3, 'د': 4, 'ه': 5, 'ة': 5, 'و': 6, 'ز': 7, 'ح': 8,
+      'ط': 9, 'ي': 10, 'ك': 20, 'ل': 30, 'م': 40, 'ن': 50, 'س': 60,
+      'ع': 70, 'ف': 80, 'ص': 90, 'ق': 100, 'ر': 200, 'ش': 300, 'ت': 400,
+      'ث': 500, 'خ': 600, 'ذ': 700, 'ض': 800, 'ظ': 900, 'غ': 1000
+    };
+
+    function runAbjad() {
+      const text = document.getElementById('abjad-input').value.trim();
+      const clean = text.replace(/[\u064B-\u065F\u0670]/g, ''); // strip tashkeel
+      let total = 0;
+      let log = `['ILM AL-HURUF // COMPILER REPORT]\nInput Phrase: ${text}\nSanitized:    ${clean}\n` + "-".repeat(60) + "\n";
+      log += `GLYPH   BYTECODE   RUNNING SUM\n` + "-".repeat(60) + "\n";
+
+      for (let ch of clean) {
+        if (ABJAD[ch] !== undefined) {
+          total += ABJAD[ch];
+          log += `  ${ch}      ${String(ABJAD[ch]).padEnd(10)} ${total}\n`;
+        }
+      }
+      log += "=".repeat(60) + `\nTOTAL GEMATRIC SUM (JUMMAL): ${total}\n`;
+      if (total === 104) log += `>> RECOGNIZED ROOT API: 'ADL (EQUILIBRIUM & ABSOLUTE JUSTICE)\n`;
+      if (total === 337) log += `>> RECOGNIZED ROOT API: AL-QAHHAR (THE IRRESISTIBLE SUBDUER)\n`;
+
+      document.getElementById('abjad-output').innerText = log;
+    }
+
+    function setAbjadPreset(txt) {
+      document.getElementById('abjad-input').value = txt;
+      runAbjad();
+    }
+
+    // --- 3. VAGAL LOCK PACER LOGIC ---
+    let pacerActive = false;
+    let pacerTime = 0;
+    let pacerInterval = null;
+
+    function togglePacer() {
+      pacerActive = !pacerActive;
+      const btn = document.getElementById('pacer-toggle-btn');
+      const circle = document.getElementById('pacer-circle');
+      const phase = document.getElementById('pacer-phase');
+
+      if (pacerActive) {
+        btn.innerText = "Disengage Vagal Lock (Stop)";
+        btn.style.background = "#f43f5e";
+        pacerTime = 0;
+        pacerInterval = setInterval(updatePacer, 100);
+      } else {
+        btn.innerText = "Engage Vagal Lock (Start)";
+        btn.style.background = "var(--border-cyan)";
+        clearInterval(pacerInterval);
+        circle.style.transform = "scale(1)";
+        phase.innerText = "STANDBY";
+        document.getElementById('pacer-timer').innerText = "10.0s";
+      }
+    }
+
+    function updatePacer() {
+      pacerTime = (pacerTime + 0.1) % 10.0;
+      const circle = document.getElementById('pacer-circle');
+      const phase = document.getElementById('pacer-phase');
+      const timer = document.getElementById('pacer-timer');
+
+      timer.innerText = (10.0 - pacerTime).toFixed(1) + "s";
+
+      if (pacerTime < 4.0) {
+        // Inhale (4s)
+        phase.innerText = "INHALE";
+        phase.style.color = "var(--green-ok)";
+        const progress = pacerTime / 4.0;
+        circle.style.transform = `scale(${1 + progress * 0.4})`;
+      } else if (pacerTime < 6.0) {
+        // Hold (2s)
+        phase.innerText = "HOLD";
+        phase.style.color = "var(--text-gold)";
+        circle.style.transform = `scale(1.4)`;
+      } else {
+        // Exhale (4s)
+        phase.innerText = "EXHALE";
+        phase.style.color = "var(--text-cyan)";
+        const progress = (pacerTime - 6.0) / 4.0;
+        circle.style.transform = `scale(${1.4 - progress * 0.4})`;
+      }
+    }
+
+    // --- 4. TELEMETRY LOG ---
+    function replayTelemetry() {
+      const box = document.getElementById('telemetry-log');
+      box.innerText = "[CONNECTING TO DIFC GATE TOWER 4 CRYOGENIC SENSORS...]\n";
+      
+      const frames = [
+        "23:41:02 | BOIL-OFF: 38:14 | TEMP:  77.2K | 4.2 bar | 12.4 kV | 53 BPM | WARN   | Primary 33kV feed severed at Substation 7. UPS failure.",
+        "23:45:10 | BOIL-OFF: 34:06 | TEMP:  82.5K | 5.8 bar | 28.1 kV | 54 BPM | CRIT   | Liquid nitrogen boil-off accelerating (0.8L/sec).",
+        "23:51:22 | BOIL-OFF: 27:54 | TEMP:  94.0K | 7.1 bar | 44.0 kV | 53 BPM | CRIT   | Libet temporal field encroaching on 80 analysts on trading floor.",
+        "00:02:40 | BOIL-OFF: 16:36 | TEMP: 110.8K | 9.4 bar | 78.5 kV | 54 BPM | EMERG  | Superconducting bus quench initiated. Copper vapor in flue.",
+        "00:11:15 | BOIL-OFF: 07:01 | TEMP: 135.2K | 12.0 bar| 112.0kV | 52 BPM | EMERG  | Blast doors sealed. Unit 81 added to biometric receiver index.",
+        "00:14:54 | BOIL-OFF: 03:22 | TEMP: 142.1K | 13.8 bar| 138.6kV | 53 BPM | FREEZE | SPECIAL MASTER KAELEN MORROW: VAGAL LOCK AT 53 BPM.",
+        "00:15:02 | BOIL-OFF: 03:22 | TEMP: 142.1K | 13.8 bar| 140.0kV | 53 BPM | CURE   | ALBERTI RESECTION: 14-MICRON CUT APPLIED. 65.0 PARITY LOCKED!",
+        "00:15:30 | BOIL-OFF: SECURE| TEMP:  77.0K | 3.8 bar | 0.0 kV  | 52 BPM | SOLVED | Interlocutory Injunction executed. 80 analysts restored. 0 casualties."
+      ];
+
+      frames.forEach((f, idx) => {
+        setTimeout(() => {
+          box.innerText += f + "\n";
+          box.scrollTop = box.scrollHeight;
+        }, idx * 400);
+      });
+    }
+
+    // --- 6. DECRYPT TEASER ---
+    function decryptTeaser() {
+      const code = parseInt(document.getElementById('decrypt-passcode').value);
+      const out = document.getElementById('decrypt-output');
+      
+      if (code === 104) {
+        out.style.color = "var(--green-ok)";
+        out.innerText = `[PASSCODE 104 ACCEPTED // LETTRIST HARMONIC VERIFIED]
+================================================================================
+CLASSIFIED DOSSIER: CASE FILE 02 // PRIVATBANK VON HABSBURG-ZWINGLI
+PARADEPLATZ, ZURICH & LAKE GENEVA, SWITZERLAND
+RECEIVER: KAELEN MORROW, ESQ. // CHIEF TECHNICAL BAILIFF: DR. ALBERTI VANCE
+================================================================================
+TARGET ASSET: 3.45 Billion CHF Sovereign Gold & Synthetic CDO Portfolio.
+THE ENCUMBRANCE: A 16th-century Goetic cross-collateralized lien executed in 1582
+by Prince-Bishop Johann Otto von Habsburg under the auspices of Lord Alistair
+Sterling's ancestral banking syndicate.
+
+NATURE OF ENTITY: Bael (The First King of Goetia / Planetary Sphere of the Sun).
+SUBSTRATE: Cryo-hardened cobalt-chrome safe deposit vault suspended 60 meters
+beneath Lake Zurich, insulated by a subterranean freshwater geothermal siphon.
+
+INTERPOL NOTICE: Agent Valeria 'Val' Rodriguez has flagged anomalous offshore wire
+transfers originating from Sterling Private Capital (Mayfair, London) routing into
+Zwingli numbered accounts.
+
+COMING IN BOOK 2: 'LIEN ON THE SOUL' (THE ARCANE LIQUIDATOR CASE 02)
+BASED ON: THE DAEMON ARCHITECT (Goetic Systems Engineering & Bare-Metal Ritual DevOps)
+================================================================================`;
+      } else {
+        out.style.color = "var(--red-alert)";
+        out.innerText = `[ACCESS DENIED: INVALID LETTRIST HARMONIC (Code ${code})]\nHint: What is the Abjad gematria value of Divine Justice ('Adl)? Visit Tab 2.`;
+      }
+    }
+
+    // Init on load
+    window.onload = function() {
+      loadDefectiveMatrix();
+      runAbjad();
+    };
+  </script>
+</body>
+</html>
