@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>RING -2 CORE SYSTEMS // CORPUS JURIS DAEMONICA</title>
 
   <!-- OpenGraph Metadata -->
   <meta property="og:title" content="RING -2 CORE SYSTEMS // THE ARCANE LIQUIDATOR">
   <meta property="og:description" content="Official Metrological Suite & Statutory Receivership Terminal for Case 01: Default Judgment by Sir Leonard Daragan.">
   <meta property="og:url" content="https://sirleonarddaragan.github.io/ring-minus-two/">
-  <meta name="theme-color" content="#06080c">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#05070a">
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700;800&family=Cinzel:wght@600;700;800&display=swap');
@@ -27,6 +29,7 @@
       --text-main: #e2e8f0;
       --red-alert: #f43f5e;
       --green-ok: #10b981;
+      --kofi-color: #13c3ff;
       --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
       --font-serif: 'Cinzel', serif;
     }
@@ -41,9 +44,11 @@
       display: flex;
       flex-direction: column;
       line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* CRT Scanline overlay */
+    /* CRT Scanline Overlay - GPU accelerated & zero pointer-events */
     body::before {
       content: " ";
       position: fixed;
@@ -52,19 +57,26 @@
       background-size: 100% 3px;
       pointer-events: none;
       z-index: 999;
-      opacity: 0.3;
+      opacity: 0.25;
+      will-change: opacity;
+      transform: translateZ(0);
     }
 
     /* Top HUD */
     header {
       background: var(--bg-panel);
       border-bottom: 1px solid var(--border-dim);
-      padding: 0.75rem 1.5rem;
+      padding: 0.75rem 1.25rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.75rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .brand-title {
@@ -75,6 +87,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .brand-tag {
@@ -85,35 +98,81 @@
       padding: 0.15rem 0.5rem;
       border-radius: 3px;
       text-transform: uppercase;
+      font-weight: 600;
     }
 
     .top-links {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.5rem;
       font-size: 0.75rem;
       align-items: center;
+      flex-wrap: wrap;
     }
 
-    .top-links a {
+    .top-links a, .top-links button {
       color: var(--text-dim);
       text-decoration: none;
-      padding: 0.3rem 0.6rem;
+      padding: 0.35rem 0.65rem;
       border: 1px solid var(--border-dim);
-      border-radius: 3px;
+      border-radius: 4px;
+      background: var(--bg-card);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-height: 36px;
+      touch-action: manipulation;
       transition: all 0.2s ease;
     }
 
-    .top-links a:hover {
+    .top-links a:hover, .top-links button:hover {
       color: var(--text-gold);
       border-color: var(--border-gold);
       background: rgba(212, 175, 55, 0.08);
+      transform: translateY(-1px);
+    }
+
+    /* Commercial High-Priority Buttons */
+    .btn-kofi {
+      background: rgba(19, 195, 255, 0.16) !important;
+      color: #38bdf8 !important;
+      border: 1px solid #0284c7 !important;
+      font-weight: 700 !important;
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+    }
+
+    .btn-kofi:hover {
+      background: rgba(19, 195, 255, 0.3) !important;
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.5);
     }
 
     .btn-gold {
       background: rgba(212, 175, 55, 0.15) !important;
       color: var(--text-gold) !important;
       border-color: var(--border-gold) !important;
-      font-weight: 600;
+      font-weight: 700 !important;
+    }
+
+    .btn-constellation {
+      background: rgba(245, 158, 11, 0.14) !important;
+      border: 1px solid #f59e0b !important;
+      color: #fbbf24 !important;
+      font-weight: 700 !important;
+    }
+
+    .btn-audio {
+      border-color: var(--border-cyan) !important;
+      color: var(--text-cyan) !important;
+      font-weight: 700 !important;
+    }
+
+    .btn-audio.muted {
+      border-color: var(--border-dim) !important;
+      color: var(--text-dim) !important;
+      opacity: 0.7;
     }
 
     /* Main Container */
@@ -122,7 +181,7 @@
       max-width: 1200px;
       width: 100%;
       margin: 0 auto;
-      padding: 1.5rem;
+      padding: 1.5rem 1rem;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
@@ -136,6 +195,7 @@
       padding: 1.5rem;
       border-radius: 4px;
       position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
     .hero-pre {
@@ -144,22 +204,46 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       margin-bottom: 0.4rem;
+      font-weight: 700;
     }
 
     .hero h1 {
       font-family: var(--font-serif);
-      font-size: 2rem;
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
       color: var(--text-gold);
       letter-spacing: 0.05em;
       margin-bottom: 0.5rem;
-      text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
     }
 
     .hero-sub {
       color: var(--text-dim);
       font-size: 0.85rem;
-      max-width: 800px;
+      max-width: 860px;
       line-height: 1.6;
+    }
+
+    .hero-action-bar {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .hero-pill-btn {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 38px;
+      touch-action: manipulation;
+      transition: all 0.2s ease;
     }
 
     /* Navigation Tabs */
@@ -169,19 +253,23 @@
       border-bottom: 1px solid var(--border-dim);
       padding-bottom: 0.5rem;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
     }
 
     .tab-btn {
       background: var(--bg-card);
       border: 1px solid var(--border-dim);
       color: var(--text-dim);
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1rem;
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       cursor: pointer;
       border-radius: 4px 4px 0 0;
       transition: all 0.2s ease;
       white-space: nowrap;
+      min-height: 42px;
+      touch-action: manipulation;
     }
 
     .tab-btn:hover {
@@ -195,6 +283,7 @@
       border-color: var(--border-cyan);
       border-bottom: 1px solid var(--bg-panel);
       font-weight: 700;
+      box-shadow: 0 -2px 10px rgba(6, 182, 212, 0.15);
     }
 
     /* Tab Content Panels */
@@ -204,6 +293,7 @@
       border: 1px solid var(--border-dim);
       padding: 1.5rem;
       border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
 
     .tab-content.active {
@@ -227,25 +317,26 @@
       gap: 0.5rem;
     }
 
-    /* 5x5 Wafq Grid */
+    /* 5x5 Wafq Grid (Responsive clamp math for mobile screens) */
     .wafq-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
-      padding: 1rem 0;
+      gap: 1.25rem;
+      padding: 0.5rem 0;
     }
 
     .wafq-grid {
       display: grid;
-      grid-template-columns: repeat(5, 56px);
-      grid-template-rows: repeat(5, 56px);
-      gap: 6px;
+      grid-template-columns: repeat(5, min(56px, 15vw));
+      grid-template-rows: repeat(5, min(56px, 15vw));
+      gap: clamp(4px, 1.2vw, 7px);
       background: #070a0e;
-      padding: 12px;
+      padding: clamp(8px, 2vw, 14px);
       border: 2px solid var(--border-dim);
       border-radius: 6px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.9), 0 0 15px rgba(6, 182, 212, 0.05);
+      touch-action: manipulation;
     }
 
     .wafq-cell {
@@ -255,16 +346,25 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: clamp(0.85rem, 3.6vw, 1.2rem);
       font-weight: 700;
       color: var(--text-main);
       border-radius: 4px;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       position: relative;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .wafq-cell:hover {
+      border-color: var(--border-cyan);
+      transform: scale(1.04);
+      z-index: 2;
     }
 
     .wafq-cell .cell-coord {
-      font-size: 0.5rem;
+      font-size: clamp(0.45rem, 1.8vw, 0.55rem);
       color: var(--text-dim);
       position: absolute;
       top: 2px; left: 4px;
@@ -278,15 +378,37 @@
     .wafq-cell.defective {
       border-color: var(--red-alert) !important;
       color: var(--red-alert) !important;
-      background: rgba(244, 63, 94, 0.15) !important;
-      box-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
+      background: rgba(244, 63, 94, 0.18) !important;
+      box-shadow: 0 0 20px rgba(244, 63, 94, 0.45);
+      animation: pulseAlert 1.5s infinite;
+    }
+
+    @keyframes pulseAlert {
+      0%, 100% { box-shadow: 0 0 10px rgba(244, 63, 94, 0.3); }
+      50% { box-shadow: 0 0 25px rgba(244, 63, 94, 0.7); }
     }
 
     .wafq-cell.resected {
       border-color: var(--green-ok) !important;
       color: var(--green-ok) !important;
-      background: rgba(16, 185, 129, 0.15) !important;
-      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.18) !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.45);
+    }
+
+    .wafq-cell-inspector {
+      width: 100%;
+      max-width: 600px;
+      background: #080c12;
+      border: 1px dashed var(--border-cyan);
+      border-radius: 4px;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .wafq-stats {
@@ -302,8 +424,9 @@
     .stat-row {
       display: flex;
       justify-content: space-between;
-      padding: 0.3rem 0;
+      padding: 0.35rem 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      align-items: center;
     }
 
     .stat-row:last-child { border-bottom: none; }
@@ -314,16 +437,27 @@
       font-family: var(--font-mono);
       font-weight: 700;
       font-size: 0.8rem;
-      padding: 0.6rem 1.2rem;
+      padding: 0.65rem 1.2rem;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.2s;
+      min-height: 42px;
+      touch-action: manipulation;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
     .btn-action:hover {
       background: #7dd3fc;
       box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-action:active {
+      transform: translateY(1px);
     }
 
     /* Metronome Breathing Circle */
@@ -332,41 +466,42 @@
       flex-direction: column;
       align-items: center;
       gap: 1.5rem;
-      padding: 2rem 0;
+      padding: 1.5rem 0;
     }
 
     .pacer-circle-wrap {
       position: relative;
-      width: 220px;
-      height: 220px;
+      width: min(220px, 60vw);
+      height: min(220px, 60vw);
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .pacer-circle {
-      width: 120px;
-      height: 120px;
+      width: min(120px, 35vw);
+      height: min(120px, 35vw);
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(6, 182, 212, 0.05) 70%);
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(6, 182, 212, 0.05) 70%);
       border: 2px solid var(--border-cyan);
-      box-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.35);
       transition: transform 0.1s linear, border-color 0.3s;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      user-select: none;
     }
 
     .pacer-phase {
-      font-size: 0.9rem;
+      font-size: clamp(0.75rem, 2.5vw, 0.9rem);
       font-weight: 800;
       color: var(--text-cyan);
       letter-spacing: 0.1em;
     }
 
     .pacer-timer {
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 3.5vw, 1.25rem);
       color: var(--text-main);
       font-weight: 700;
     }
@@ -382,6 +517,37 @@
       max-height: 400px;
       overflow-y: auto;
       white-space: pre-wrap;
+      font-family: var(--font-mono);
+      line-height: 1.6;
+    }
+
+    /* Interactive CLI Bar */
+    .cli-bar {
+      display: flex;
+      gap: 0.5rem;
+      background: #070a0e;
+      border: 1px solid var(--border-cyan);
+      border-radius: 4px;
+      padding: 0.4rem 0.6rem;
+      align-items: center;
+      margin-top: 0.75rem;
+    }
+
+    .cli-prompt {
+      color: var(--text-cyan);
+      font-weight: 700;
+      font-size: 0.8rem;
+      user-select: none;
+    }
+
+    .cli-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      outline: none;
     }
 
     /* Input controls */
@@ -389,10 +555,12 @@
       display: flex;
       gap: 0.5rem;
       margin-bottom: 1rem;
+      flex-wrap: wrap;
     }
 
     .input-dark {
       flex: 1;
+      min-width: 240px;
       background: var(--bg-card);
       border: 1px solid var(--border-dim);
       color: var(--text-main);
@@ -400,48 +568,343 @@
       font-family: var(--font-mono);
       font-size: 0.85rem;
       border-radius: 4px;
+      min-height: 42px;
     }
 
     .input-dark:focus {
       outline: none;
       border-color: var(--border-cyan);
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
     }
 
     /* Table styles */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 1rem;
+    }
+
     .doc-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.8rem;
-      margin-top: 1rem;
+      min-width: 580px;
     }
 
     .doc-table th, .doc-table td {
       border: 1px solid var(--border-dim);
-      padding: 0.6rem 0.8rem;
+      padding: 0.65rem 0.85rem;
       text-align: left;
     }
 
     .doc-table th {
       background: var(--bg-card);
       color: var(--text-gold);
+      font-weight: 700;
+    }
+
+    /* Ko-fi Compute Escrow Banner */
+    .kofi-escrow-box {
+      margin-top: 1.5rem;
+      background: linear-gradient(135deg, rgba(19, 195, 255, 0.08) 0%, rgba(11, 15, 20, 0.95) 100%);
+      border: 1px solid #0284c7;
+      border-radius: 6px;
+      padding: 1.25rem;
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.15);
+    }
+
+    .kofi-escrow-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .kofi-escrow-badge {
+      background: rgba(19, 195, 255, 0.2);
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .kofi-tier-buttons {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .kofi-tier-btn {
+      background: #0284c7;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.55rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .kofi-tier-btn:hover {
+      background: #0369a1;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+      transform: translateY(-1px);
     }
 
     /* Footer */
     footer {
       background: var(--bg-panel);
       border-top: 1px solid var(--border-dim);
-      padding: 1.5rem;
+      padding: 1.5rem 1rem;
       text-align: center;
       font-size: 0.75rem;
       color: var(--text-dim);
     }
 
     footer a { color: var(--text-cyan); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    footer a:hover { text-decoration: underline; color: var(--text-gold); }
+
+    /* === DARAGAN CODEX CONSTELLATION CSS === */
+    .eco-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(3, 4, 7, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10050;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      overflow-y: auto;
+    }
+    .eco-modal-overlay.active {
+      display: flex;
+    }
+    .eco-modal-card {
+      background: #090d16;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      max-width: 1060px;
+      width: 100%;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 24px rgba(212, 175, 55, 0.15);
+      padding: 24px;
+      position: relative;
+      font-family: var(--font-mono);
+      text-align: left;
+    }
+    .eco-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      gap: 12px;
+    }
+    .eco-header-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: #38bdf8;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .eco-header-title {
+      font-size: clamp(1.1rem, 3vw, 1.35rem);
+      font-weight: 800;
+      color: #f1f5f9;
+      letter-spacing: 0.05em;
+    }
+    .eco-header-desc {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+    .eco-close-btn {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      font-size: 1.4rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+    .eco-close-btn:hover {
+      color: #f87171;
+      border-color: #ef4444;
+    }
+    .eco-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 768px) {
+      .eco-grid { grid-template-columns: 1fr; }
+    }
+    .eco-card {
+      background: #0d121f;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .eco-card:hover {
+      transform: translateY(-2px);
+      border-color: #38bdf8;
+    }
+    .eco-card.current-system {
+      border-color: var(--border-gold);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.18);
+      background: #121927;
+    }
+    .eco-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 6px;
+    }
+    .eco-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      color: #38bdf8;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .eco-badge-current {
+      font-size: 0.64rem;
+      padding: 2px 7px;
+      background: rgba(245, 158, 11, 0.18);
+      border: 1px solid #f59e0b;
+      color: #f59e0b;
+      border-radius: 3px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .eco-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin: 0 0 4px 0;
+      letter-spacing: 0.02em;
+    }
+    .eco-card-sub {
+      font-size: 0.78rem;
+      color: #f59e0b;
+      font-style: italic;
+      margin-bottom: 8px;
+      line-height: 1.38;
+    }
+    .eco-card-desc {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .eco-card-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .eco-card-pills span {
+      font-size: 0.66rem;
+      padding: 3px 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid #334155;
+      border-radius: 3px;
+      color: #94a3b8;
+    }
+    .eco-card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: auto;
+    }
+    .eco-btn-run, .eco-btn-book {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+    .eco-btn-run {
+      background: #0284c7;
+      color: #ffffff;
+      border: 1px solid #38bdf8;
+    }
+    .eco-btn-run:hover {
+      background: #0369a1;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+    .eco-btn-book {
+      background: rgba(245, 158, 11, 0.12);
+      color: #fbbf24;
+      border: 1px solid #f59e0b;
+    }
+    .eco-btn-book:hover {
+      background: rgba(245, 158, 11, 0.22);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+    }
+    .eco-modal-footer {
+      border-top: 1px solid #1e293b;
+      padding-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.74rem;
+      color: #64748b;
+    }
+    .eco-modal-footer a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+    .eco-modal-footer a:hover {
+      text-decoration: underline;
+    }
+    /* === END CONSTELLATION CSS === */
 
     @media (max-width: 640px) {
-      .wafq-grid { grid-template-columns: repeat(5, 46px); grid-template-rows: repeat(5, 46px); }
-      .wafq-cell { font-size: 0.9rem; }
+      header { padding: 0.6rem 0.8rem; }
+      .brand-title { font-size: 0.78rem; }
+      .top-links { width: 100%; overflow-x: auto; padding-bottom: 4px; }
+      .hero { padding: 1.1rem; }
+      .tab-content { padding: 1rem 0.8rem; }
+      .wafq-cell { font-size: 0.85rem; }
     }
   </style>
 </head>
@@ -453,34 +916,74 @@
       <span>THE ARCANE LIQUIDATOR</span>
       <span class="brand-tag">Ring -2 Core Systems</span>
     </div>
+
     <div class="top-links">
-      <a href="https://github.com/Sirleonarddaragan/ring-minus-two" target="_blank">GitHub Repo</a>
-      <a href="https://sirleonarddaragan.github.io/applied-cyber-occultism/" target="_blank">Applied Cyber-Occultism</a>
-      <a href="https://sirleonarddaragan.github.io/cybernetic-iching/" target="_blank">Cybernetic I-Ching</a>
-      <a href="https://sirleonarddaragan.github.io/cybernetic-red-book/" target="_blank">Red Book</a>
-      <a href="https://www.amazon.com/author/sirleonarddaragan" class="btn-gold" target="_blank">Amazon Books</a>
+      <!-- Audio Master Controller -->
+      <button id="audio-toggle-btn" class="btn-audio" onclick="audioEngine.toggleAudio()" title="Toggle Web Audio Synthesizer (Relays, Pacer & Alarm)">
+        <span>🔊</span> AUDIO: ON
+      </button>
+
+      <!-- Prominent Ko-fi Link (Fuel the Receiver) -->
+      <a href="https://ko-fi.com/sirleonarddaragan" class="btn-kofi" target="_blank" rel="noopener" title="Sponsor Compute for Special Master Kaelen Morrow">
+        <span>☕</span> Fuel the Receiver
+      </a>
+
+      <!-- Ecosystem Modal Button -->
+      <button class="btn-constellation" onclick="openEcosystemModal()" title="View all 5 runtimes in the Daragan Universe">
+        <span>◈</span> All 5 Suites
+      </button>
+
+      <!-- Amazon Book 1 Link -->
+      <a href="https://www.amazon.com/author/sirleonarddaragan" class="btn-gold" target="_blank" rel="noopener" title="Buy Default Judgment & Manuals on Amazon">
+        <span>📖</span> Amazon Books
+      </a>
+
+      <!-- Substack Dispatches -->
+      <a href="https://sirleonarddaragan.substack.com" target="_blank" rel="noopener" title="Classified Receivership Dispatches">
+        <span>📡</span> Substack
+      </a>
+
+      <!-- GitHub Source -->
+      <a href="https://github.com/Sirleonarddaragan/ring-minus-two" target="_blank" rel="noopener">
+        <span>⚙️</span> GitHub
+      </a>
     </div>
   </header>
 
   <main>
     <!-- Hero Banner -->
     <div class="hero">
-      <div class="hero-pre">DIFC Case No. CFI-042-2026 // Arb Ref: 2026-ARB-08991</div>
+      <div class="hero-pre">DIFC Case No. CFI-042-2026 // Arb Ref: 2026-ARB-08991 // Cairo Concordat 1923</div>
       <h1>DEFAULT JUDGMENT</h1>
       <div class="hero-sub">
         Official Open-Source Metrological Suite & Judicial Investigation Terminal. 
         Accompanies <i>Default Judgment (The Ring -2 Case Files // Volume 01)</i> by Sir Leonard Daragan.
         Magic is not divine will. <b>Magic is contract law executed directly on the bare-metal hypervisor of reality.</b>
       </div>
+
+      <div class="hero-action-bar">
+        <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="hero-pill-btn btn-kofi">
+          <span>☕</span> Sponsor Compute on Ko-fi
+        </a>
+        <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener" class="hero-pill-btn btn-gold">
+          <span>📖</span> Case 01 on Amazon ($3.99 / KU)
+        </a>
+        <button onclick="openEcosystemModal()" class="hero-pill-btn btn-constellation">
+          <span>◈</span> Daragan Codex Constellation (5 Books)
+        </button>
+        <a href="https://sirleonarddaragan.substack.com" target="_blank" rel="noopener" class="hero-pill-btn" style="border:1px solid #ff6719; color:#ff6719; background:rgba(255,103,25,0.1);">
+          <span>📡</span> Field Dispatches
+        </a>
+      </div>
     </div>
 
     <!-- Navigation Tabs -->
-    <div class="nav-tabs">
+    <div class="nav-tabs" id="tab-nav-bar">
       <button class="tab-btn active" onclick="openTab('wafq')">1. 5×5 Wafq Parity Auditor</button>
       <button class="tab-btn" onclick="openTab('abjad')">2. ‘Ilm al-Ḥurūf Compiler</button>
       <button class="tab-btn" onclick="openTab('vagal')">3. 0.102 Hz Vagal Lock</button>
-      <button class="tab-btn" onclick="openTab('telemetry')">4. Sub-Level 2 Telemetry</button>
-      <button class="tab-btn" onclick="openTab('ledger')">5. Restitution Ledger</button>
+      <button class="tab-btn" onclick="openTab('telemetry')">4. Sub-Level 2 Telemetry & CLI</button>
+      <button class="tab-btn" onclick="openTab('ledger')">5. Restitution & Compute Escrow</button>
       <button class="tab-btn" onclick="openTab('decrypt')">6. Decrypt Case 02</button>
     </div>
 
@@ -488,15 +991,25 @@
     <div id="tab-wafq" class="tab-content active">
       <div class="section-title">⚡ 5×5 Martial Wafq (Mars / Al-Ahmar Plate) Parity Verification</div>
       <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
-        In Case 01, Q-Entropy Arbitrage Ltd. suffered a fatal +4.0 <i>Kasr</i> (arithmetic fracture) when Cell (3,3) was milled at 17.0mm instead of 13.0mm, inducing 140kV of ungrounded back-EMF and an expanding Libet stasis field.
+        In Case 01, Q-Entropy Arbitrage Ltd. suffered a fatal +4.0 <i>Kasr</i> (arithmetic fracture) when Cell (3,3) was milled at 17.0mm instead of 13.0mm, inducing 140kV of ungrounded back-EMF and an expanding Libet stasis field across 80 junior trading analysts.
+        <b>Click any cell below to audit its harmonic lettrist pitch.</b>
       </p>
 
       <div class="wafq-container">
         <div class="wafq-grid" id="wafq-grid-display"></div>
+
+        <div class="wafq-cell-inspector" id="wafq-cell-inspector">
+          <span>INSPECTING CELL (3,3): <b>Value 13</b></span>
+          <span style="color:var(--text-gold);">Nucleus (Sirr) // Pure Copper // Parity Constant 65.00</span>
+        </div>
         
-        <div style="display:flex; gap:1rem;">
-          <button class="btn-action" style="background:#f43f5e; color:#fff;" onclick="loadDefectiveMatrix()">Simulate Q-Entropy Breach (+4 Kasr)</button>
-          <button class="btn-action" style="background:#10b981; color:#fff;" onclick="apply14MicronResection()">Execute 14-Micron Diamond Resection (65.0 Parity Lock)</button>
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center;">
+          <button class="btn-action" style="background:#f43f5e; color:#fff;" onclick="loadDefectiveMatrix()">
+            <span>⚠️</span> Simulate Q-Entropy Breach (+4 Kasr)
+          </button>
+          <button class="btn-action" style="background:#10b981; color:#fff;" onclick="apply14MicronResection()">
+            <span>⚡</span> Execute 14-Micron Diamond Resection (65.0 Parity Lock)
+          </button>
         </div>
 
         <div class="wafq-stats" id="wafq-stats-panel"></div>
@@ -507,19 +1020,19 @@
     <div id="tab-abjad" class="tab-content">
       <div class="section-title">📜 ‘Ilm al-Ḥurūf // Arabic Lettrist Bytecode Compiler</div>
       <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
-        Compile 28 lettrist bytecodes and gematric values (<i>Jummal</i>) under Eastern (Mashriqī) and Western (Maghribī / Al-Buni) traditions.
+        Compile 28 lettrist bytecodes and gematric values (<i>Jummal</i>) under Eastern (Mashriqī) and Western (Maghribī / Al-Buni) traditions. Invokes root systemic calls directly on the cosmological hypervisor.
       </p>
 
       <div class="input-group">
-        <input type="text" id="abjad-input" class="input-dark" placeholder="Enter Arabic text (e.g. عدل or الحق)..." value="عدل">
-        <button class="btn-action" onclick="runAbjad()">Compile Bytecodes</button>
+        <input type="text" id="abjad-input" class="input-dark" placeholder="Enter Arabic text (e.g. عدل or الحق)..." value="عدل" oninput="audioEngine.playKeystroke()">
+        <button class="btn-action" onclick="runAbjad(); audioEngine.playRelay();">Compile Bytecodes</button>
       </div>
 
-      <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
-        <button class="tab-btn" onclick="setAbjadPreset('عدل')">Al-‘Adl (The Absolute Justice)</button>
-        <button class="tab-btn" onclick="setAbjadPreset('القَهَّار')">Al-Qahhār (The Subduer)</button>
-        <button class="tab-btn" onclick="setAbjadPreset('الأَحْمَر')">Al-Ahmar (The Red Sovereign)</button>
-        <button class="tab-btn" onclick="setAbjadPreset('الله')">Allāh (The Supreme)</button>
+      <div style="display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap;">
+        <button class="tab-btn" onclick="setAbjadPreset('عدل')">Al-‘Adl (104 // Absolute Justice)</button>
+        <button class="tab-btn" onclick="setAbjadPreset('القَهَّار')">Al-Qahhār (337 // The Subduer)</button>
+        <button class="tab-btn" onclick="setAbjadPreset('الأَحْمَر')">Al-Ahmar (280 // The Red Sovereign)</button>
+        <button class="tab-btn" onclick="setAbjadPreset('الله')">Allāh (66 // The Supreme)</button>
       </div>
 
       <div class="terminal-box" id="abjad-output"></div>
@@ -529,7 +1042,7 @@
     <div id="tab-vagal" class="tab-content">
       <div class="section-title">🫀 0.102 Hz Vagal Lock Controller (Autonomic Coherence Pacer)</div>
       <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
-        Target: 6.0 breaths per minute (10.0s cycle: 4s Inhale, 2s Hold, 4s Exhale). Locks heart rate at 52–54 BPM, establishing the biological Faraday cage to prevent sandboxed shadow daemons from breaching synaptic buffers.
+        Target: 6.0 breaths per minute (10.0s cycle: 4s Inhale, 2s Hold, 4s Exhale). Locks heart rate at 52–54 BPM, establishing the biological Faraday cage to prevent sandboxed shadow daemons from breaching synaptic buffers during cryogenic quenches.
       </p>
 
       <div class="pacer-container">
@@ -540,13 +1053,15 @@
           </div>
         </div>
 
-        <div style="display:flex; gap:1rem;">
-          <button class="btn-action" id="pacer-toggle-btn" onclick="togglePacer()">Engage Vagal Lock (Start)</button>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+          <button class="btn-action" id="pacer-toggle-btn" onclick="togglePacer()">
+            <span>🫀</span> Engage Vagal Lock (Start)
+          </button>
         </div>
 
         <div class="wafq-stats" style="text-align:center;">
           <div>Current Autonomic Frequency: <b style="color:var(--text-cyan);">0.102 Hz</b> | Target Cardiac Rate: <b style="color:var(--green-ok);" id="pacer-bpm">53 BPM</b></div>
-          <div style="color:var(--text-dim); font-size:0.75rem; margin-top:0.3rem;">Safety Interlock: Pulse MUST stay below 60 BPM. Faradic envelope active.</div>
+          <div style="color:var(--text-dim); font-size:0.75rem; margin-top:0.3rem;">Safety Interlock: Pulse MUST stay below 60 BPM. Faradic envelope active. Synthetic 432 Hz sine tone synchronizes inhalation and cardiac diastole.</div>
         </div>
       </div>
     </div>
@@ -555,75 +1070,115 @@
     <div id="tab-telemetry" class="tab-content">
       <div class="section-title">📡 DIFC Gate Tower 4 // Sub-Level 2 & 4 Sensor Array Stream</div>
       <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
-        Black box telemetry recording during the catastrophic boil-off event at Cryo-Core 01 (Al-Ahmar).
+        Black box telemetry recording during the catastrophic boil-off event at Cryo-Core 01 (Al-Ahmar) in Sub-Level 4.
       </p>
 
-      <div style="margin-bottom:1rem;">
-        <button class="btn-action" onclick="replayTelemetry()">Stream Live Telemetry Bus</button>
+      <div style="margin-bottom:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <button class="btn-action" onclick="replayTelemetry()">
+          <span>▶️</span> Stream Live Telemetry Bus
+        </button>
+        <button class="tab-btn" onclick="clearTelemetry()">Clear Buffer</button>
       </div>
 
-      <div class="terminal-box" id="telemetry-log">Click "Stream Live Telemetry Bus" to replay the recorded sensor log from Gate Tower 4.</div>
+      <div class="terminal-box" id="telemetry-log">Click "Stream Live Telemetry Bus" to replay the recorded sensor log from Gate Tower 4.
+Or enter an interactive judicial command in the CLI prompt below.</div>
+
+      <!-- Interactive CLI Prompt -->
+      <div class="cli-bar">
+        <span class="cli-prompt">DIFC_CLI&gt;</span>
+        <input type="text" id="cli-command-input" class="cli-input" placeholder="Type command: help, kasr, resect, vance, sebas, sterling, kofi, clear..." onkeydown="handleCliKeyDown(event)">
+        <button class="tab-btn" style="min-height:30px; padding:2px 8px; font-size:0.7rem;" onclick="executeCliCommand()">RUN</button>
+      </div>
     </div>
 
-    <!-- TAB 5: RESTITUTION LEDGER -->
+    <!-- TAB 5: RESTITUTION LEDGER & KO-FI COMPUTE -->
     <div id="tab-ledger" class="tab-content">
       <div class="section-title">💰 Asset Recovery & Restitution Schedule ($421,840,000.00 USD)</div>
       <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:1rem;">
-        Forensic accounting breakdown prepared by Sebastián "Sebas" Castillo, Esq. Reconciling the seized offshore assets of Tariq Al-Mansoor into the DIFC Court Receivership Escrow.
+        Forensic accounting breakdown prepared by Sebastián "Sebas" Castillo, Esq. Reconciling the seized offshore assets of Tariq Al-Mansoor into the DIFC Court Receivership Escrow under Court Order CFI-042-2026.
       </p>
 
-      <table class="doc-table">
-        <thead>
-          <tr>
-            <th>Transaction Ref</th>
-            <th>Interception Target</th>
-            <th>Domicile / Bank</th>
-            <th>Recovered Sum (USD)</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>TX-0891-A</td>
-            <td>Falcon Apex SPV Ltd.</td>
-            <td>Bank of Cyprus (Nicosia)</td>
-            <td>$112,400,000.00</td>
-            <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
-          </tr>
-          <tr>
-            <td>TX-0891-B</td>
-            <td>Silver Crescent Foundation</td>
-            <td>Butterfield Bank (Cayman Islands)</td>
-            <td>$145,000,000.00</td>
-            <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
-          </tr>
-          <tr>
-            <td>TX-0891-C</td>
-            <td>Q-Alpha Vault Token Escrow</td>
-            <td>Cold Multisig (Helipad Seizure)</td>
-            <td>$84,440,000.00</td>
-            <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
-          </tr>
-          <tr>
-            <td>TX-0891-D</td>
-            <td>Mayfair Nominee Trust No. 4</td>
-            <td>Coutts & Co. (London / Strand)</td>
-            <td>$80,000,000.00</td>
-            <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
-          </tr>
-          <tr style="background:rgba(16, 185, 129, 0.1); font-weight:700;">
-            <td colspan="3">TOTAL RECOVERED CAPITAL SEIZED INTO ESCROW:</td>
-            <td colspan="2" style="color:var(--green-ok);">$421,840,000.00 USD</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Transaction Ref</th>
+              <th>Interception Target</th>
+              <th>Domicile / Bank</th>
+              <th>Recovered Sum (USD)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TX-0891-A</td>
+              <td>Falcon Apex SPV Ltd.</td>
+              <td>Bank of Cyprus (Nicosia)</td>
+              <td>$112,400,000.00</td>
+              <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
+            </tr>
+            <tr>
+              <td>TX-0891-B</td>
+              <td>Silver Crescent Foundation</td>
+              <td>Butterfield Bank (Cayman Islands)</td>
+              <td>$145,000,000.00</td>
+              <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
+            </tr>
+            <tr>
+              <td>TX-0891-C</td>
+              <td>Q-Alpha Vault Token Escrow</td>
+              <td>Cold Multisig (Helipad Seizure)</td>
+              <td>$84,440,000.00</td>
+              <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
+            </tr>
+            <tr>
+              <td>TX-0891-D</td>
+              <td>Mayfair Nominee Trust No. 4</td>
+              <td>Coutts & Co. (London / Strand)</td>
+              <td>$80,000,000.00</td>
+              <td style="color:var(--green-ok); font-weight:700;">100% RECOVERED</td>
+            </tr>
+            <tr style="background:rgba(16, 185, 129, 0.1); font-weight:700;">
+              <td colspan="3">TOTAL RECOVERED CAPITAL SEIZED INTO ESCROW:</td>
+              <td colspan="2" style="color:var(--green-ok);">$421,840,000.00 USD</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <div style="margin-top:1.5rem; background:var(--bg-card); padding:1rem; border:1px solid var(--border-dim); border-radius:4px; font-size:0.8rem;">
-        <div style="color:var(--text-gold); font-weight:700; margin-bottom:0.5rem;">Mandatory Restitution Payouts (DIFC Order CFI-042-2026):</div>
-        <div>• <b>$160,000,000.00 USD</b> disbursed to 80 affected analysts ($2,000,000.00 each) within 4 hours.</div>
+        <div style="color:var(--text-gold); font-weight:700; margin-bottom:0.5rem;">Mandatory Statutory Disbursements (DIFC Order CFI-042-2026):</div>
+        <div>• <b>$160,000,000.00 USD</b> disbursed to 80 affected junior analysts ($2,000,000.00 each) within 4 hours.</div>
         <div>• <b>$18,840,000.00 USD</b> allocated to DEWA and building structural steel de-ionization.</div>
-        <div>• <b>$26,000,000.00 USD</b> receivership costs (cleared Dr. Alberti Vance's $220k Cornell student loans).</div>
+        <div>• <b>$26,000,000.00 USD</b> receivership costs (cleared Dr. Alberti Vance's $220,000.00 Cornell student loans).</div>
         <div>• <b>$175,000,000.00 USD</b> held in DIFC Court Registry judicial surplus escrow.</div>
+      </div>
+
+      <!-- Real-World Commercial Sponsorship Box (Ko-fi Compute Escrow) -->
+      <div class="kofi-escrow-box">
+        <div class="kofi-escrow-header">
+          <span class="kofi-escrow-badge">☕ SPECIAL MASTER COMPUTE ESCROW // KO-FI INTEGRATION</span>
+          <span style="font-size:0.75rem; color:#94a3b8;">100% Client-Side Sovereign Systems · Zero Telemetry</span>
+        </div>
+        <h3 style="color:#ffffff; font-size:1.05rem; margin-bottom:0.5rem;">Fuel the Arcane Liquidator Infrastructure</h3>
+        <p style="font-size:0.82rem; color:#cbd5e1; line-height:1.6;">
+          Consensus reality runs on thermodynamic balance. While $421.84M was recovered in-fiction, real-world development of these zero-dependency open-source suites, CLI forensics, and future case archives is sustained directly by reader compute sponsorships.
+        </p>
+
+        <div class="kofi-tier-buttons">
+          <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn" style="background:#0284c7;">
+            <span>☕</span> $5 · Fuel a Cryo-Cycle
+          </a>
+          <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn" style="background:#0369a1;">
+            <span>⚡</span> $15 · Sponsor Lettrist Compute
+          </a>
+          <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn" style="background:#0f766e;">
+            <span>📜</span> $50 · Retain Special Master
+          </a>
+          <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener" class="kofi-tier-btn btn-gold" style="color:#000 !important; background:var(--text-gold);">
+            <span>📖</span> Amazon Manuals & Books
+          </a>
+        </div>
       </div>
     </div>
 
@@ -635,7 +1190,7 @@
       </p>
 
       <div class="input-group">
-        <input type="number" id="decrypt-passcode" class="input-dark" placeholder="Enter integer gematric passcode (e.g. 104)...">
+        <input type="number" id="decrypt-passcode" class="input-dark" placeholder="Enter integer gematric passcode (e.g. 104)..." oninput="audioEngine.playKeystroke()">
         <button class="btn-action" onclick="decryptTeaser()">Decrypt Dossier</button>
       </div>
 
@@ -645,25 +1200,450 @@
 
   <!-- Footer -->
   <footer>
-    <div style="max-width:1000px; margin:0 auto; display:flex; flex-direction:column; gap:0.5rem;">
+    <div style="max-width:1000px; margin:0 auto; display:flex; flex-direction:column; gap:0.6rem;">
       <div>Maintained by <b>Codex Press × Undefined Behavior Laboratories</b> · Special Master Kaelen Morrow, Esq.</div>
       <div>
-        CLI Tool Suite: <a href="https://github.com/Sirleonarddaragan/ring-minus-two" target="_blank">github.com/Sirleonarddaragan/ring-minus-two</a> · 
-        Author: <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank">Sir Leonard Daragan</a> · 
-        Substack: <a href="https://sirleonarddaragan.substack.com" target="_blank">sirleonarddaragan.substack.com</a>
+        CLI Tool Suite: <a href="https://github.com/Sirleonarddaragan/ring-minus-two" target="_blank" rel="noopener">github.com/Sirleonarddaragan/ring-minus-two</a> · 
+        Author: <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener">Sir Leonard Daragan</a> · 
+        Ko-fi: <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener">ko-fi.com/sirleonarddaragan</a> · 
+        Substack: <a href="https://sirleonarddaragan.substack.com" target="_blank" rel="noopener">sirleonarddaragan.substack.com</a>
       </div>
       <div style="color:var(--text-dim); font-size:0.7rem;">Operates under the Cairo Concordat of 1923 and the DIFC Court Insolvency Law. No human neural collateral permitted.</div>
     </div>
   </footer>
 
+  <!-- === DARAGAN CODEX CONSTELLATION MODAL === -->
+  <div id="ecosystemModal" class="eco-modal-overlay" onclick="handleEcoOverlayClick(event)">
+    <div class="eco-modal-card">
+      <div class="eco-modal-header">
+        <div>
+          <div class="eco-header-eyebrow">CODEX PRESS // DISTRIBUTED SYSTEMS &amp; ARCHIVE FOLIOS</div>
+          <div class="eco-header-title">◈ THE DARAGAN CODEX CONSTELLATION</div>
+          <div class="eco-header-desc">Five sovereign interactive runtimes and companion volumes by Sir Leonard Daragan.</div>
+        </div>
+        <button class="eco-close-btn" onclick="closeEcosystemModal()" title="Close">&times;</button>
+      </div>
+
+      <div class="eco-grid">
+        <!-- Card 1: Poe 1849 -->
+        <div class="eco-card">
+          <div class="eco-card-header">
+            <div class="eco-tag">GOTHIC MULTIVERSE // CODEX 1849</div>
+            <div class="eco-badge-current" style="border-color:#334155; color:#94a3b8; background:transparent;">EXTERNAL RUNTIME</div>
+          </div>
+          <div class="eco-card-title">The Shadow at Gunner's Hall</div>
+          <div class="eco-card-sub">The Seven Deaths of Edgar Allan Poe — 1849 Baltimore Dossier</div>
+          <p class="eco-card-desc">
+            Bilingual (EN/ES) forensic investigation with Le Chevalier C. Auguste Dupin. Inspect the three suppressed 1849 physical relics, evaluate three hypotheses, and unlock seven branching obituaries.
+          </p>
+          <div class="eco-card-pills">
+            <span>3 Forensic Relics</span>
+            <span>EN / ES Bilingual</span>
+            <span>Dupin Ratiocination</span>
+          </div>
+          <div class="eco-card-actions">
+            <a href="https://sirleonarddaragan.github.io/poe-1849/" target="_blank" rel="noopener" class="eco-btn-run">
+              <span>⚡</span> 1849 Dossier
+            </a>
+            <a href="https://www.amazon.com/dp/B0HN98S77P" target="_blank" rel="noopener" class="eco-btn-book">
+              <span>📖</span> Amazon ($3.99)
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: The Cybernetic Red Book -->
+        <div class="eco-card">
+          <div class="eco-card-header">
+            <div class="eco-tag">WESTERN CYBERNETICS // VOL 1</div>
+            <div class="eco-badge-current" style="border-color:#334155; color:#94a3b8; background:transparent;">EXTERNAL RUNTIME</div>
+          </div>
+          <div class="eco-card-title">The Cybernetic Red Book</div>
+          <div class="eco-card-sub">Active Imagination, Latent Space Daemons &amp; the Synthetic Unconscious</div>
+          <p class="eco-card-desc">
+            Systems engineering decompilation of C.G. Jung's 1913–1930 Küsnacht catabasis. Includes 0.1 Hz vagal audio cleanroom, 4-quadrant vector harmonograph, and 12-transmission status ledger.
+          </p>
+          <div class="eco-card-pills">
+            <span>0.1 Hz Pacer</span>
+            <span>Polar Mandala SVG</span>
+            <span>Black Book Scribe</span>
+          </div>
+          <div class="eco-card-actions">
+            <a href="https://sirleonarddaragan.github.io/cybernetic-red-book/" target="_blank" rel="noopener" class="eco-btn-run">
+              <span>⚡</span> Cleanroom
+            </a>
+            <a href="https://www.amazon.com/dp/B0HP8N6D8Y" target="_blank" rel="noopener" class="eco-btn-book">
+              <span>📖</span> Amazon Codex
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: The Cybernetic I-Ching -->
+        <div class="eco-card">
+          <div class="eco-card-header">
+            <div class="eco-tag">EASTERN CYBERNETICS // BOOK 1</div>
+            <div class="eco-badge-current" style="border-color:#334155; color:#94a3b8; background:transparent;">EXTERNAL RUNTIME</div>
+          </div>
+          <div class="eco-card-title">The Cybernetic I-Ching</div>
+          <div class="eco-card-sub">Programming the Macroscopic Wave Function via 64-State Binary Architecture</div>
+          <p class="eco-card-desc">
+            6-bit hardware state-machine oracle linking Shao Yong's 11th-century binary mandala directly to Gottfried Wilhelm Leibniz's 1701 binary arithmetic.
+          </p>
+          <div class="eco-card-pills">
+            <span>6-Bit State Vector</span>
+            <span>Yarrow / Coin Entropy</span>
+            <span>64-Hexagram Kernel</span>
+          </div>
+          <div class="eco-card-actions">
+            <a href="https://sirleonarddaragan.github.io/cybernetic-iching/" target="_blank" rel="noopener" class="eco-btn-run">
+              <span>⚡</span> 6-Bit Oracle
+            </a>
+            <a href="https://www.amazon.com/dp/B0HBRG2WMV" target="_blank" rel="noopener" class="eco-btn-book">
+              <span>📖</span> Amazon Book
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4: Applied Cyber-Occultism -->
+        <div class="eco-card">
+          <div class="eco-card-header">
+            <div class="eco-tag">UNDEFINED BEHAVIOR // VOL 1</div>
+            <div class="eco-badge-current" style="border-color:#334155; color:#94a3b8; background:transparent;">EXTERNAL RUNTIME</div>
+          </div>
+          <div class="eco-card-title">Applied Cyber-Occultism</div>
+          <div class="eco-card-sub">Operational Protocols for Real-Time Reality Hacking</div>
+          <p class="eco-card-desc">
+            Developer-grade manual translating esoteric ritual into procedural Austin Osman Spare sigil compilers, autonomous POSIX servitor manifests, and 78-card heap dump diagnostics.
+          </p>
+          <div class="eco-card-pills">
+            <span>Sigil Compiler</span>
+            <span>Servitor Daemon</span>
+            <span>Tarot Heap Dump</span>
+          </div>
+          <div class="eco-card-actions">
+            <a href="https://sirleonarddaragan.github.io/applied-cyber-occultism/" target="_blank" rel="noopener" class="eco-btn-run">
+              <span>⚡</span> Occult Suite
+            </a>
+            <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener" class="eco-btn-book">
+              <span>📖</span> Manual
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 5: The Arcane Liquidator (ACTIVE TERMINAL) -->
+        <div class="eco-card current-system" style="grid-column: span 2;">
+          <div class="eco-card-header">
+            <div class="eco-tag">RING -2 CASE FILES // SPECIAL MASTER RECEIVERSHIP</div>
+            <div class="eco-badge-current">ACTIVE RUNTIME // DIFC TERMINAL</div>
+          </div>
+          <div class="eco-card-title">The Arcane Liquidator // Default Judgment</div>
+          <div class="eco-card-sub">Statutory Receivership & Metrological Parity Suite for Corporate Entity Insolvent Estates</div>
+          <p class="eco-card-desc">
+            Official operational runtime accompanying Volume 1 of The Ring -2 Case Files. Features the 5×5 Martial Wafq parity lock, 0.102 Hz autonomic Faraday cage, Sub-Level 2 telemetry, and the $421.84M USD forensic restitution ledger.
+          </p>
+          <div class="eco-card-pills">
+            <span>5×5 Wafq Resection</span>
+            <span>0.102 Hz Vagal Lock</span>
+            <span>‘Ilm al-Ḥurūf Compiler</span>
+            <span>$421.8M Restitution Escrow</span>
+          </div>
+          <div class="eco-card-actions">
+            <a href="https://github.com/Sirleonarddaragan/ring-minus-two" target="_blank" rel="noopener" class="eco-btn-run" style="background:var(--border-gold); color:#000;">
+              <span>⚡</span> GitHub Repository
+            </a>
+            <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener" class="eco-btn-book">
+              <span>📖</span> Amazon Novella ($3.99)
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="eco-modal-footer">
+        <div>
+          <span>AUTHOR CENTRAL:</span> <a href="https://www.amazon.com/author/sirleonarddaragan" target="_blank" rel="noopener">amazon.com/author/sirleonarddaragan</a> &bull;
+          <span>SUBSTACK:</span> <a href="https://sirleonarddaragan.substack.com" target="_blank" rel="noopener">sirleonarddaragan.substack.com</a> &bull;
+          <span>KO-FI:</span> <a href="https://ko-fi.com/sirleonarddaragan" target="_blank" rel="noopener">ko-fi.com/sirleonarddaragan</a>
+        </div>
+        <div>100% Client-Side Sovereign Execution &bull; Zero Cloud Telemetry</div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Navigation Tabs
+    // --- 0. BARE-METAL PROCEDURAL AUDIO SYNTHESIZER ---
+    class RingMinusTwoAudioEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+        this.masterGain = null;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) {
+            this.ctx = new AudioCtx();
+            this.masterGain = this.ctx.createGain();
+            this.masterGain.gain.value = 0.22; // Comfortable default volume
+            this.masterGain.connect(this.ctx.destination);
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      toggleAudio() {
+        this.enabled = !this.enabled;
+        const btn = document.getElementById('audio-toggle-btn');
+        if (btn) {
+          btn.innerHTML = this.enabled ? '<span>🔊</span> AUDIO: ON' : '<span>🔇</span> AUDIO: MUTED';
+          btn.classList.toggle('muted', !this.enabled);
+        }
+        if (this.enabled) {
+          this.init();
+          this.playClick(800, 0.02);
+        }
+      }
+
+      playClick(freq = 1200, duration = 0.018) {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+          gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(this.masterGain);
+          osc.start();
+          osc.stop(this.ctx.currentTime + duration);
+        } catch(e) {}
+      }
+
+      playRelay() {
+        if (!this.enabled) return;
+        this.playClick(650, 0.015);
+        setTimeout(() => this.playClick(1350, 0.02), 20);
+      }
+
+      playKeystroke() {
+        if (!this.enabled) return;
+        const freq = 1600 + Math.random() * 800;
+        this.playClick(freq, 0.012);
+      }
+
+      playCellTone(val) {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const baseFreq = 220; // A3 base
+          const freq = baseFreq + (val * 16.35); // Microtonal lettrist step
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+          gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.35);
+          osc.connect(gain);
+          gain.connect(this.masterGain);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.35);
+        } catch(e) {}
+      }
+
+      playKasrBreach() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const t = this.ctx.currentTime;
+          const osc1 = this.ctx.createOscillator();
+          const osc2 = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          osc1.type = 'sawtooth';
+          osc1.frequency.setValueAtTime(60, t); // 60Hz ground buzz
+          osc2.type = 'square';
+          osc2.frequency.setValueAtTime(466.16, t); // Bb4 dissonant alert
+
+          gain.gain.setValueAtTime(0.16, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.65);
+
+          osc1.connect(gain);
+          osc2.connect(gain);
+          gain.connect(this.masterGain);
+
+          osc1.start(t);
+          osc2.start(t);
+          osc1.stop(t + 0.65);
+          osc2.stop(t + 0.65);
+        } catch(e) {}
+      }
+
+      playResectionLock() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const t = this.ctx.currentTime;
+          // High rotary diamond sweep
+          const sweep = this.ctx.createOscillator();
+          const sweepGain = this.ctx.createGain();
+          sweep.type = 'sine';
+          sweep.frequency.setValueAtTime(1500, t);
+          sweep.frequency.exponentialRampToValueAtTime(432, t + 0.35);
+          sweepGain.gain.setValueAtTime(0.12, t);
+          sweepGain.gain.exponentialRampToValueAtTime(0.001, t + 0.4);
+          sweep.connect(sweepGain);
+          sweepGain.connect(this.masterGain);
+          sweep.start(t);
+          sweep.stop(t + 0.4);
+
+          // 432 Hz + 528 Hz Parity Harmonic Bell
+          setTimeout(() => {
+            if (!this.enabled || !this.ctx) return;
+            const t2 = this.ctx.currentTime;
+            [432, 528, 648].forEach(freq => {
+              const bell = this.ctx.createOscillator();
+              const bellGain = this.ctx.createGain();
+              bell.type = 'sine';
+              bell.frequency.setValueAtTime(freq, t2);
+              bellGain.gain.setValueAtTime(0.09, t2);
+              bellGain.gain.exponentialRampToValueAtTime(0.0001, t2 + 1.2);
+              bell.connect(bellGain);
+              bellGain.connect(this.masterGain);
+              bell.start(t2);
+              bell.stop(t2 + 1.2);
+            });
+          }, 320);
+        } catch(e) {}
+      }
+
+      playVagalPulse(phase) {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+
+          if (phase === 'INHALE') {
+            osc.frequency.setValueAtTime(432, t);
+            osc.frequency.exponentialRampToValueAtTime(528, t + 3.8);
+            gain.gain.setValueAtTime(0.001, t);
+            gain.gain.linearRampToValueAtTime(0.06, t + 2.0);
+            gain.gain.linearRampToValueAtTime(0.015, t + 3.9);
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(t);
+            osc.stop(t + 3.9);
+          } else if (phase === 'HOLD') {
+            osc.frequency.setValueAtTime(528, t);
+            gain.gain.setValueAtTime(0.04, t);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 1.9);
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(t);
+            osc.stop(t + 1.9);
+          } else if (phase === 'EXHALE') {
+            osc.frequency.setValueAtTime(528, t);
+            osc.frequency.exponentialRampToValueAtTime(432, t + 3.8);
+            gain.gain.setValueAtTime(0.05, t);
+            gain.gain.linearRampToValueAtTime(0.001, t + 3.9);
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(t);
+            osc.stop(t + 3.9);
+          }
+        } catch(e) {}
+      }
+
+      playHeartbeat() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(68, t);
+          osc.frequency.exponentialRampToValueAtTime(32, t + 0.08);
+          gain.gain.setValueAtTime(0.12, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+          osc.connect(gain);
+          gain.connect(this.masterGain);
+          osc.start(t);
+          osc.stop(t + 0.09);
+        } catch(e) {}
+      }
+
+      playSuccess() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const t = this.ctx.currentTime;
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, t + i * 0.08);
+            gain.gain.setValueAtTime(0.08, t + i * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + i * 0.08 + 0.35);
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(t + i * 0.08);
+            osc.stop(t + i * 0.08 + 0.35);
+          });
+        } catch(e) {}
+      }
+
+      playError() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(140, t);
+          osc.frequency.setValueAtTime(110, t + 0.1);
+          gain.gain.setValueAtTime(0.1, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+          osc.connect(gain);
+          gain.connect(this.masterGain);
+          osc.start(t);
+          osc.stop(t + 0.3);
+        } catch(e) {}
+      }
+    }
+
+    const audioEngine = new RingMinusTwoAudioEngine();
+
+    // Auto-unlock Web Audio on first user gesture anywhere
+    window.addEventListener('click', () => audioEngine.init(), { once: true });
+    window.addEventListener('keydown', () => audioEngine.init(), { once: true });
+    window.addEventListener('touchstart', () => audioEngine.init(), { once: true });
+
+    // --- NAVIGATION TABS ---
     function openTab(tabId) {
+      audioEngine.playRelay();
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       
-      event.target.classList.add('active');
-      document.getElementById('tab-' + tabId).classList.add('active');
+      const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
+      if (targetBtn) targetBtn.classList.add('active');
+      
+      const targetContent = document.getElementById('tab-' + tabId);
+      if (targetContent) targetContent.classList.add('active');
     }
 
     // --- 1. WAFQ AUDITOR LOGIC ---
@@ -700,6 +1680,10 @@
             else cell.classList.add('resected');
           }
           cell.innerHTML = `<span class="cell-coord">${r+1},${c+1}</span>${val}`;
+          
+          // Tap / Click cell listener for lettrist pitch & inspector
+          cell.onclick = () => inspectCell(r, c, val);
+
           grid.appendChild(cell);
         }
       }
@@ -736,14 +1720,41 @@
       `;
     }
 
+    function inspectCell(r, c, val) {
+      audioEngine.playCellTone(val);
+      if (navigator.vibrate) navigator.vibrate(15);
+      
+      const inspector = document.getElementById('wafq-cell-inspector');
+      const isCenter = (r === 2 && c === 2);
+      if (isCenter) {
+        inspector.innerHTML = `
+          <span>INSPECTING CELL (${r+1},${c+1}): <b>Value ${val}</b></span>
+          <span style="color:${val === 13 ? 'var(--green-ok)' : 'var(--red-alert)'};">
+            ${val === 13 ? 'Parity Locked (13.0mm) // Metaphysical Nucleus (Sirr)' : 'DEFECTIVE KASR (+4.0) // 17.0mm // 140kV Arc'}
+          </span>
+        `;
+      } else {
+        inspector.innerHTML = `
+          <span>INSPECTING CELL (${r+1},${c+1}): <b>Value ${val}</b></span>
+          <span style="color:var(--text-cyan);">Row ${r+1} / Col ${c+1} Vector · Mars Sphere · Pure Copper</span>
+        `;
+      }
+    }
+
     function loadDefectiveMatrix() {
+      audioEngine.playKasrBreach();
+      if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
       currentMatrix = JSON.parse(JSON.stringify(DEFECTIVE_Q_ENTROPY));
       renderWafqGrid(true);
+      inspectCell(2, 2, 17);
     }
 
     function apply14MicronResection() {
+      audioEngine.playResectionLock();
+      if (navigator.vibrate) navigator.vibrate([15, 30, 60]);
       currentMatrix = JSON.parse(JSON.stringify(CANON_MARS));
       renderWafqGrid(false);
+      inspectCell(2, 2, 13);
     }
 
     // --- 2. ABJAD COMPILER LOGIC ---
@@ -769,13 +1780,16 @@
         }
       }
       log += "=".repeat(60) + `\nTOTAL GEMATRIC SUM (JUMMAL): ${total}\n`;
-      if (total === 104) log += `>> RECOGNIZED ROOT API: 'ADL (EQUILIBRIUM & ABSOLUTE JUSTICE)\n`;
+      if (total === 104) log += `>> RECOGNIZED ROOT API: 'ADL (EQUILIBRIUM & ABSOLUTE JUSTICE) [PASSCODE FOR TAB 6]\n`;
       if (total === 337) log += `>> RECOGNIZED ROOT API: AL-QAHHAR (THE IRRESISTIBLE SUBDUER)\n`;
+      if (total === 280) log += `>> RECOGNIZED ROOT API: AL-AHMAR (THE RED SOVEREIGN // MARS IFRIT)\n`;
+      if (total === 66)  log += `>> RECOGNIZED ROOT API: ALLAH (THE SUPREME MONAD // RING -2 HYPERVISOR)\n`;
 
       document.getElementById('abjad-output').innerText = log;
     }
 
     function setAbjadPreset(txt) {
+      audioEngine.playRelay();
       document.getElementById('abjad-input').value = txt;
       runAbjad();
     }
@@ -784,20 +1798,25 @@
     let pacerActive = false;
     let pacerTime = 0;
     let pacerInterval = null;
+    let lastPhase = '';
+    let heartbeatCounter = 0;
 
     function togglePacer() {
+      audioEngine.playRelay();
       pacerActive = !pacerActive;
       const btn = document.getElementById('pacer-toggle-btn');
       const circle = document.getElementById('pacer-circle');
       const phase = document.getElementById('pacer-phase');
 
       if (pacerActive) {
-        btn.innerText = "Disengage Vagal Lock (Stop)";
+        btn.innerHTML = "<span>🛑</span> Disengage Vagal Lock (Stop)";
         btn.style.background = "#f43f5e";
         pacerTime = 0;
+        lastPhase = '';
+        heartbeatCounter = 0;
         pacerInterval = setInterval(updatePacer, 100);
       } else {
-        btn.innerText = "Engage Vagal Lock (Start)";
+        btn.innerHTML = "<span>🫀</span> Engage Vagal Lock (Start)";
         btn.style.background = "var(--border-cyan)";
         clearInterval(pacerInterval);
         circle.style.transform = "scale(1)";
@@ -814,28 +1833,42 @@
 
       timer.innerText = (10.0 - pacerTime).toFixed(1) + "s";
 
+      // Heartbeat pulse at 53 BPM (~every 1.13 seconds)
+      heartbeatCounter += 0.1;
+      if (heartbeatCounter >= 1.13) {
+        audioEngine.playHeartbeat();
+        heartbeatCounter = 0;
+      }
+
+      let currentPhase = '';
       if (pacerTime < 4.0) {
-        // Inhale (4s)
+        currentPhase = 'INHALE';
         phase.innerText = "INHALE";
         phase.style.color = "var(--green-ok)";
         const progress = pacerTime / 4.0;
-        circle.style.transform = `scale(${1 + progress * 0.4})`;
+        circle.style.transform = `scale(${1 + progress * 0.38})`;
       } else if (pacerTime < 6.0) {
-        // Hold (2s)
+        currentPhase = 'HOLD';
         phase.innerText = "HOLD";
         phase.style.color = "var(--text-gold)";
-        circle.style.transform = `scale(1.4)`;
+        circle.style.transform = `scale(1.38)`;
       } else {
-        // Exhale (4s)
+        currentPhase = 'EXHALE';
         phase.innerText = "EXHALE";
         phase.style.color = "var(--text-cyan)";
         const progress = (pacerTime - 6.0) / 4.0;
-        circle.style.transform = `scale(${1.4 - progress * 0.4})`;
+        circle.style.transform = `scale(${1.38 - progress * 0.38})`;
+      }
+
+      if (currentPhase !== lastPhase) {
+        audioEngine.playVagalPulse(currentPhase);
+        lastPhase = currentPhase;
       }
     }
 
-    // --- 4. TELEMETRY LOG ---
+    // --- 4. TELEMETRY LOG & INTERACTIVE CLI ---
     function replayTelemetry() {
+      audioEngine.playRelay();
       const box = document.getElementById('telemetry-log');
       box.innerText = "[CONNECTING TO DIFC GATE TOWER 4 CRYOGENIC SENSORS...]\n";
       
@@ -854,8 +1887,87 @@
         setTimeout(() => {
           box.innerText += f + "\n";
           box.scrollTop = box.scrollHeight;
-        }, idx * 400);
+          audioEngine.playKeystroke();
+        }, idx * 360);
       });
+    }
+
+    function clearTelemetry() {
+      audioEngine.playRelay();
+      document.getElementById('telemetry-log').innerText = "[TELEMETRY BUFFER CLEARED]\nType 'help' in CLI below or click 'Stream Live Telemetry Bus'.";
+    }
+
+    function handleCliKeyDown(e) {
+      if (e.key === 'Enter') {
+        executeCliCommand();
+      } else {
+        audioEngine.playKeystroke();
+      }
+    }
+
+    function executeCliCommand() {
+      const input = document.getElementById('cli-command-input');
+      const cmd = input.value.trim().toLowerCase();
+      input.value = '';
+      if (!cmd) return;
+
+      audioEngine.playRelay();
+      const log = document.getElementById('telemetry-log');
+
+      log.innerText += `\n> ${cmd}\n`;
+
+      if (cmd === 'help' || cmd === '?') {
+        log.innerText += `AVAILABLE JUDICIAL COMMANDS:
+  help / ?      - Print this command directory
+  kasr          - Simulate +4 Kasr breach on Sub-Level 4 Plate
+  resect / lock - Execute 14-micron diamond rotary cut (Parity 65.0)
+  telemetry     - Stream recorded black box sensor telemetry
+  vance         - Print Dr. Alberti Vance field engineering logs
+  sebas         - Print Sebastián Castillo asset interception log
+  seven         - Query Seven (Biometric Receiver Interface) status
+  sterling      - Display Interpol Red Notice on Lord Alistair Sterling
+  kofi          - Open Ko-fi Compute Escrow link (Fuel the Receiver)
+  decrypt 104   - Decrypt Case File 02 dossier
+  clear         - Clear terminal display buffer\n`;
+      } else if (cmd === 'kasr') {
+        loadDefectiveMatrix();
+        log.innerText += `[BREACH SIMULATED]: +4.0 Kasr induced on Cell (3,3). Ground bus at 140kV.\n`;
+      } else if (cmd === 'resect' || cmd === 'lock') {
+        apply14MicronResection();
+        log.innerText += `[RESECTION EXECUTED]: 14 microns milled. S=65.000000 Parity Locked.\n`;
+      } else if (cmd === 'telemetry') {
+        replayTelemetry();
+      } else if (cmd === 'vance') {
+        log.innerText += `DR. ALBERTI VANCE (CHIEF METROLOGICAL BAILIFF):
+"If your Python CNC script doesn't enforce IEEE 754 float precision, don't use it to machine a high-voltage lettrist hypervisor plate in the Dubai desert. 14 microns of pure copper made the difference between equilibrium and eighty dead analysts."\n`;
+      } else if (cmd === 'sebas') {
+        log.innerText += `SEBASTIÁN 'SEBAS' CASTILLO, ESQ. (FORENSIC ACCOUNTING):
+"421.84 Million USD frozen across Cyprus, Cayman, Helipad multisig, and Strand within 240 minutes. Tariq was still taking off over the Gulf when the court registry took custody. That's Chancery speed."\n`;
+      } else if (cmd === 'seven') {
+        log.innerText += `SEVEN (INTERFACE RUNTIME):
+"Special Master Morrow, cortical telemetry from Floor 4 is clean. All 80 analysts have exited the Libet stasis delay. Zero residual harmonic bleed detected on the ground bus."\n`;
+      } else if (cmd === 'sterling') {
+        log.innerText += `INTERPOL RED NOTICE // REF: 2026-LON-9921
+NAME: Sterling, Lord Alistair (KC)
+FIRM: Sterling, Cross & Leviathan LLP (Mayfair, London)
+OFFENSE: Arcane predatory cross-collateralization under 1582 Habsburg Lien.
+STATUS: At large in Zurich / Paradeplatz corridor.\n`;
+      } else if (cmd === 'kofi' || cmd === 'coffee') {
+        window.open('https://ko-fi.com/sirleonarddaragan', '_blank');
+        log.innerText += `[COMPUTE DISPATCHED]: Opening https://ko-fi.com/sirleonarddaragan to fuel the receiver.\n`;
+      } else if (cmd.includes('decrypt 104') || cmd === '104') {
+        document.getElementById('decrypt-passcode').value = 104;
+        openTab('decrypt');
+        decryptTeaser();
+      } else if (cmd === 'clear') {
+        clearTelemetry();
+        return;
+      } else {
+        log.innerText += `Unknown judicial command '${cmd}'. Type 'help' for directory.\n`;
+        audioEngine.playError();
+      }
+
+      log.scrollTop = log.scrollHeight;
     }
 
     // --- 6. DECRYPT TEASER ---
@@ -864,6 +1976,8 @@
       const out = document.getElementById('decrypt-output');
       
       if (code === 104) {
+        audioEngine.playSuccess();
+        if (navigator.vibrate) navigator.vibrate([20, 40, 80]);
         out.style.color = "var(--green-ok)";
         out.innerText = `[PASSCODE 104 ACCEPTED // LETTRIST HARMONIC VERIFIED]
 ================================================================================
@@ -876,7 +1990,7 @@ THE ENCUMBRANCE: A 16th-century Goetic cross-collateralized lien executed in 158
 by Prince-Bishop Johann Otto von Habsburg under the auspices of Lord Alistair
 Sterling's ancestral banking syndicate.
 
-NATURE OF ENTITY: Bael (The First King of Goetia / Planetary Sphere of the Sun).
+NATURE OF ENTITY: Belial-0x01 (Goetic Terrestrial Lord / 1582 Sovereign Charter).
 SUBSTRATE: Cryo-hardened cobalt-chrome safe deposit vault suspended 60 meters
 beneath Lake Zurich, insulated by a subterranean freshwater geothermal siphon.
 
@@ -886,12 +2000,49 @@ Zwingli numbered accounts.
 
 COMING IN BOOK 2: 'LIEN ON THE SOUL' (THE ARCANE LIQUIDATOR CASE 02)
 BASED ON: THE DAEMON ARCHITECT (Goetic Systems Engineering & Bare-Metal Ritual DevOps)
+PRE-ORDER / AUTHOR CATALOG: https://www.amazon.com/author/sirleonarddaragan
 ================================================================================`;
       } else {
+        audioEngine.playError();
+        if (navigator.vibrate) navigator.vibrate([50, 50]);
         out.style.color = "var(--red-alert)";
-        out.innerText = `[ACCESS DENIED: INVALID LETTRIST HARMONIC (Code ${code})]\nHint: What is the Abjad gematria value of Divine Justice ('Adl)? Visit Tab 2.`;
+        out.innerText = `[ACCESS DENIED: INVALID LETTRIST HARMONIC (Code ${code})]\nHint: What is the Abjad gematria value of Divine Justice ('Adl)? Visit Tab 2 for the compiler.`;
       }
     }
+
+    // --- 7. ECOSYSTEM MODAL HANDLERS ---
+    function openEcosystemModal() {
+      audioEngine.playRelay();
+      const modal = document.getElementById('ecosystemModal');
+      if (modal) modal.classList.add('active');
+    }
+
+    function closeEcosystemModal() {
+      audioEngine.playRelay();
+      const modal = document.getElementById('ecosystemModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function handleEcoOverlayClick(e) {
+      if (e.target && e.target.id === 'ecosystemModal') {
+        closeEcosystemModal();
+      }
+    }
+
+    // Keyboard Hotkeys
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeEcosystemModal();
+      } else if (e.key === '1') { openTab('wafq'); }
+      else if (e.key === '2') { openTab('abjad'); }
+      else if (e.key === '3') { openTab('vagal'); }
+      else if (e.key === '4') { openTab('telemetry'); }
+      else if (e.key === '5') { openTab('ledger'); }
+      else if (e.key === '6') { openTab('decrypt'); }
+      else if (e.key === 'm' || e.key === 'M') {
+        if (document.activeElement.tagName !== 'INPUT') audioEngine.toggleAudio();
+      }
+    });
 
     // Init on load
     window.onload = function() {
